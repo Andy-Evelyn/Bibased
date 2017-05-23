@@ -5,6 +5,9 @@
 a{
   text-decoration: none;
 }
+/*a:hover{
+  color: #42c92c !important;
+}*/
 ul{
   list-style:none;
 }
