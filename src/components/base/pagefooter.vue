@@ -39,6 +39,14 @@
 </template>
 
 <style lang="less">
+  @media (min-width: 840px){
+    .mdl-mega-footer {
+      padding: 16px 80px !important;
+    }
+  }
+  .mdl-mega-footer a:hover{
+    color: #42c92c !important;
+  }
   .fc{
     width:100% !important;
     line-height: 50px;
