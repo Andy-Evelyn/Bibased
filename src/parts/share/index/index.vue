@@ -1,58 +1,97 @@
 <template>
   <div>
     <PageHeader>
-      <template scope="props" slot="user">
-        <mu-list class="personalR">
-          <mu-list-item class="personal">
-            <mu-avatar  slot="left" :src="userUrl" :size="40"/>
-            <span class="userName">用户名</span>
-          </mu-list-item>
-        </mu-list>
+      <template scope="props" slot="user" >
+        <div class="pRbox">
+          <a href="#">
+            <mu-list class="personalR">
+                <mu-list-item class="personal">
+                  <mu-avatar  slot="left" :src="userUrl" :size="40"/>
+                  <span class="userName">用户名</span>
+                </mu-list-item>
+            </mu-list>
+            <div class="m1">
+              <mu-paper :zDepth="1" class="menu2">
+                <mu-menu>
+                  <mu-menu-item href="../../../parts/share/personal/personal.html" title="个人中心"/>
+                  <mu-menu-item href="https://www.baidu.com/" title="退出"/>
+                </mu-menu>
+              </mu-paper>
+            </div>
+          </a>
+        </div>
+
+
+
+
       </template>
     </PageHeader>
 
-    <div>
-      <mu-paper class="menu2"  :zDepth="2">
+
+<!--      <mu-paper class="menu2"  :zDepth="2">
         <mu-menu>
           <mu-menu-item title="个人中心"/>
           <mu-menu-item title="退出"/>
         </mu-menu>
-      </mu-paper>
+      </mu-paper>-->
     </div>
-  </div>
-
-
 
 </template>
 <style lang="less">
-.personalR {
-  width: 24%!important;
-  padding:0 !important;
-  .mu-item-wrapper{
-    &:hover{
-       background: rgba(255,255,255,1)!important;
-     }
-  }
-  .personal{
-    .userName{
-      color:#fff !important;
-    }
-    &:hover{
-       /*background: rgba(255,255,255,1)!important;*/
-      .userName{
-        color:#009688 !important;
+  .pRbox a{
+    display:block;
+    width:100%;
+    /*color:#fff !important;*/
+    .personalR {
+      position: relative;
+      width: 133px !important;
+      margin-right: 25px;
+      padding: 0 !important;
+      .mu-item-wrapper {
+          &:hover {
+            background: rgba(255, 255, 255, 1) !important;
+          }
+          .mu-item {
+            width: 133px;
+          }
       }
+      .personal {
+          .userName {
+            color: #fff !important;
+          }
+          &:hover {
+            /*background: rgba(255,255,255,1)!important;*/
+            .userName {
+              color: #009688 !important;
+            }
+          }
+      }
+  }
+  >div.m1{
+     display: none !important;
+     /*height: 100px;*/
+     width: 133px;
+     position: absolute;
+      .menu2 {
+        display: none !important;
+        position: absolute;
+        /*z-index: 100 !important;*/
+        /*top: 64px;*/
+        /*right: 65px;*/
+        /*height: 100px;*/
+        width: 133px;
+        text-align: center;
+      }
+   }
+  &:hover>div.m1{
+     display: inline-block !important;
+    .menu2 {
+      display: block !important;
     }
   }
+
 }
-.menu2{
-  display: inline-block;
-  position: absolute;
-  top:20px;
-  /*height: 100px;*/
-  /*width: 100px;*/
-  text-align: center;
-}
+
 
 </style>
 <script>

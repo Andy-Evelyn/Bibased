@@ -1,40 +1,14 @@
 <template>
   <div>
-    <div style="display: flex;z-index: 30;padding-bottom:60px;">
+    <div style="display: flex;z-index: 30;">
       <PageHeader>
         <template scope="props" slot="login">
-          <mu-raised-button label="登录" class="login-raised-button mdl-shadow--2dp" primary backgroundColor="transparent" href="/parts/share/login/login.html"/>
+          <mu-raised-button label="登录" class="login-raised-button mdl-shadow--2dp" primary backgroundColor="transparent" href="../../../parts/share/login/login.html"/>
         </template>
       </PageHeader>
     </div>
-
-
-  <mu-tabs :value="activeTab" @change="handleTabChange">
-    <mu-tab value="tab1" title="TAB ONE"/>
-    <mu-tab value="tab2" title="TAB TWO"/>
-    <mu-tab value="tab3" @active="handleActive" title="TAB ACTIVE"/>
-  </mu-tabs>
-  <div v-if="activeTab === 'tab1'">
-    <h2>Tab One</h2>
-    <p>
-      这是第一个 tab
-    </p>
-  </div>
-  <div v-if="activeTab === 'tab2'">
-    <h2>Tab Two</h2>
-    <p>
-      这是第二个 tab
-    </p>
-  </div>
-  <div v-if="activeTab === 'tab3'">
-    <h2>Tab Three</h2>
-    <p>
-      这是第三个 tab
-    </p>
-  </div>
-    <mu-pagination :total="total" :current="current" @pageChange="handleClick">
-    </mu-pagination>
-
+    <PageMain></PageMain>
+    <PageFooter></PageFooter>
 </div>
 
 
@@ -52,6 +26,7 @@
   </div>-->
 
 </template>
+
 <style lang="less">
   .appbar-search-field{
     color: #FFF;
@@ -70,22 +45,7 @@
   }
   }
 </style>
-<!--<script>
-  import PageHeader from 'components/base/pageheader';
-  export default{
-
-    components: {
-      PageHeader
-    }
-  }
-</script>-->
-
 <script>
-//  import Vue from 'vue'
-//  import MuseUI from 'muse-ui'
-
-//  Vue.use(MuseUI)
-
   import 'muse-components/styles/base.less' // 加载基础的样式
 /*  import appBar from 'muse-components/appBar'
   import textField  from 'muse-components/textField'
@@ -101,12 +61,14 @@ Vue.use(MuseUI)
 
 
   import PageHeader from 'components/base/pageheader';
+  import PageMain from 'components/base/pagemain';
+  import PageFooter from 'components/base/pagefooter';
   export default{
     data () {
       return {
         activeTab: 'tab1',
         total: 50,
-        current: 1
+        current: 1,
       }
     },
     methods: {
@@ -124,7 +86,9 @@ Vue.use(MuseUI)
       textField,
       flatButton,
       icon*/
-      PageHeader
+      PageHeader,
+      PageMain,
+      PageFooter,
     }
   }
 </script>

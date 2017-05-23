@@ -18,10 +18,12 @@
 
       用户登录
     </div>
-    <textField label="用户名" hintText="请输入用户名" labelClass="textlabel" type="text" errorText="" fullWidth labelFloat/><br/>
-    <textField label="密码" hintText="请输入密码" labelClass="textlabel" type="password" errorText="" fullWidth labelFloat/><br/>
-    <router-link to="forgetpw"><span class="forgetpw">忘记密码？</span></router-link>
-    <raisedButton label="登录" class="loginbtn" primary/>
+    <form action="">
+      <textField id="userName" @blur="check_login" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" fullWidth labelFloat/><br/>
+      <textField id="passWord" @blur="check_login" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/><br/>
+      <router-link to="forgetpw"><span class="forgetpw">忘记密码？</span></router-link>
+      <raisedButton label="登录" class="loginbtn" id="subMit" @click="login" primary/>
+    </form>
   </paper>
 </template>
 <style lang="less" scoped>
@@ -84,11 +86,14 @@
   import paper from 'muse-components/paper';
   import icon from 'muse-components/icon';
   import raisedButton from 'muse-components/raisedButton';
+  import $ from 'jquery';
     export default{
         name:"loginform",
         data(){
             return {
-                msg: 'hello vue'
+              inputErrorText:'',
+              inputErrorPassword:'',
+              msg: 'hello vue'
             }
         },
         components: {
@@ -96,6 +101,34 @@
           paper,
           icon,
           raisedButton,
+        },
+      methods: {
+        handleInputOverflow (isOverflow) {
+          this.inputErrorText = isOverflow ? '用戶名只能是10位数哟' : ''
+        },
+        check_login(){
+            if($("#userName input").val() == ''){
+              this.inputErrorText = '用户名不能为空哟'
+//              return false
+            }else{
+              this.inputErrorText = ''
+              if($("#passWord input").val() == ''){
+                this.inputErrorPassword = '密码不能为空哟'
+//              return false
+              }else{
+                this.inputErrorPassword = ''
+              }
+            }
+        },
+        login(){
+          this.check_login()
+          if($("#userName input").val() && $("#passWord input").val()){
+            this.inputErrorText = ''
+            this.inputErrorPassword = ''
+          }
+            console.log($("#userName input").val());
+            console.log($("#passWord input").val());
         }
+      }
     }
 </script>

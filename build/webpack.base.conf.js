@@ -32,7 +32,7 @@ parts.forEach(function (part,i) {
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
- //entry['vendor']=['jquery','materialjs']
+ entry['vendor']=['jquery','materialjs']
 module.exports = {
   entry: entry,
   output: {
@@ -148,11 +148,11 @@ module.exports = {
         //     }
         // }),
         // new ExtractTextPlugin({ filename:'../static/css/color.css', disable: false, allChunks: true }),
-        //new webpack.ProvidePlugin({
-        //    $: "jquery",
-        //    jQuery: "jquery",
-        //    "window.jQuery": "jquery"
-        //}),
+        new webpack.ProvidePlugin({
+           $: "jquery",
+           jQuery: "jquery",
+           "window.jQuery": "jquery"
+        }),
        //new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' })
     ],
 
