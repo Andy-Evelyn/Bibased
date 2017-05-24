@@ -19,8 +19,8 @@
       用户登录
     </div>
     <form action="">
-      <textField id="userName" @blur="check_login" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" fullWidth labelFloat/><br/>
-      <textField id="passWord" @blur="check_login" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/><br/>
+      <textField id="userName" @blur="check_name" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" fullWidth labelFloat/><br/>
+      <textField id="passWord" @blur="check_word" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/><br/>
       <router-link to="forgetpw"><span class="forgetpw">忘记密码？</span></router-link>
       <raisedButton label="登录" class="loginbtn" id="subMit" @click="login" primary/>
     </form>
@@ -29,6 +29,7 @@
 <style lang="less" scoped>
   .pl-login-paper{
     position: absolute;
+    z-index:3;
     top:50%;
     left: 50%;
     /*padding: 20px 20px 36px 20px;*/
@@ -106,22 +107,25 @@
         handleInputOverflow (isOverflow) {
           this.inputErrorText = isOverflow ? '用戶名只能是10位数哟' : ''
         },
-        check_login(){
+        check_name(){
             if($("#userName input").val() == ''){
               this.inputErrorText = '用户名不能为空哟'
 //              return false
             }else{
               this.inputErrorText = ''
-              if($("#passWord input").val() == ''){
-                this.inputErrorPassword = '密码不能为空哟'
-//              return false
-              }else{
-                this.inputErrorPassword = ''
-              }
             }
         },
+        check_word(){
+          if($("#passWord input").val() == ''){
+            this.inputErrorPassword = '密码不能为空哟'
+//              return false
+          }else{
+            this.inputErrorPassword = ''
+          }
+        },
         login(){
-          this.check_login()
+          this.check_name()
+          this.check_word()
           if($("#userName input").val() && $("#passWord input").val()){
             this.inputErrorText = ''
             this.inputErrorPassword = ''

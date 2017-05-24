@@ -12,10 +12,10 @@
       </div>
     </div>
     <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--6-col">
 
+      <div class="mdl-cell mdl-cell--6-col">
         <div class="moreTitle">
-          <span>讨论版</span>
+          <!--<mu-icon value="question_answer" :size="48" color="#c39d32"/>--><span>讨论版</span>
           <a href="../../../parts/share/posts/posts.html">更多>></a>
         </div>
         <!--切换按钮-->
@@ -25,18 +25,25 @@
         </mu-tabs>
         <!--显示内容-->
         <div v-if="activeTab1 === 'tab1'">
-          <h5>最新内容</h5>
-          <p>
-            这是第一个 tab
-          </p>
+          <div class="context_one">
+            <img :src="banner_img" class="item_img"/>
+            <div class="item_cont">
+              <h6><a class="text" href="#">test Ghost的监听端口在哪里修改。。。</a></h6>
+              <p><span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+            </div>
+          </div>
         </div>
         <div v-if="activeTab1 === 'tab2'">
-          <h5>最热内容</h5>
-          <p>
-            这是第二个 tab
-          </p>
+          <div class="context_one">
+            <img :src="banner_img" class="item_img"/>
+            <div class="item_cont">
+              <h6><a class="text" href="#">test最热。。。修改。。。</a></h6>
+              <p><span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="mdl-cell mdl-cell--6-col">
         <div class="moreTitle">
           <span>分享</span>
@@ -67,6 +74,7 @@
 </template>
 
 <style lang="less">
+  .main{
   @media (min-width: 840px){
     .mdl-cell{
       padding:20px 0 0 80px !important;
@@ -81,7 +89,6 @@
   .mu-tab-active{
     color: #0b9613 !important;
   }
-  .main{
     .banner{
       position: relative;
       width: 100%;
@@ -117,6 +124,29 @@
         position: absolute;
         right:10px;
         }
+    }
+    .context_one {
+      position: relative;
+      /*height: 60px;*/
+      min-height: 45px;
+      padding: 20px 0;
+      border-bottom: 1px solid #e6e6e6;
+      >img{
+        position: absolute;
+        top: 22px;
+        width: 40px;
+        height: 40px;
+        border-radius:5px;
+       }
+      .item_cont {
+        padding-left: 60px;
+        h6{
+          margin:0 !important;
+        }
+        >p{
+          color:#999;
+        }
+      }
     }
   }
 </style>
