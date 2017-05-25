@@ -5,9 +5,6 @@
     </div>
     <div class="pl-form-head mu-flat-button-primary">找回密码</div>
     <p style="text-align: center; margin: 30px;">请到F214找管理人员修改密码<br/>联系人...</p>
-    <!--<textField label="" hintText="请输入用户名" type="text" errorText="" fullWidth labelFloat/><br/>-->
-    <!--<textField label="密码" hintText="请输入密码" type="password" errorText="" fullWidth labelFloat/><br/>-->
-    <!--<router-link to="forgetpw"><span class="forgetpw">忘记密码？</span></router-link>-->
     <router-link to="/"><raisedButton label="知道了" fullWidth primary/></router-link>
   </paper>
 </template>
@@ -59,6 +56,12 @@
   import paper from 'muse-components/paper';
   import icon from 'muse-components/icon';
   import raisedButton from 'muse-components/raisedButton';
+//  import 'muse-components/styles/base.less' // 加载基础的样式
+  import Vue from 'vue'
+  import MuseUI from 'muse-ui'
+  import 'muse-ui/dist/muse-ui.css'
+  import 'muse-ui/dist/theme-teal.css' // 使用 carbon 主题
+  Vue.use(MuseUI)
     export default{
         name:"forgetpw",
         data(){

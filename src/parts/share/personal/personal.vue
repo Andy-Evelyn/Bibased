@@ -52,8 +52,13 @@
                     javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习
                   </p>
                   <p>
-                    <a href="javascript: void(0);" title="删除"><mu-icon value="delete" :size="14"/></a>&nbsp;&nbsp;
+                    <a href="javascript: void(0);" label="dialog" @click="open" title="删除"><mu-icon value="delete" :size="16"/></a>&nbsp;&nbsp;
                     <a href="#" title="编辑"><mu-icon value="border_color" :size="14"/></a>
+                    <mu-dialog :open="dialog" title="确定删除？" @close="close">
+                      删除后不可恢复
+                      <mu-flat-button slot="actions" color="#14c97f" @click="close" label="取消"/>
+                      <mu-flat-button slot="actions" color="#14c97f" @click="close" label="确定"/>
+                    </mu-dialog>
                   </p>
                 </li>
               </ul>
@@ -84,7 +89,13 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
+  .mu-dialog{
+    width: 300px!important;
+    .mu-dialog-title{
+      color:#ff4081 !important;
+    }
+  }
   /*.mu-badge-float*/
     .personalMain{
       /*background-color: #f7f8fa !important;*/
@@ -238,6 +249,7 @@
         stuClass:'计科134',
         n:'12',
         activeFabu: 'tiezi',
+        dialog: false
       }
     },
     beforeDestroy(){
@@ -246,6 +258,12 @@
     methods: {
       ChangMyPu(val) {
         this.activeFabu = val
+      },
+      open () {
+        this.dialog = true
+      },
+      close () {
+        this.dialog = false
       },
     },
     components: {

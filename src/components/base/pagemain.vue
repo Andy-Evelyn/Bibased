@@ -11,11 +11,11 @@
         <h1>分享知识与见解</h1>
       </div>
     </div>
-    <div class="mdl-grid">
 
+    <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--6-col">
         <div class="moreTitle">
-          <!--<mu-icon value="question_answer" :size="48" color="#c39d32"/>--><span>讨论版</span>
+          <mu-icon value="message" :size="48" color="#f1b200"/><span>讨论版</span>
           <a href="../../../parts/share/posts/posts.html">更多>></a>
         </div>
         <!--切换按钮-->
@@ -29,7 +29,7 @@
             <img :src="banner_img" class="item_img"/>
             <div class="item_cont">
               <h6><a class="text" href="#">test Ghost的监听端口在哪里修改。。。</a></h6>
-              <p><span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+              <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
             <img :src="banner_img" class="item_img"/>
             <div class="item_cont">
               <h6><a class="text" href="#">test最热。。。修改。。。</a></h6>
-              <p><span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+              <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
 
       <div class="mdl-cell mdl-cell--6-col">
         <div class="moreTitle">
-          <span>分享</span>
+          <mu-icon value="forum" :size="48" color="#f1b200"/><span>分享</span>
           <a href="../../../parts/share/resources/resources.html">更多>></a>
         </div>
         <!--切换按钮-->
@@ -69,6 +69,7 @@
         </div>
       </div>
     </div>
+
   </div>
 
 </template>
@@ -113,12 +114,22 @@
         }
       }
     }
+    /*增加背景强度*/
+    .mdl-grid{
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.156863), 0 3px 10px rgba(0, 0, 0, 0.227451);
+      border-radius: 3px;
+      margin:8px;
+    }
     .mdl-grid .moreTitle{
       position:relative;
       padding-bottom:20px;
       >span{
-        border-left:3px solid #009688;
-        padding:0 10px;
+/*        border-left:3px solid #009688;
+        padding:0 10px;*/
+         padding: 0 10px;
+         position: absolute;
+         font-size: 24px;
+         color:#009688 !important;
        }
        >a{
         position: absolute;
@@ -141,10 +152,15 @@
       .item_cont {
         padding-left: 60px;
         h6{
+          font-size: 14px !important;
           margin:0 !important;
         }
         >p{
+          font-size: 12px !important;
           color:#999;
+        }
+        .itemUser_name{
+          color:#666;
         }
       }
     }

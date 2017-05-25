@@ -10,8 +10,8 @@
 
 </style>
 <script>
-  import 'muse-components/styles/base.less' // 加载基础的样式
-  /*全部加载，用于测试*/
+/*  import 'muse-components/styles/base.less' // 加载基础的样式*/
+  /*全部加载*/
   import Vue from 'vue'
   import MuseUI from 'muse-ui'
   import 'muse-ui/dist/muse-ui.css'

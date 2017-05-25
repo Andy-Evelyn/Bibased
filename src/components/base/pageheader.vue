@@ -1,90 +1,9 @@
-<!--
 <template>
-  <div>
-    <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="1">SHARE</el-menu-item>
-      <el-menu-item index="2"><router-link to="../../../parts/share/posts/posts.html">讨论版</router-link></el-menu-item>
-      <el-submenu index="3">
-        <template slot="title">交流分享</template>
-        <el-menu-item index="3-1">文档资料</el-menu-item>
-        <el-menu-item index="3-2">技术博客</el-menu-item>
-        <el-menu-item index="3-3">个人笔记</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="4"><router-link to="SharePersonal">个人中心</router-link></el-menu-item>
-    </el-menu>
-  </div>
-</template>
-<script>
-  export default {
-    data() {
-      return {
-        activeIndex: '1',
-        activeIndex2: '1'
-      };
-    },
-    methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
-  }
-</script>
--->
-
-
-<template>
-<!--  <div class="mdl-layout mdl-js-layout mdl-layout&#45;&#45;fixed-header">
-    <header class="mdl-layout__header">
-      <appBar title="Shareing" class="mdl-layout-title mdl-layout__header-row mdl-layout&#45;&#45;large-screen-only">
-        <flatButton color="white" label="讨论版" slot="right"/>
-        <flatButton color="white" label="交流分享" slot="right"/>
-        <textField icon="search" class="appbar-search-field"  slot="right" hintText="请输入搜索内容"/>
-        <avatar slot="right" :src="userUrl" />
-        <flatButton color="white" label="个人中心" slot="right"/>
-      </appBar>
-    </header>
-    <floatButton icon="add" secondary mini class="demo-float-button"/>
-  </div>-->
-
-<!--  <div>
-    <appBar title="Shareing">
-      <flatButton color="white" label="讨论版" slot="right"/>
-      <flatButton color="white" label="交流分享" slot="right"/>
-      <textField icon="search" class="appbar-search-field"  slot="right" hintText="请输入搜索内容"/>
-      <avatar slot="right" :src="userUrl" />
-      <flatButton color="white" label="个人中心" slot="right"/>
-    </appBar>
-  </div>-->
-
-<!--  <div class="mdl-layout mdl-js-layout mdl-layout&#45;&#45;fixed-header">
-    <header class="mdl-layout__header" :class="{'mdl-layout__header&#45;&#45;transparent' :bgtransparent,'raised-button-primary' :!bgtransparent}" :style="styleObj" >
-      <div class="mdl-layout__header-row" :style="styleObj">
-        <slot classname="mdl-layout__title">Shareing</slot>
-        <nav class="mdl-navigation mdl-layout&#45;&#45;large-screen-only">
-          <slot>
-            test
-          </slot>
-        </nav>
-        <div class="mdl-layout-spacer"></div>
-        <slot>
-          test2
-        </slot>
-      </div>
-    </header>
-    <div class="mdl-layout__drawer mdl-layout&#45;&#45;small-screen-only">
-      <slot text="hello from child" classname="mdl-layout__title"></slot>
-      <nav class="mdl-navigation">
-        <slot>
-          test3
-        </slot>
-      </nav>
-    </div>
-  </div>-->
 
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
           <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title"><a href="../../../parts/share/home/home.html">Sharing</a></span>
+            <span class="mdl-layout-title"><a href="../../../parts/share/index/index.html">Sharing</a></span>
             <!--<div class="mdl-layout-spacer"></div>-->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
               <!--<a class="mdl-navigation__link" href="#">讨论版</a>-->
@@ -106,7 +25,7 @@
             <div class="mdl-layout-spacer"></div>
             <slot name="login"></slot>
             <slot name="user"></slot>
-            <!--<mu-raised-button label="登录" class="login-raised-button mdl-shadow&#45;&#45;2dp" primary backgroundColor="transparent" href="/parts/share/login/login.html"/>-->
+
           </div>
         </header>
         <div class="mdl-layout__drawer mdl-layout--small-screen-only">
@@ -184,49 +103,6 @@
     background: #fff!important;
   }
 
-
- /* .demo-layout-transparent .mdl-layout__header,
-  .demo-layout-transparent .mdl-layout__drawer-button {
-    !* This background is dark, so we set text to white. Use 87% black instead if
-       your background is light. *!
-    color: #FFF;
-  }
-  .mdl-layout__header-row .mdl-navigation__link{color: #FFF;}
-  .appbar-search-field{
-    color: #FFF;
-    margin-bottom: 0;
-    &.focus-state {
-       color: #FFF;
-     }
-    .text-field-hint {
-      color: fade(#FFF, 54%);
-    }
-    .text-field-input {
-      color: #FFF;
-    }
-    .text-field-focus-line {
-      background-color: #FFF;
-    }
-  }
-
-  .demo-popover-title {
-    margin-bottom: 0;
-    font-weight: 500;
-  }
-
-  .demo-anchor-origin{
-    display: flex;
-  }
-
-  .demo-origin-block{
-    display: flex;
-    flex-direction: column;
-    margin-left: 12px;
-  }
-  .demo-origin-raido {
-    margin-top: 12px;
-  }*/
-
 </style>
 <script>
   import 'muse-components/styles/base.less' // 加载基础的样式
@@ -239,12 +115,12 @@
   import dropDownMenu from 'muse-components/dropDownMenu'
   import mItem from 'muse-components/menu/menuItem'
   import imgurl from '../../assets/images/user.png'
-  import 'muse-ui/dist/theme-teal.css' // 使用 teal 主题
 
   /*全部加载muse-ui用于测试*/
   import Vue from 'vue'
   import MuseUI from 'muse-ui'
   import 'muse-ui/dist/muse-ui.css'
+  import 'muse-ui/dist/theme-teal.css' // 使用 teal 主题
   Vue.use(MuseUI)
 //  require("materialjs");
   export default{

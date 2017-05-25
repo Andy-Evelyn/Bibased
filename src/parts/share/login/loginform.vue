@@ -21,12 +21,39 @@
     <form action="">
       <textField id="userName" @blur="check_name" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" fullWidth labelFloat/><br/>
       <textField id="passWord" @blur="check_word" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/><br/>
+      <p class="reMind"><mu-checkbox label="记住我" /></p>
       <router-link to="forgetpw"><span class="forgetpw">忘记密码？</span></router-link>
       <raisedButton label="登录" class="loginbtn" id="subMit" @click="login" primary/>
     </form>
   </paper>
 </template>
 <style lang="less" scoped>
+  /*图标引入*/
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src:url(../../../assets/font/MaterialIcons-Regular.woff2),
+    url(../../../assets/font/MaterialIcons-Regular.woff),
+    url(../../../assets/font/MaterialIcons-Regular.eot),
+    url(../../../assets/font/MaterialIcons-Regular.ttf);
+  }
+  .material-icons {
+    font-family: 'Material Icons' !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
   .pl-login-paper{
     position: absolute;
     z-index:3;
@@ -71,15 +98,23 @@
      color: #919191;
    }
   }
-  .loginbtn{
-    float: right;
+  .reMind{
+    font-size: 12px !important;
+    margin:0px !important;
+    .mu-checkbox-icon{
+      margin-right: 0px!important;
+    }
+    .mu-checkbox-icon-uncheck {
+      color: #009688 !important;
+    }
   }
 
-  }
-</style>
-<style>
-  .textlabel{
-    color: #807e7e!important;
+    .loginbtn{
+      float: right;
+    }
+    .textlabel{
+      color: #807e7e!important;
+    }
   }
 </style>
 <script>
@@ -87,6 +122,13 @@
   import paper from 'muse-components/paper';
   import icon from 'muse-components/icon';
   import raisedButton from 'muse-components/raisedButton';
+//  import 'muse-components/styles/base.less' // 加载基础的样式
+  import Vue from 'vue'
+  import MuseUI from 'muse-ui'
+  import 'muse-ui/dist/muse-ui.css'
+  import 'muse-ui/dist/theme-teal.css' // 使用 carbon 主题
+  Vue.use(MuseUI)
+
   import $ from 'jquery';
     export default{
         name:"loginform",

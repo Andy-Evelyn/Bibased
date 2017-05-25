@@ -1,6 +1,6 @@
 <template>
   <div class="pl-page">
-    <PageHeader></PageHeader>
+    <!--<PageHeader></PageHeader>-->
     <div class="main">
       <transition name="fade">
         <keep-alive><router-view></router-view></keep-alive>
@@ -10,6 +10,34 @@
 
 </template>
 <style lang="less">
+
+  /*图标引入*/
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src:url(../../../assets/font/MaterialIcons-Regular.woff2),
+    url(../../../assets/font/MaterialIcons-Regular.woff),
+    url(../../../assets/font/MaterialIcons-Regular.eot),
+    url(../../../assets/font/MaterialIcons-Regular.ttf);
+  }
+  .material-icons {
+    font-family: 'Material Icons' !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+
   html,body,.pl-page{
     height: 100%;
   }
@@ -28,12 +56,14 @@
 </style>
 
 <script>
-  /*全部加载，用于测试*/
-  import Vue from 'vue'
-  import MuseUI from 'muse-ui'
-  import 'muse-ui/dist/muse-ui.css'
-  Vue.use(MuseUI)
-  import PageHeader from 'components/base/pageheader';
+//  import 'muse-components/styles/base.less' // 加载基础的样式
+//  import Vue from 'vue'
+//  import MuseUI from 'muse-ui'
+//  import 'muse-ui/dist/muse-ui.css'
+//  import 'muse-ui/dist/theme-teal.css' // 使用 carbon 主题
+//  Vue.use(MuseUI)
+
+//  import PageHeader from 'components/base/pageheader';
   export default{
     data(){
       return {
@@ -54,7 +84,7 @@
       }
     },
     components: {
-      PageHeader
+//      PageHeader
     }
   }
 </script>
