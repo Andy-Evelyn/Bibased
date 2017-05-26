@@ -1,12 +1,14 @@
 <template>
-  <div class="pl-page">
+  <!--<div class="sl-page">-->
     <!--<PageHeader></PageHeader>-->
     <div class="main">
+        <h1>Sharing</h1>
+        <h5>分享你的知识、见解</h5>
       <transition name="fade">
         <keep-alive><router-view></router-view></keep-alive>
       </transition>
     </div>
-  </div>
+  <!--</div>-->
 
 </template>
 <style lang="less">
@@ -37,8 +39,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-
-  html,body,.pl-page{
+  html,body,.sl-page{
     height: 100%;
   }
   body{
@@ -46,13 +47,35 @@
     overflow: hidden;
   }
   .main{
-    height: 100%;
+    /*height: 100%;*/
+    /*border:1px solid blue;*/
+    position: absolute;
+    z-index:3;
+    top:50%;
+    left: 50%;
+    width: 80%;
+    /*padding: 20px 20px 36px 20px;*/
+    /*padding: 5px 15px 30px 15px;*/
+    max-width:  340px;
+    transform: translate(-50%,-50%);
+    h1,h5{
+      text-align: center;
+      color:#009688;
+    }
   }
   .fade-leave-active, .fade-enter-active{
     transition: all .3s ease !important;
     opacity: 0;
     transform:translate(-50%,-50%) rotateY(90deg)!important;
+    transform-origin:50% 50% !important;
   }
+
+  /*.loginTitle{*/
+    /*color:#009688;*/
+    /*text-align: center;*/
+    /*position: relative;*/
+    /*z-index: 4;*/
+  /*}*/
 </style>
 
 <script>

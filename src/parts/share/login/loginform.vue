@@ -1,31 +1,33 @@
 <template>
-  <paper class="pl-login-paper" :zDepth="2" >
-<!--    <div class="icon-circle">
-      <icon value="lock" color="orange" :size="82" class="icon-clock"/>
-    </div>-->
+
+  <paper class="loginPaper" :zDepth="2" >
+    <!--    <div class="icon-circle">
+          <icon value="lock" color="orange" :size="82" class="icon-clock"/>
+        </div>-->
+
     <div class="icon-circle">
       <!--<h1 style="line-height: 140px;">Sharing</h1>-->
       <icon value="account_box" color="orange" :size="82" class="icon-clock"/>
       <!--<icon value="lock" color="orange" :size="82" class="icon-clock"/>-->
     </div>
-    <div class="pl-form-head mu-flat-button-primary">
+    <div class="login-form-head mu-flat-button-primary">
       <!--<mu-list-item disabled>-->
-        <!--<mu-avatar slot="left" color="orange" backgroundColor="#eee" :size="140">Sharing</mu-avatar>-->
+      <!--<mu-avatar slot="left" color="orange" backgroundColor="#eee" :size="140">Sharing</mu-avatar>-->
       <!--</mu-list-item>-->
-<!--      <h1>Sharing</h1>
-      &lt;!&ndash;<h5>分享你的知识、见解</h5>&ndash;&gt;
-      <p>用户登录</p>-->
-
+      <!--      <h1>Sharing</h1>
+            &lt;!&ndash;<h5>分享你的知识、见解</h5>&ndash;&gt;
+            <p>用户登录</p>-->
       用户登录
     </div>
     <form action="">
-      <textField id="userName" @blur="check_name" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" fullWidth labelFloat/><br/>
+      <textField id="userName" @blur="check_name" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" pattern="-?[0-9]*(\.[0-9]+)?" fullWidth labelFloat/><br/>
       <textField id="passWord" @blur="check_word" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/><br/>
-      <p class="reMind"><mu-checkbox label="记住我" /></p>
+      <p class="reMind"><mu-checkbox label="记住我"/></p>
       <router-link to="forgetpw"><span class="forgetpw">忘记密码？</span></router-link>
       <raisedButton label="登录" class="loginbtn" id="subMit" @click="login" primary/>
     </form>
   </paper>
+
 </template>
 <style lang="less" scoped>
   /*图标引入*/
@@ -54,17 +56,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .pl-login-paper{
-    position: absolute;
-    z-index:3;
-    top:50%;
-    left: 50%;
-    /*padding: 20px 20px 36px 20px;*/
-    padding: 5px 15px 30px 15px;
-    width: 80%;
-    max-width:  340px;
-    transform: translate(-50%,-50%);
-  .pl-form-head{
+  .loginPaper{
+    padding: 5px 15px 50px 15px;
+  }
+  .login-form-head{
     text-align: center;
     margin: 20px 0 10px 0;
     font-size: 20px;
@@ -101,6 +96,9 @@
   .reMind{
     font-size: 12px !important;
     margin:0px !important;
+    .mu-checkbox-svg-icon {
+      color: #009688 !important;
+    }
     .mu-checkbox-icon{
       margin-right: 0px!important;
     }
@@ -115,7 +113,6 @@
     .textlabel{
       color: #807e7e!important;
     }
-  }
 </style>
 <script>
   import textField from 'muse-components/textField';

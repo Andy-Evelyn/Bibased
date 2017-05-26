@@ -1,23 +1,23 @@
 <template>
-  <paper class="pl-login-paper" :zDepth="2" >
+  <paper class="forget-paper" :zDepth="2" >
     <div class="icon-circle">
       <icon value="live_help" color="orange" :size="82" class="icon-clock"/>
     </div>
-    <div class="pl-form-head mu-flat-button-primary">找回密码</div>
+    <div class="forget-form-head mu-flat-button-primary">找回密码</div>
     <p style="text-align: center; margin: 30px;">请到F214找管理人员修改密码<br/>联系人...</p>
     <router-link to="/"><raisedButton label="知道了" fullWidth primary/></router-link>
   </paper>
 </template>
 <style lang="less" scoped>
-  .pl-login-paper{
-    position: absolute;
-    top:50%;
-    left: 50%;
+  .forget-paper{
+    /*position: absolute;*/
+    /*top:50%;*/
+    /*left: 50%;*/
     padding: 20px 20px 36px 20px;
-    width: 80%;
+    /*width: 80%;*/
     max-width:  340px;
-    transform: translate(-50%,-50%);
-  .pl-form-head{
+    /*transform: translate(-50%,-50%);*/
+  .forget-form-head{
     text-align: center;
     margin: 20px 0 10px 0;
     font-size: 20px;
@@ -60,7 +60,7 @@
   import Vue from 'vue'
   import MuseUI from 'muse-ui'
   import 'muse-ui/dist/muse-ui.css'
-  import 'muse-ui/dist/theme-teal.css' // 使用 carbon 主题
+  import 'muse-ui/dist/theme-teal.css' // 使用 teal 主题
   Vue.use(MuseUI)
     export default{
         name:"forgetpw",

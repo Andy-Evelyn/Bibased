@@ -1,5 +1,4 @@
 <template>
-
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
           <div class="mdl-layout__header-row">
@@ -7,7 +6,7 @@
             <!--<div class="mdl-layout-spacer"></div>-->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
               <!--<a class="mdl-navigation__link" href="#">讨论版</a>-->
-              <mu-flat-button label="讨论版" color="#fff" backgroundColor="transparent" href="../../../parts/share/posts/posts.html" target="_blank"/>
+              <mu-flat-button label="讨论版" color="#fff" backgroundColor="transparent" href="../../../parts/share/posts/posts.html" />
               <!--<div>-->
                 <!--<mu-raised-a class="mdl-navigation__link" href="#">交流分享</a>-->
                 <mu-flat-button label="交流分享" ref="button" @click="toggle" color="#fff" backgroundColor="transparent"/>
@@ -35,7 +34,7 @@
             <!--<a class="mdl-navigation__link" href="#" color="#fff">讨论版</a>-->
             <!--<mu-flat-button label="交流分享" ref="button1" @click="toggle1" color="#fff" backgroundColor="#009688;"/>-->
             <div>
-              <mu-flat-button label="讨论版" color="#009688" backgroundColor="transparent" href="../../../parts/share/posts/posts.html"target="_blank"/>
+              <mu-flat-button label="讨论版" color="#009688" backgroundColor="transparent" href="../../../parts/share/posts/posts.html"/>
             </div>
             <div>
               <!--<a class="mdl-navigation__link" @click="toggle" href="#">交流分享</a>-->

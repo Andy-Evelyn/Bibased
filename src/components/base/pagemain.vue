@@ -119,6 +119,7 @@
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.156863), 0 3px 10px rgba(0, 0, 0, 0.227451);
       border-radius: 3px;
       margin:8px;
+      background: #fff;
     }
     .mdl-grid .moreTitle{
       position:relative;

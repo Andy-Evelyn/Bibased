@@ -14,6 +14,16 @@ const SharePosts= resolve => {
     resolve(require('parts/share/posts/posts.vue'));
   }, 'shareposts');
 };
+const SharePostsSend= resolve => {
+  require.ensure(['parts/share/posts/postsend.vue'], require => {
+    resolve(require('parts/share/posts/postsend.vue'));
+  }, 'sharepostsend');
+};
+const SharePostsMain= resolve => {
+  require.ensure(['parts/share/posts/postsmain.vue'], require => {
+    resolve(require('parts/share/posts/postsmain.vue'));
+  }, 'sharepostsmain');
+};
 const ShareResources= resolve => {
   require.ensure(['parts/share/resources/resources.vue'], require => {
     resolve(require('parts/share/resources/resources.vue'));
@@ -69,6 +79,8 @@ export default {
     SharePersonal,
     ShareHome,
     SharePosts,
+    SharePostsSend,
+    SharePostsMain,
     ShareResources,
     Login,
     ShareLoginForm,

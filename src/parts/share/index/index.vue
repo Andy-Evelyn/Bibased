@@ -7,7 +7,11 @@
 
 </template>
 <style lang="less">
-
+  body{
+    height:100%;
+    background: #f2f2f2 !important;
+    overflow: hidden;
+  }
 </style>
 <script>
 /*  import 'muse-components/styles/base.less' // 加载基础的样式*/
