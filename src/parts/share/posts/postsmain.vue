@@ -8,7 +8,13 @@
             <mu-raised-button label="发布帖子" to="postsend" class="send_postBtn" primary href="#"/>
             <mu-text-field label="搜索" icon="search" hintText="输入关键词" labelFloat/>
           </div>
-          <ListTabs></ListTabs>
+          <ListTabs>
+            <template scope="props" slot="addTabs">
+              <mu-tab value="tab3" title="分类一"/>
+              <mu-tab value="tab4" title="分类二"/>
+              <mu-tab value="tab5" title="分类三"/>
+            </template>
+          </ListTabs>
           <PaginAtion></PaginAtion>
         </div>
       </div>
@@ -19,10 +25,10 @@
   .listtabsmain{
     position: relative;
     padding-top:94px;
-  /*f分页在右边显示*/
+/*  !*f分页在右边显示*!
   .mu-pagination{
     float: right;
-  }
+  }*/
   /*增加背景强度*/
   .mdl-grid {
     background:#fff;
@@ -68,6 +74,7 @@
     name:"postsmain",
     data(){
       return {
+//        activeTab1:'tab5'
       }
     },
     components: {

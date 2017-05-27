@@ -9,7 +9,28 @@ import Router from 'vue-router';
 import routers from 'router/index';
 Vue.use(Router)
 const routes = [
-  {path: '/', component: routers.ShareResources},
+  {
+   path: '/', component: routers.ShareResources,
+   children: [
+      {
+        path: '',
+        component: routers.ShareResourcesMain,
+      },
+     /*{
+        path: 'postsend',
+        component: routers.SharePostsSend,
+      },*/
+      {
+        path: 'detail',
+        // component: routers.SharePostsComment,
+        component: routers.SharePostsComment,
+      },
+      // {
+      //   path: 'postslisttabs',
+      //   component: routers.ShareListtabs,
+      // },
+    ]
+  }
 ];
 const router= new Router({
   routes

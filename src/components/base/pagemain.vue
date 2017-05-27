@@ -172,7 +172,7 @@
   import 'muse-ui/dist/theme-teal.css' // 使用 teal 主题
   import 'assets/css/style.css'
 
-  /*全部加载muse-ui用于测试*/
+  /*全部加载*/
   import Vue from 'vue'
   import MuseUI from 'muse-ui'
   import 'muse-ui/dist/muse-ui.css'

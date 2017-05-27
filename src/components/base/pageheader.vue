@@ -14,9 +14,9 @@
                 <!--<mu-popover :open="open" :autoPosition="false" :trigger="trigger" :anchorOrigin="anchorOrigin" :targetOrigin="targetOrigin" @close="handleClose">-->
                 <mu-popover :trigger="trigger" :open="open" @close="handleClose" :autoPosition="false" :anchorOrigin="anchorOrigin" :targetOrigin="targetOrigin"  >
                   <mu-menu>
-                    <a href="https://www.baidu.com/"><mu-menu-item title="文档资料" /></a>
-                    <mu-menu-item title="技术博客" />
-                    <mu-menu-item title="个人笔记" />
+                    <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="文档资料" /></a>
+                    <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="技术博客" /></a>
+                    <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="个人笔记" /></a>
                   </mu-menu>
                 </mu-popover>
               <!--</div>-->
@@ -44,9 +44,9 @@
               <mu-popover :trigger="trigger1" :open="open1" @close="handleClose" :autoPosition="false" :anchorOrigin="anchorOriginDrawer" :targetOrigin="targetOriginDrawer"  >
               <!--<mu-popover :trigger="trigger" :open="open" @close="handleClose">-->
                 <mu-menu>
-                  <a href="https://www.baidu.com/"><mu-menu-item title="文档资料" /></a>
-                  <mu-menu-item title="技术博客" />
-                  <mu-menu-item title="个人笔记" />
+                  <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="文档资料" /></a>
+                  <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="技术博客" /></a>
+                  <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="个人笔记" /></a>
                 </mu-menu>
               </mu-popover>
             </div>
@@ -87,10 +87,12 @@
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
   }
-
-
+  .mdl-layout__container{
+    height: 200px !important;
+  }
   .mdl-layout__header{
     background: #009688 !important;
+    z-index: 30 !important;
     .mdl-layout__header-row{
       .mdl-navigation{
         padding-left: 50px;

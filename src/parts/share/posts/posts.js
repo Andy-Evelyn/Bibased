@@ -19,6 +19,14 @@ const routes = [
         path: 'postsend',
         component: routers.SharePostsSend,
       },
+      {
+        path: 'detail',
+        component: routers.SharePostsComment,
+      },
+      // {
+      //   path: 'postslisttabs',
+      //   component: routers.ShareListtabs,
+      // },
     ]
   },
 ];

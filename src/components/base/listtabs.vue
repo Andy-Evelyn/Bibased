@@ -9,26 +9,55 @@
         <mu-tabs :value="activeTab1" @change="handleTabChangeposts">
           <mu-tab value="tab1" title="最新"/>
           <mu-tab value="tab2" title="最热"/>
+          <slot name="addTabs"></slot>
         </mu-tabs>
         <!--显示内容-->
-        <div v-if="activeTab1 === 'tab1'">
+        <div class="postsL_all">    <!--v-if="activeTab1 === 'tab1'"-->
           <div class="context_one">
             <img :src="banner_img" class="item_img"/>
             <div class="item_cont">
-              <h6><a class="text" href="#">test Ghost的监听端口在哪里修改。。。</a></h6>
+              <h6><router-link to="detail" class="text" >test Ghost的监听端口在哪里修改。。。</router-link></h6>
               <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
             </div>
           </div>
         </div>
-        <div v-if="activeTab1 === 'tab2'">
+<!--        <div v-if="activeTab1 === 'tab2'">
           <div class="context_one">
             <img :src="banner_img" class="item_img"/>
             <div class="item_cont">
-              <h6><a class="text" href="#">test最热。。。修改。。。</a></h6>
+              <h6><router-link to="postscomment" class="text" >test最热。。。修改。。。</router-link></h6>
               <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
             </div>
           </div>
         </div>
+        <div v-if="activeTab1 === 'tab3'">
+          <div class="context_one">
+            <img :src="banner_img" class="item_img"/>
+            <div class="item_cont">
+              <h6><router-link to="postscomment" class="text" >test Ghost的监听端口在哪里修改。。。</router-link></h6>
+              <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+            </div>
+          </div>
+        </div>
+        <div v-if="activeTab1 === 'tab4'">
+          <div class="context_one">
+            <img :src="banner_img" class="item_img"/>
+            <div class="item_cont">
+              <h6><router-link to="postscomment" class="text" >test最热。。。修改。。。</router-link></h6>
+              <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+            </div>
+          </div>
+        </div>
+        <div v-if="activeTab1 === 'tab5'">
+        <div class="context_one">
+          <img :src="banner_img" class="item_img"/>
+          <div class="item_cont">
+            <h6><router-link to="postscomment" class="text" >5555最热。。。修改。。。</router-link></h6>
+            <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+          </div>
+        </div>
+    </div>-->
+        <slot name="activeTab"></slot>
         <!--<PaginAtion></PaginAtion>-->
       <!--</div>-->
     <!--</div>-->
@@ -47,7 +76,7 @@
       .mu-tabs{
         background: #fff !important;
         z-index:1 !important;
-        width: 20%;
+        width: 50%;
         min-width: 95px;
       }
       .mu-tab-link{
@@ -121,6 +150,12 @@
 //  import PaginAtion from 'components/base/pagination';
 
   export default{
+/*    props: {
+      'activeTab1':{
+        type:String,
+        default:"tab1"
+      },
+     },*/
     data(){
       return {
         banner_img: banner_img,

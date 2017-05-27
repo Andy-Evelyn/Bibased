@@ -185,7 +185,7 @@
               $(this).removeClass("selected");
             }
             else{
-              $(this).siblings('a').removeClass("selected");
+//              $(this).siblings('a').removeClass("selected");  //只选一个
               $(this).addClass("selected");
             }
             });

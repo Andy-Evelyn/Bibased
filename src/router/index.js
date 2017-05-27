@@ -19,6 +19,16 @@ const SharePostsSend= resolve => {
     resolve(require('parts/share/posts/postsend.vue'));
   }, 'sharepostsend');
 };
+const SharePostsComment= resolve => {
+  require.ensure(['parts/share/posts/postscomment.vue'], require => {
+    resolve(require('parts/share/posts/postscomment.vue'));
+  }, 'sharepostscomment');
+};
+// const ShareListtabs= resolve => {
+//   require.ensure(['components/base/listtabs.vue'], require => {
+//     resolve(require('components/base/listtabs.vue'));
+//   }, 'sharelisttabs');
+// };
 const SharePostsMain= resolve => {
   require.ensure(['parts/share/posts/postsmain.vue'], require => {
     resolve(require('parts/share/posts/postsmain.vue'));
@@ -28,6 +38,11 @@ const ShareResources= resolve => {
   require.ensure(['parts/share/resources/resources.vue'], require => {
     resolve(require('parts/share/resources/resources.vue'));
   }, 'shareresources');
+};
+const ShareResourcesMain= resolve => {
+  require.ensure(['parts/share/resources/resourcesmain.vue'], require => {
+    resolve(require('parts/share/resources/resourcesmain.vue'));
+  }, 'shareresourcesmain');
 };
 const ShareHome= resolve => {
     require.ensure(['parts/share/home/home.vue'], require => {
@@ -84,7 +99,10 @@ export default {
     ShareResources,
     Login,
     ShareLoginForm,
-    ShareLoginForgetpw
+    ShareLoginForgetpw,
+    SharePostsComment,
+    ShareResourcesMain,
+    // ShareListtabs,
   // StudentProblems,
   //Studentshow,
   //StudenttodoList

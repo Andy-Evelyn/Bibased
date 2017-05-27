@@ -5,7 +5,10 @@
 </template>
 
 <style lang="less">
-
+  /*f分页在右边显示*/
+  .mu-pagination{
+    float: right;
+  }
 </style>
 <script>
 
