@@ -3,7 +3,7 @@
     <div class="listtabsmain">
       <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col">
-          <div class="moreTitle">
+          <div class="postTitle">
             <mu-icon value="message" :size="48" color="#f1b200"/><span>讨论版</span>
             <mu-raised-button label="发布帖子" to="postsend" class="send_postBtn" primary href="#"/>
             <mu-text-field label="搜索" icon="search" hintText="输入关键词" labelFloat/>
@@ -36,7 +36,7 @@
     border-radius: 3px;
     margin: 0 20%;
     min-width: 500px;
-  .moreTitle {
+  .postTitle {
     position: relative;
     padding-bottom: 20px;
   .mu-text-field.has-label {

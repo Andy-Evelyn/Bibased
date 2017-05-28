@@ -20,7 +20,7 @@
               内容：<textarea></textarea>
             </p>
             <p>
-              <mu-flat-button label="发布" to="/" backgroundColor="orange" labelPosition="before" icon="send" color="#fff"/>
+              <mu-flat-button label="发布" to="/" backgroundColor="orange" labelPosition="before" icon="near_me" color="#fff"/>
             </p>
           </form>
         </mu-paper>
@@ -178,7 +178,7 @@
 
     },
     methods: {
-        selectClass(){   //只能选一个标签
+        selectClass(){   //选标签
           $(".postSend_class a").click(function () {
               console.log($(this).text());  //标签类别
             if($(this).hasClass("selected")){

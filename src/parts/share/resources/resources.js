@@ -16,10 +16,10 @@ const routes = [
         path: '',
         component: routers.ShareResourcesMain,
       },
-     /*{
-        path: 'postsend',
-        component: routers.SharePostsSend,
-      },*/
+     {
+        path: 'buildfile',
+        component: routers.ShareReBuildFile,
+      },
       {
         path: 'detail',
         // component: routers.SharePostsComment,

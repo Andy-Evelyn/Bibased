@@ -19,7 +19,7 @@
                 <transition name="fade">
                   <form action="" method="" v-show="isShow_com1" id="s_h">
                     <textarea placeholder="请写下你的评论：" maxlength="280" autofocus ></textarea>
-                    <mu-raised-button label="提交" to="postscomment" class="com_btn" />
+                    <mu-raised-button label="评论" to="postscomment" class="com_btn" />
                   </form>
                 </transition>
                 <p class="p2"><span>2</span>个回复</p>
@@ -30,7 +30,7 @@
             <div class="clearfix reply">
               <img :src="userUrl">
               <div class="reply_context">
-                <span>ba啦 啦la la la </span>
+                <a href="#">用户名 </a>
                 <div class="cont">
                   百度一下吧，啦啦啦啦 百度一下吧，啦啦啦啦 百度一下吧，啦啦啦啦 百度一下吧，啦啦
                 </div>
@@ -52,7 +52,7 @@
                     <!--添加评论-->
                     <form action="" method="" >
                       <textarea class="txt"placeholder="请写下你的评论：" maxlength="280" autofocus ></textarea>
-                      <mu-raised-button label="提交" class="com_btn" to="postscomment" />
+                      <mu-raised-button label="评论" class="com_btn" to="postscomment" />
                     </form>
                     <!--<listCom></listCom>-->
                   </ul>

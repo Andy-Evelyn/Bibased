@@ -44,6 +44,16 @@ const ShareResourcesMain= resolve => {
     resolve(require('parts/share/resources/resourcesmain.vue'));
   }, 'shareresourcesmain');
 };
+const ShareReNewBuild= resolve => {
+  require.ensure(['parts/share/resources/newbuild.vue'], require => {
+    resolve(require('parts/share/resources/newbuild.vue'));
+  }, 'shareresourcesnewbuild');
+};
+const ShareReBuildFile= resolve => {
+  require.ensure(['parts/share/resources/buildfile.vue'], require => {
+    resolve(require('parts/share/resources/buildfile.vue'));
+  }, 'shareresourcesbuildfile');
+};
 const ShareHome= resolve => {
     require.ensure(['parts/share/home/home.vue'], require => {
         resolve(require('parts/share/home/home.vue'));
@@ -102,6 +112,8 @@ export default {
     ShareLoginForgetpw,
     SharePostsComment,
     ShareResourcesMain,
+    ShareReNewBuild,
+    ShareReBuildFile,
     // ShareListtabs,
   // StudentProblems,
   //Studentshow,

@@ -14,7 +14,7 @@
                 <!--<mu-popover :open="open" :autoPosition="false" :trigger="trigger" :anchorOrigin="anchorOrigin" :targetOrigin="targetOrigin" @close="handleClose">-->
                 <mu-popover :trigger="trigger" :open="open" @close="handleClose" :autoPosition="false" :anchorOrigin="anchorOrigin" :targetOrigin="targetOrigin"  >
                   <mu-menu>
-                    <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="文档资料" /></a>
+                    <a href="../../../parts/share/resources/resources.html?type=wendang"><mu-menu-item title="文档资料" /></a>
                     <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="技术博客" /></a>
                     <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="个人笔记" /></a>
                   </mu-menu>
@@ -128,7 +128,7 @@
     data(){
       return {
         userUrl: imgurl,
-        value: '1',
+//        value: '1',
         open: false,
         open1:false,
         trigger: null,

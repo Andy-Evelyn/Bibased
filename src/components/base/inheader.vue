@@ -13,8 +13,9 @@
             <div class="m1">
               <mu-paper :zDepth="1" class="menu2">
                 <mu-menu>
+                  <!--<mu-icon value="power_settings_new">-->
                   <mu-menu-item href="../../../parts/share/personal/personal.html" title="个人中心"/>
-                  <mu-menu-item href="https://www.baidu.com/" title="退出"/>
+                  <mu-menu-item href="../../../parts/share/login/login.html" title="退出"/>
                 </mu-menu>
               </mu-paper>
             </div>
