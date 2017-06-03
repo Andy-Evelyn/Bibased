@@ -26,16 +26,16 @@
         <!--显示内容-->
         <div v-if="activeTab1 === 'tab1'">
           <div class="context_one">
-            <img :src="banner_img" class="item_img"/>
+            <img :src="banner_img1" class="item_img"/>
             <div class="item_cont">
-              <h6><a class="text" href="#">test Ghost的监听端口在哪里修改。。。</a></h6>
-              <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+              <h6><a class="text" href="#">vue-cli的监听端口在哪里修改?</a></h6>
+              <p> • <span class="itemUser_name">2013081302 </span>发起了问题 • <span>7</span>个回复 • <span>154</span>次浏览 • <span>2016-5-23</span></p>
             </div>
           </div>
         </div>
         <div v-if="activeTab1 === 'tab2'">
           <div class="context_one">
-            <img :src="banner_img" class="item_img"/>
+            <img :src="banner_img1" class="item_img"/>
             <div class="item_cont">
               <h6><a class="text" href="#">test最热。。。修改。。。</a></h6>
               <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
@@ -56,10 +56,13 @@
         </mu-tabs>
         <!--显示内容-->
         <div v-if="activeTab2 === 'tab1'">
-          <h5>最新内容</h5>
-          <p>
-            这是第一个 tab
-          </p>
+          <div class="context_one">
+            <img :src="banner_img1" class="item_img"/>
+            <div class="item_cont">
+              <h6><a class="text" href="#">vue学习</a></h6>
+              <p> • <span class="itemUser_name">2013081125 </span>发起了问题 • <span>3</span>个回复 • <span>15</span>次浏览 • <span>2016-5-28</span></p>
+            </div>
+          </div>
         </div>
         <div v-if="activeTab2 === 'tab2'">
           <h5>最热内容</h5>
@@ -178,10 +181,12 @@
   import 'muse-ui/dist/muse-ui.css'
   Vue.use(MuseUI)
   import banner_img from '../../assets/images/slide1.jpg'
+  import banner_img1 from '../../assets/images/user.png'
   export default{
     data(){
       return {
         banner_img: banner_img,
+        banner_img1: banner_img1,
         activeTab1: 'tab1',
         activeTab2: 'tab1',
       }

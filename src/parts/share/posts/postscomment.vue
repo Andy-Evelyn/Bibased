@@ -6,23 +6,25 @@
           <div class="comment_left">
             <div class="com_topic">
               <div class="com_topic_top">
-                <a href="../../../parts/share/posts/posts.html">分类一</a>
-                <p>Ghost 的监听端口2368在哪里修改？</p>
+                <!--<a href="../../../parts/share/posts/posts.html">分类一</a>-->
+                <p>115队列的链式存储结构与操作，提交不通过？</p>
+                <span><span class="tags">tag1</span></span>
               </div>
               <div class="com_topic_two">
                 <p class="p1">求解？
                 </p>
                 <div class="comment_add">
-                  <span>2016-05-23</span>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="comment" @click="toggle_com1"><mu-icon value="textsms" :size="16"/>&nbsp;添加评论</a>
+                  <span>2016-05-23</span>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="comment" @click="isShow_com1 = !isShow_com1"><mu-icon value="textsms" :size="16"/>&nbsp;添加评论</a>
                 </div>
                 <!--添加评论-->
                 <transition name="fade">
-                  <form action="" method="" v-show="isShow_com1" id="s_h">
-                    <textarea placeholder="请写下你的评论：" maxlength="280" autofocus ></textarea>
-                    <mu-raised-button label="评论" to="postscomment" class="com_btn" />
+                  <form action="" method="" v-if="isShow_com1" id="s_h">
+                    <!--<textarea placeholder="请写下你的评论：" maxlength="280" autofocus ></textarea>-->
+                      <Editor style="min-height: 150px"></Editor>
+                    <mu-raised-button label="评论" to="/" class="com_btn" />
                   </form>
                 </transition>
-                <p class="p2"><span>2</span>个回复</p>
+                <p class="p2"><span>1</span>个回复</p>
               </div>
             </div>
 
@@ -30,29 +32,30 @@
             <div class="clearfix reply">
               <img :src="userUrl">
               <div class="reply_context">
-                <a href="#">用户名 </a>
+                <a href="#">2013081502</a>
                 <div class="cont">
-                  百度一下吧，啦啦啦啦 百度一下吧，啦啦啦啦 百度一下吧，啦啦啦啦 百度一下吧，啦啦
+                  115队列的链式存储结构与操作，提交不通过
                 </div>
                 <div>
-                  <a href="javascript:void(0);" class="con_number" id="reply_a" @click="toggle_com2"><mu-icon value="textsms" :size="16"/>&nbsp;0</a>
+                  <a href="javascript:void(0);" class="con_number" id="reply_a" @click="isShow_com2 = !isShow_com2"><mu-icon value="textsms" :size="16"/>&nbsp;0</a>
                   <span class="con_time">2016-5-23</span>
                 </div>
                 <!--评论的内容先隐藏-->
                 <transition name="fade">
-                  <ul class="reply_show" id="reply_num" v-show="isShow_com2">
+                  <ul class="reply_show" id="reply_num" v-if="isShow_com2">
                     <li class="clearfix">
                       <img :src="userUrl" alt="">
                       <div class="li_re">
-                        <a href="#">用户名</a>
-                        <span>2016-03-20</span>
-                        <p>改端口或host后可以同时挂多套博客吗？</p>
+                        <a href="#">2013081502</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span>2016-5-23</span>
+                        <p>115队列的链式存储结构与操作，提交不通过？</p>
                       </div>
                     </li>
                     <!--添加评论-->
                     <form action="" method="" >
-                      <textarea class="txt"placeholder="请写下你的评论：" maxlength="280" autofocus ></textarea>
-                      <mu-raised-button label="评论" class="com_btn" to="postscomment" />
+                      <!--<textarea class="txt"placeholder="请写下你的评论：" maxlength="280" autofocus ></textarea>-->
+                        <Editor style="min-height: 150px"></Editor>
+                      <mu-raised-button label="评论" class="com_btn" to="/" />
                     </form>
                     <!--<listCom></listCom>-->
                   </ul>
@@ -68,7 +71,7 @@
             <div class="writer">
               <p>发起人</p>
               <img :src="userUrl" alt="">
-              <a href="javascript:void(0);">lal la a </a>
+              <a href="javascript:void(0);">2013081420</a>
             </div>
             <ul class="writer" style="border-bottom: none;">
               <li style="font-size: 20px;margin-bottom: 10px;">帖子状态</li>
@@ -120,12 +123,9 @@
       position: relative;
       top: 4px;
     }
-    textarea {
+    .textarea {
       width: 100%;
       height: 150px;
-      resize: none;
-      outline: none;
-      border: 1px solid #dce1e5;
       margin:0 auto;
       margin-top: 15px;
     }
@@ -135,6 +135,7 @@
       background: #59b0ff;
       color: #fff;
       border-radius: 5px;
+      margin-top: 10px;
     }
     .mdl-grid {
       margin: 0 20%;
@@ -157,20 +158,20 @@
           margin: 0 auto;
           width: 90%;
           border-bottom: 1px solid #e6e6e6;
-          >a {
+           .tags{
              display: inline-block;
-             margin-top: 20px;
+             margin-bottom: 10px;
              width: auto;
              height: 20px;
              line-height: 20px;
              color: #fff;
              text-align: center;
-             border-radius: 4px;
+             border-radius: 3px;
              background: #99cfff;
              padding: 0px 4px 0 4px;
-              &:hover{
-                 background: #59b0ff;
-               }
+              /*&:hover{*/
+                 /*background: #59b0ff;*/
+               /*}*/
            }
           >p {
              font-size: 20px;
@@ -186,6 +187,9 @@
             margin-top: 20px;
             color: #666a74;
           }
+           .comment_add{
+             margin-bottom: 15px;
+           }
           .comment_add, .comment_add>a {
             margin-top: 20px;
             width: 100%;
@@ -243,7 +247,8 @@
             width: 100%;
             border-radius: 2px;
             font-size: 15px;
-            border: 1px solid #e6e6e6;
+            /*border: 1px solid #e6e6e6;*/
+            border-top: 1px solid #e6e6e6;
             list-style: none;
             padding-bottom: 5px;
             li {
@@ -257,6 +262,7 @@
                 float: left;
                 width: 80%;
                 padding: 10px;
+                font-size: 14px;
               }
             }
             .txt {
@@ -305,8 +311,9 @@
 </style>
 <script>
   import '../../../assets/css/style.css' // 加载样式
-  import imgurl from '../../../assets/images/background.jpg'
+  import imgurl from '../../../assets/images/user.png'
 //  import listCom from '../../../components/base/listtabs'
+  import Editor from 'components/base/pageeditor';
   export default{
       name:"postscomment",
     data(){
@@ -314,18 +321,21 @@
         userUrl: imgurl,
         isShow_com1:false,
         isShow_com2:false,
+        editor:'',
       }
     },
     components: {
+      Editor,
 //      listCom
     },
     methods:{
-      toggle_com1(){
-        this.isShow_com1 = !this.isShow_com1;
-      },
-      toggle_com2(){
-        this.isShow_com2 = !this.isShow_com2;
-      }
+
+//      toggle_com1(){
+//        this.isShow_com1 = !this.isShow_com1;
+//      },
+//      toggle_com2(){
+//        this.isShow_com2 = !this.isShow_com2;
+//      }
     }
   }
 </script>

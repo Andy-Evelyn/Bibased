@@ -6,12 +6,16 @@
           <div class="ResTitle">
             <mu-icon value="message" :size="48" color="#f1b200"/><span>分享</span>
             <a class="send_postBtn" href="#">我要分享
-              <div class="newItem">
-                <router-link to="buildfile">文档资料</router-link>
-                <router-link to="newbuild">技术博客</router-link>
-                <router-link to="newbuild">个人笔记</router-link>
+              <div class="newItemMain">
+                <div class="entry-trangle"></div>
+                <div class="newItem">
+                  <router-link to="buildfile">文档资料</router-link>
+                  <router-link to="buildblog">技术博客</router-link>
+                  <router-link to="buildnote">个人笔记</router-link>
+                </div>
               </div>
             </a>
+            <mu-text-field label="搜索" icon="search" hintText="输入关键词" labelFloat/>
 
             <!--<mu-raised-button label="我要分享" to="" class="send_postBtn" primary href="#"/>-->
             <!--<mu-raised-button label="我要分享"class="send_postBtn" primary ref="button" @click="toggle" color="#fff"/>-->
@@ -25,9 +29,9 @@
           </div>
           <ListTabs>
             <template scope="props" slot="addTabs">
-              <mu-tab value="tab3" id="wendang" title="文档资料" @click="handle"/>
-              <mu-tab value="tab4" title="技术博客"/>
-              <mu-tab value="tab5" title="个人笔记"/>
+              <mu-tab value="tab1" id="wendang" title="文档资料" @click="handle"/>
+              <mu-tab value="tab2" title="技术博客"/>
+              <mu-tab value="tab3" title="个人笔记"/>
             </template>
           </ListTabs>
           <PaginAtion></PaginAtion>
@@ -45,28 +49,63 @@
       .ResTitle {
         position: relative;
         padding-bottom: 20px;
+        .mu-text-field.has-label {
+          position: absolute;
+          right: 0;
+          top: 25px;
+        }
+        .mu-text-field-icon{
+          left:90% !important;
+        }
           > span {
               padding: 0 10px;
               position: absolute;
               font-size: 24px;
               color: #009688 !important;
             }
-            .newItem{
+            .newItemMain{
               display: none;
               position: absolute;
               width:100%;
               min-width: 88px;
-              top:36px;
+              /*top:36px;*/
+              left: 88px;
+              top: -21px;
               text-align: center;
               z-index:10;
               /*background:#f2f2f2 !important;*/
-              border:1px solid #ff4081;
-              box-shadow: 0 1px 6px rgba(0,0,0,.117647), 0 1px 4px rgba(0,0,0,.117647);
-              a{
-                display: block;
-                height: 28px!important;
-                line-height: 28px!important;
-                width:100%;
+              /*border:1px solid lightgreen;*/
+              /*border-color:transparent transparent lightgreen transparent;*/
+              /*border:1px solid #99cfff;*/
+               .entry-trangle{
+                  width:0;
+                  height:0;
+                  position: absolute;
+                  z-index: -1;
+                  top:30px;
+                  border-top: 8px solid transparent;
+                  border-bottom: 8px solid transparent;
+                  /*border-right: 8px solid #f1b200;*/
+                 border-right: 8px solid #41f1a4;
+                }
+              .newItem{
+                margin-left: 8px;
+                background:#fff;
+                /*box-shadow: 0 1px 6px rgba(153,207,255,.117647), 0 1px 4px rgba(153,207,255,.117647);*/
+                border:2px solid #41f1a4;
+                border-radius:8px;
+                a{
+                  display: block;
+                  height: 28px!important;
+                  line-height: 28px!important;
+                  width:100%;
+                  /*color:#12cba5!important;*/
+                  color:#ff4081 !important;
+                &:hover{
+                   color: #fff !important;
+                   background:#12cba5;
+                 }
+                }
               }
             }
           .send_postBtn{
@@ -82,14 +121,14 @@
             background: #009688 !important;
             box-shadow: 0 1px 6px rgba(0,0,0,.117647), 0 1px 4px rgba(0,0,0,.117647);
             &:hover{
-                .newItem{
+                .newItemMain{
                   display: block;
                 }
              }
           }
       }
       .mdl-cell {
-        padding: 10px;
+        padding: 20px;
         position: relative;
       }
      }

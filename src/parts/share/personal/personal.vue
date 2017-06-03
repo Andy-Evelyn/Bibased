@@ -1,6 +1,6 @@
 <template>
   <div>
-    <InHeader></InHeader>
+    <PageHeader></PageHeader>
     <div class="personalMain">
       <div class="personalContent">
           <mu-paper class="introduction" :zDepth="1">
@@ -11,28 +11,28 @@
             </div>
             <div class="upImg">
               <img :src="userUrl" alt="">
-              <div class="maskUp">
-                <div>
-                  <mu-icon value="photo_camera" :size="36" color="#fff"/>
-                  <p>修改我的头像</p>
-                </div>
-                <input type="file" accept="image/png,image/jpeg">
-              </div>
+              <!--<div class="maskUp">-->
+                <!--<div>-->
+                  <!--<mu-icon value="photo_camera" :size="36" color="#fff"/>-->
+                  <!--<p>修改我的头像</p>-->
+                <!--</div>-->
+                <!--<input type="file" accept="image/png,image/jpeg">-->
+              <!--</div>-->
             </div>
           </mu-paper>
           <mu-paper class="issueAll" :zDepth="1">
             <mu-tabs :value="activeFabu" @change="ChangMyPu">
               <mu-tab value="tiezi" title="发布帖子">
-                <mu-badge :content="n" class="demo-icon-badge" circle secondary></mu-badge>
+                <mu-badge :content="n1" class="demo-icon-badge" circle secondary></mu-badge>
               </mu-tab>
               <mu-tab value="wendang" title="文档资料">
-                <mu-badge :content="n" class="demo-icon-badge" circle secondary></mu-badge>
+                <mu-badge :content="n2" class="demo-icon-badge" circle secondary></mu-badge>
               </mu-tab>
               <mu-tab value="boke" title="技术博客">
-                <mu-badge :content="n" class="demo-icon-badge" circle secondary></mu-badge>
+                <mu-badge :content="n3" class="demo-icon-badge" circle secondary></mu-badge>
               </mu-tab>
               <mu-tab value="biji" title="个人笔记">
-                <mu-badge :content="n" class="demo-icon-badge" circle secondary></mu-badge>
+                <mu-badge :content="n4" class="demo-icon-badge" circle secondary></mu-badge>
               </mu-tab>
             </mu-tabs>
             <div v-if="activeFabu === 'tiezi'" class="fabuDetails">
@@ -43,13 +43,7 @@
                    <a href="#" class="zhuti">javaScript学习</a>
                    <span class="fabuTime">2017-5-24</span>
                  </p>
-                  <p class="neirong">javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习
-                    javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习
-                    javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习
-                    javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习
-                    javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习
-                    javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习
-                    javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习 javaScript学习
+                  <p class="neirong">JavaScript一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。
                   </p>
                   <p>
                     <a href="javascript: void(0);" label="dialog" @click="open" title="删除"><mu-icon value="delete" :size="16"/></a>&nbsp;&nbsp;
@@ -239,15 +233,18 @@
   import 'muse-ui/dist/theme-teal.css' // 使用 teal 主题
   import 'assets/css/style.css'
 
-  import imgurl from '../../../assets/images/background.jpg'
-  import InHeader from 'components/base/inheader';
+  import imgurl from '../../../assets/images/user.png'
+  import PageHeader from 'components/base/pageheader';
   export default{
     data(){
       return {
         userUrl: imgurl,
         stuNum:'2013081420',
         stuClass:'计科134',
-        n:'12',
+        n1:'1',
+        n2:'3',
+        n3:'10',
+        n4:'5',
         activeFabu: 'tiezi',
         dialog: false
       }
@@ -267,7 +264,7 @@
       },
     },
     components: {
-      InHeader,
+      PageHeader,
     }
   }
 </script>

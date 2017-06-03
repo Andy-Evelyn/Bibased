@@ -1,63 +1,62 @@
 <template>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-          <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title"><a href="../../../parts/share/index/index.html">Sharing</a></span>
+    <!--<div class="mdl-layout mdl-js-layout mdl-layout&#45;&#45;fixed-header">-->
+        <!--<header class="mdl-layout__header">-->
+          <!--<div class="mdl-layout__header-row">-->
+            <!--<span class="mdl-layout-title"><a href="../../../parts/share/index/index.html">Sharing</a></span>-->
+            <!--<nav class="mdl-navigation mdl-layout&#45;&#45;large-screen-only">-->
+              <!--<mu-flat-button label="讨论版" color="#fff" backgroundColor="transparent" href="../../../parts/share/posts/posts.html" />-->
+              <!--<mu-flat-button label="交流分享" href="../../../parts/share/resources/resources.html" color="#fff" backgroundColor="transparent"/>-->
+            <!--</nav>-->
             <!--<div class="mdl-layout-spacer"></div>-->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-              <!--<a class="mdl-navigation__link" href="#">讨论版</a>-->
-              <mu-flat-button label="讨论版" color="#fff" backgroundColor="transparent" href="../../../parts/share/posts/posts.html" />
-              <!--<div>-->
-                <!--<mu-raised-a class="mdl-navigation__link" href="#">交流分享</a>-->
-                <mu-flat-button label="交流分享" ref="button" @click="toggle" color="#fff" backgroundColor="transparent"/>
-                <!--<button value="交流分享" ref="button" @click="toggle">jiaoliu</button>-->
-                <!--<mu-popover :open="open" :autoPosition="false" :trigger="trigger" :anchorOrigin="anchorOrigin" :targetOrigin="targetOrigin" @close="handleClose">-->
-                <mu-popover :trigger="trigger" :open="open" @close="handleClose" :autoPosition="false" :anchorOrigin="anchorOrigin" :targetOrigin="targetOrigin"  >
-                  <mu-menu>
-                    <a href="../../../parts/share/resources/resources.html?type=wendang"><mu-menu-item title="文档资料" /></a>
-                    <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="技术博客" /></a>
-                    <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="个人笔记" /></a>
-                  </mu-menu>
-                </mu-popover>
-              <!--</div>-->
-            </nav>
-            <div class="mdl-layout-spacer"></div>
-            <slot name="login"></slot>
-            <slot name="user"></slot>
+            <!--<slot name="login"></slot>-->
+            <!--<slot name="user"></slot>-->
+          <!--</div>-->
+        <!--</header>-->
+    <!--</div>-->
 
-          </div>
-        </header>
-        <div class="mdl-layout__drawer mdl-layout--small-screen-only">
-          <span class="mdl-layout-title"><a href="../../../parts/share/home/home.html">Sharing</a></span>
-          <!--<div class="mdl-layout-spacer"></div>-->
-          <nav class="mdl-navigation">
-            <!--<a class="mdl-navigation__link" href="#" color="#fff">讨论版</a>-->
-            <!--<mu-flat-button label="交流分享" ref="button1" @click="toggle1" color="#fff" backgroundColor="#009688;"/>-->
-            <div>
-              <mu-flat-button label="讨论版" color="#009688" backgroundColor="transparent" href="../../../parts/share/posts/posts.html"/>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title"><a href="../../../parts/share/index/index.html">Sharing</a></span>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <li>
+            <a href="../../../parts/share/posts/posts.html">讨论版</a>
+            <slot name="line-topP"></slot>
+          </li>
+          <li>
+            <a href="../../../parts/share/resources/resources.html">交流分享</a>
+            <slot name="line-topR"></slot>
+          </li>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <div class="pRbox">
+          <a href="#">
+            <mu-list class="personalR">
+              <mu-list-item class="personal">
+                <mu-avatar  slot="left" :src="userUrl" :size="40"/>
+                <span class="userName">2013081420</span>
+              </mu-list-item>
+            </mu-list>
+            <div class="m1">
+              <mu-paper :zDepth="1" class="menu2">
+                  <li>
+                    <a href="../../../parts/share/personal/personal.html">
+                      <mu-icon value="assignment_ind"/>&nbsp;&nbsp;个人中心
+                    </a>
+                  </li>
+                  <li>
+                    <a href="../../../parts/share/login/login.html">
+                      <mu-icon value="power_settings_new"/>&nbsp;&nbsp;退出
+                    </a>
+                  </li>
+              </mu-paper>
             </div>
-            <div>
-              <!--<a class="mdl-navigation__link" @click="toggle" href="#">交流分享</a>-->
-              <!--<mu-raised-button label="交流分享" ref="button" @click="toggle"/>-->
-              <!--<a class="mdl-navigation__link" ref="a" @click="toggle" href="#">交流分享</a>-->
-              <mu-flat-button label="交流分享" ref="button1" @click="toggle1" color="#009688" backgroundColor="transparent"/>
-              <mu-popover :trigger="trigger1" :open="open1" @close="handleClose" :autoPosition="false" :anchorOrigin="anchorOriginDrawer" :targetOrigin="targetOriginDrawer"  >
-              <!--<mu-popover :trigger="trigger" :open="open" @close="handleClose">-->
-                <mu-menu>
-                  <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="文档资料" /></a>
-                  <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="技术博客" /></a>
-                  <a href="../../../parts/share/resources/resources.html"><mu-menu-item title="个人笔记" /></a>
-                </mu-menu>
-              </mu-popover>
-            </div>
-          </nav>
+          </a>
         </div>
-<!--      <main class="mdl-layout__content">
-      </main>-->
-      <!--<floatButton icon="add" secondary mini class="demo-float-button"/>-->
-    </div>
 
-
+      </div>
+    </header>
+  </div>
 
 </template>
 
@@ -93,9 +92,30 @@
   .mdl-layout__header{
     background: #009688 !important;
     z-index: 30 !important;
+    li{
+      list-style: none;
+      text-align: center;
+    }
     .mdl-layout__header-row{
       .mdl-navigation{
         padding-left: 50px;
+        /*.line-top {*/
+          /*border-top: 1px solid #3bbe7a;*/
+          /*width: 18px;*/
+          /*margin: auto;*/
+        /*}*/
+        li{
+          width: 100px;
+          height: 20px;
+          line-height: 20px;
+          a{
+            color:#fff !important;
+            &:hover{
+               color: #27be59 !important;
+               /*font-size:20px;*/
+             }
+          }
+        }
       }
     }
   }
@@ -104,20 +124,88 @@
     background: #fff!important;
   }
 
+  /*右边样式*/
+  .pRbox a{
+    display:block;
+    width:100%;
+  /*color:#fff !important;*/
+  .personalR {
+    position: relative;
+    width: 163px !important;
+    margin-right: 25px;
+    padding: 0 !important;
+  .mu-item-wrapper {
+  &:hover {
+     background: rgba(255, 255, 255, 1) !important;
+   }
+  .mu-item {
+    width: 163px;
+  }
+  }
+  .personal {
+  .userName {
+    color: #fff !important;
+  }
+  &:hover {
+  /*background: rgba(255,255,255,1)!important;*/
+  .userName {
+    color: #009688 !important;
+  }
+  }
+  }
+  }
+  >div.m1{
+     display: none !important;
+     /*height: 100px;*/
+     width: 163px;
+     position: absolute;
+    .menu2 {
+      display: none !important;
+      position: absolute;
+      width: 163px;
+      text-align: center;
+      li{
+        height:50px;
+        line-height: 50px;
+        text-align:left;
+        text-indent:12px;
+        &:hover{
+            background: #12cba5;
+            a{
+              color:#fff!important;
+            }
+         }
+        .material-icons {
+          position: relative;
+          top: 5px;
+        }
+      }
+    }
+  }
+  &:hover>div.m1{
+     display: inline-block !important;
+  .menu2 {
+    display: block !important;
+  }
+  }
+
+  }
+
+
 </style>
 <script>
-  import 'muse-components/styles/base.less' // 加载基础的样式
-  import appBar from 'muse-components/appBar'
+  /*import 'muse-components/styles/base.less'*/ // 加载基础的样式
+/*  import appBar from 'muse-components/appBar'
   import textField  from 'muse-components/textField'
   import flatButton from 'muse-components/flatButton'
   import icon from 'muse-components/icon'
   import avatar from 'muse-components/avatar'
   import floatButton from 'muse-components/floatButton'
   import dropDownMenu from 'muse-components/dropDownMenu'
-  import mItem from 'muse-components/menu/menuItem'
+  import mItem from 'muse-components/menu/menuItem'*/
   import imgurl from '../../assets/images/user.png'
 
-  /*全部加载muse-ui用于测试*/
+  /*全部加载muse-ui*/
   import Vue from 'vue'
   import MuseUI from 'muse-ui'
   import 'muse-ui/dist/muse-ui.css'
@@ -128,61 +216,21 @@
     data(){
       return {
         userUrl: imgurl,
-//        value: '1',
-        open: false,
-        open1:false,
-        trigger: null,
-        trigger1: null,
-        autoPosition:false,
-        anchorOrigin: {
-          vertical: 'bottom',
-          horizontal: 'middle'
-        },
-        targetOrigin: {
-          vertical: 'top',
-          horizontal: 'middle'
-        },
-        anchorOriginDrawer: {
-          vertical: 'bottom',
-          horizontal: 'middle'
-        },
-        targetOriginDrawer: {
-          vertical: 'top',
-          horizontal: 'middle'
-        }
       }
     },
     mounted () {
-      this.trigger = this.$refs.button.$el
-      this.trigger1 = this.$refs.button1.$el
     },
     methods:{
-//      handleChange (value) {
-//        this.value = value
-//      },
-      toggle () {
-        this.open = !this.open
-      },
-      toggle1(){
-        this.open1 = !this.open1
-      },
-      handleClose () {
-        this.open = false,
-        this.open1 = false
-      },
-      stringify (obj) {
-        return JSON.stringify(obj)
-      }
     },
     components: {
-      appBar,
+/*      appBar,
       textField,
       flatButton,
       icon,
       avatar,
       floatButton,
       dropDownMenu,
-      mItem
+      mItem*/
     }
   }
 </script>

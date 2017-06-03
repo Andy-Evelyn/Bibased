@@ -7,32 +7,32 @@
         <!--</div>-->
         <!--切换按钮-->
         <mu-tabs :value="activeTab1" @change="handleTabChangeposts">
-          <mu-tab value="tab1" title="最新"/>
-          <mu-tab value="tab2" title="最热"/>
+          <!--<mu-tab value="tab1" title="最新"/>-->
+          <!--<mu-tab value="tab2" title="最热"/>-->
           <slot name="addTabs"></slot>
         </mu-tabs>
         <!--显示内容-->
-        <div class="postsL_all">    <!--v-if="activeTab1 === 'tab1'"-->
+        <div class="postsL_all" v-if="activeTab1 === 'tab1'" v-for="item1 in itemData" :key="item1">    <!--v-if="activeTab1 === 'tab1'"-->
           <div class="context_one">
-            <img :src="banner_img" class="item_img"/>
+            <img :src="userImg" class="item_img"/>
             <div class="item_cont">
-              <h6><router-link to="detail" class="text" >test Ghost的监听端口在哪里修改。。。</router-link></h6>
-              <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+              <h6><router-link to="detail" class="text" >{{item1.title}}</router-link></h6>
+              <p> • <span class="itemUser_name">{{item1.username}} </span>的发布 • <span>{{item1.huifu}}</span>个回复 • <span>{{item1.liulang}}</span>次浏览 • <span>{{item1.time}}</span></p>
             </div>
           </div>
         </div>
        <div v-if="activeTab1 === 'tab3'">
           <div class="context_one">
-            <img :src="banner_img" class="item_img"/>
+            <img :src="userImg" class="item_img"/>
             <div class="item_cont">
               <h6><router-link to="postscomment" class="text" >3333 test最热。。。修改。。。</router-link></h6>
-              <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+              <p> • <span class="itemUser_name">2013081420 </span>的发布 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
             </div>
           </div>
         </div>
   <!--       <div v-if="activeTab1 === 'tab3'">
           <div class="context_one">
-            <img :src="banner_img" class="item_img"/>
+            <img :src="userImg" class="item_img"/>
             <div class="item_cont">
               <h6><router-link to="postscomment" class="text" >test Ghost的监听端口在哪里修改。。。</router-link></h6>
               <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
@@ -41,7 +41,7 @@
         </div>
         <div v-if="activeTab1 === 'tab4'">
           <div class="context_one">
-            <img :src="banner_img" class="item_img"/>
+            <img :src="userImg" class="item_img"/>
             <div class="item_cont">
               <h6><router-link to="postscomment" class="text" >test最热。。。修改。。。</router-link></h6>
               <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
@@ -50,7 +50,7 @@
         </div>
         <div v-if="activeTab1 === 'tab5'">
         <div class="context_one">
-          <img :src="banner_img" class="item_img"/>
+          <img :src="userImg" class="item_img"/>
           <div class="item_cont">
             <h6><router-link to="postscomment" class="text" >5555最热。。。修改。。。</router-link></h6>
             <p> • <span class="itemUser_name">2013081420 </span>发起了问题 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
@@ -146,20 +146,37 @@
   import 'muse-ui/dist/theme-teal.css' // 使用 teal 主题
   Vue.use(MuseUI)
 
-  import banner_img from '../../assets/images/slide1.jpg'
+  import userImg from '../../assets/images/user.png'
 //  import PaginAtion from 'components/base/pagination';
 
   export default{
-/*    props: {
-      'activeTab1':{
-        type:String,
-        default:"tab1"
-      },
-     },*/
     data(){
       return {
-        banner_img: banner_img,
+        userImg: userImg,
         activeTab1: 'tab1',
+        itemData:[
+            {
+              title:'Vue电子书籍',
+              username:'2013081420',
+              huifu:'7',
+              liulang:'150',
+              time:'2017-5-13',
+            },
+            {
+              title:'vue的监听端口在哪里修改',
+              username:'2013081510',
+              huifu:'0',
+              liulang:'10',
+              time:'2017-5-20',
+            },
+            {
+              title:'php学习资料',
+              username:'2014081609',
+              huifu:'7',
+              liulang:'08',
+              time:'2017-5-21',
+            }
+        ],
       }
     },
     components: {

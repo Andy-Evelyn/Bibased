@@ -4,10 +4,12 @@
 require('babel-polyfill');
 require('../../../assets/css/material.min.css');
 require('../../../assets/js/material.min.js');
+
 import Vue from 'vue';
 import Router from 'vue-router';
 import routers from 'router/index';
 Vue.use(Router)
+
 const routes = [
   {
    path: '/', component: routers.ShareResources,
@@ -20,6 +22,14 @@ const routes = [
         path: 'buildfile',
         component: routers.ShareReBuildFile,
       },
+     {
+       path: 'buildblog',
+       component: routers.ShareReBuildBlog,
+     },
+     {
+       path: 'buildnote',
+       component: routers.ShareReBuildNote,
+     },
       {
         path: 'detail',
         // component: routers.SharePostsComment,

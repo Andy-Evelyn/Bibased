@@ -17,8 +17,10 @@
               标题：<input type="text" class="">
             </p>
             <p>
-              内容：<textarea></textarea>
+              <!--内容：<textarea></textarea>-->
+              <Editor></Editor>
             </p>
+
             <p>
               <mu-flat-button label="发布" to="/" backgroundColor="orange" labelPosition="before" icon="near_me" color="#fff"/>
             </p>
@@ -162,7 +164,7 @@
   import 'muse-ui/dist/muse-ui.css'
   import 'muse-ui/dist/theme-teal.css' // 使用 teal 主题
   Vue.use(MuseUI)
-
+  import Editor from 'components/base/pageeditor';
   import $ from 'jquery';
   export default{
     name:"postsend",
@@ -175,7 +177,7 @@
       $("#a1").trigger("click"); //默认选中标签一
     },
     components: {
-
+      Editor,
     },
     methods: {
         selectClass(){   //选标签

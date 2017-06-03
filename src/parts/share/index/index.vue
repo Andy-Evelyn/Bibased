@@ -1,6 +1,6 @@
 <template>
   <div>
-    <InHeader></InHeader>
+    <PageHeader></PageHeader>
     <PageMain></PageMain>
     <PageFooter></PageFooter>
   </div>
@@ -21,7 +21,7 @@
   import 'muse-ui/dist/muse-ui.css'
   Vue.use(MuseUI)
 
-  import InHeader from 'components/base/inheader';
+  import PageHeader from 'components/base/pageheader';
   import PageMain from 'components/base/pagemain';
   import PageFooter from 'components/base/pagefooter';
   export default{
@@ -34,7 +34,7 @@
        textField,
        flatButton,
        icon*/
-      InHeader,
+      PageHeader,
       PageMain,
       PageFooter
     }

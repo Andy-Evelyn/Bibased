@@ -61,6 +61,7 @@
     h1,h5{
       text-align: center;
       color:#009688;
+      /*color:#ff4081;*/
     }
   }
   .fade-leave-active, .fade-enter-active{

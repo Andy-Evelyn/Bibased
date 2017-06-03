@@ -1,6 +1,10 @@
 <template>
   <div>
-    <InHeader></InHeader>
+    <PageHeader>
+      <template slot="line-topR">
+        <p class="line-top"></p>
+      </template>
+    </PageHeader>
     <keep-alive><router-view></router-view></keep-alive>
   </div>
 </template>
@@ -10,6 +14,11 @@
     background: #f2f2f2 !important;
     overflow: hidden;
   }
+  .line-top {
+    border-top: 2px solid #3bbe7a;
+    width: 18px;
+    margin: auto;
+  }
 </style>
 <script>
   import Vue from 'vue'
@@ -17,7 +26,7 @@
   import 'muse-ui/dist/muse-ui.css'
   import 'muse-ui/dist/theme-teal.css' // 使用 teal 主题
   Vue.use(MuseUI)
-  import InHeader from 'components/base/inheader';
+  import PageHeader from 'components/base/pageheader';
   import ListTabs from 'components/base/listtabs';
   import PaginAtion from 'components/base/pagination';
   export default{
@@ -27,7 +36,7 @@
       }
     },
     components: {
-      InHeader,
+      PageHeader,
       ListTabs,
       PaginAtion,
     }

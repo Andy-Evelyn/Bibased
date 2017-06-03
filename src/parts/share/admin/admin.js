@@ -11,7 +11,7 @@ import Vuex from 'vuex';
 Vue.use(Router);
 Vue.use(Vuex);
 const routes = [
-  {path: '/', component: routers.ShareHome},
+  {path: '/', component: routers.ShareAdmin},
 ];
 const router= new Router({
   routes

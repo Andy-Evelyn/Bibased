@@ -10,9 +10,17 @@
           </div>
           <ListTabs>
             <template scope="props" slot="addTabs">
-              <mu-tab value="tab3" title="分类一"/>
-              <mu-tab value="tab4" title="分类二"/>
-              <mu-tab value="tab5" title="分类三"/>
+              <mu-tab value="tab1" :title="tabsData[0]"/>
+              <mu-tab value="tab2" :title="tabsData[1]"/>
+              <mu-tab value="tab3" :title="tabsData[2]"/>
+              <mu-tab value="tab4" :title="tabsData[3]"/>
+              <mu-tab value="tab5" :title="tabsData[4]"/>
+              <!--<mu-tab value="tab1" :title="最新"/>-->
+              <!--<mu-tab value="tab2" :title="最热"/>-->
+              <!--<mu-tab value="tab3" :title="分类一"/>-->
+              <!--<mu-tab value="tab4" :title="分类二"/>-->
+              <!--<mu-tab value="tab5" :title="分类三"/>-->
+
             </template>
           </ListTabs>
           <PaginAtion></PaginAtion>
@@ -74,7 +82,7 @@
     name:"postsmain",
     data(){
       return {
-//        activeTab1:'tab5'
+        tabsData:['最新', '最热', '分类一', '分类二', '分类三'],
       }
     },
     components: {

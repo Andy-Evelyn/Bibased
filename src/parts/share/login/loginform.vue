@@ -20,9 +20,8 @@
       用户登录
     </div>
     <form action="">
-      <textField id="userName" @blur="check_name" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" pattern="-?[0-9]*(\.[0-9]+)?" fullWidth labelFloat/><br/>
-      <textField id="passWord" @blur="check_word" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/><br/>
-      <p class="reMind"><mu-checkbox label="记住我"/></p>
+      <textField id="userName" @blur="check_name" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" pattern="-?[0-9]*(\.[0-9]+)?" fullWidth labelFloat/>
+      <textField id="passWord" @blur="check_word" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/>
       <router-link to="forgetpw"><span class="forgetpw">忘记密码？</span></router-link>
       <raisedButton label="登录" class="loginbtn" id="subMit" @click="login" primary/>
     </form>
@@ -57,7 +56,7 @@
   }
 
   .loginPaper{
-    padding: 5px 15px 50px 15px;
+    padding: 15px 15px 50px 15px;
   }
   .login-form-head{
     text-align: center;
@@ -93,20 +92,6 @@
      color: #919191;
    }
   }
-  .reMind{
-    font-size: 12px !important;
-    margin:0px !important;
-    .mu-checkbox-svg-icon {
-      color: #009688 !important;
-    }
-    .mu-checkbox-icon{
-      margin-right: 0px!important;
-    }
-    .mu-checkbox-icon-uncheck {
-      color: #009688 !important;
-    }
-  }
-
     .loginbtn{
       float: right;
     }

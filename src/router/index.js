@@ -54,10 +54,20 @@ const ShareReBuildFile= resolve => {
     resolve(require('parts/share/resources/buildfile.vue'));
   }, 'shareresourcesbuildfile');
 };
-const ShareHome= resolve => {
-    require.ensure(['parts/share/home/home.vue'], require => {
-        resolve(require('parts/share/home/home.vue'));
-    }, 'sharehome');
+const ShareReBuildBlog= resolve => {
+  require.ensure(['parts/share/resources/buildblog.vue'], require => {
+    resolve(require('parts/share/resources/buildblog.vue'));
+  }, 'shareresourcesbuildblog');
+};
+const ShareReBuildNote= resolve => {
+  require.ensure(['parts/share/resources/buildnote.vue'], require => {
+    resolve(require('parts/share/resources/buildnote.vue'));
+  }, 'shareresourcesbuildnote');
+};
+const ShareAdmin= resolve => {
+    require.ensure(['parts/share/admin/admin.vue'], require => {
+        resolve(require('parts/share/admin/admin.vue'));
+    }, 'shareadmin');
 };
 const Login= resolve => {
   require.ensure(['parts/share/login/login.vue'], require => {
@@ -102,7 +112,7 @@ const StudenttodoList= resolve => {
 export default {
     ShareIndex,
     SharePersonal,
-    ShareHome,
+    ShareAdmin,
     SharePosts,
     SharePostsSend,
     SharePostsMain,
@@ -114,6 +124,8 @@ export default {
     ShareResourcesMain,
     ShareReNewBuild,
     ShareReBuildFile,
+    ShareReBuildBlog,
+    ShareReBuildNote,
     // ShareListtabs,
   // StudentProblems,
   //Studentshow,
