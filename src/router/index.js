@@ -84,6 +84,16 @@ const ShareLoginForm= resolve => {
     resolve(require('parts/share/login/loginform.vue'));
   }, 'shareloginform');
 };
+const AdminPage= resolve => {
+  require.ensure(['parts/share/admin/adpage.vue'], require => {
+    resolve(require('parts/share/admin/adpage.vue'));
+  }, 'adminpage');
+};
+const AdLogin= resolve => {
+  require.ensure(['parts/share/admin/adlogin.vue'], require => {
+    resolve(require('parts/share/admin/adlogin.vue'));
+  }, 'adminlogin');
+};
 /*const FullPage= resolve => {
   require.ensure(['parts/student/home/fullpage.vue'], require => {
     resolve(require('parts/student/home/fullpage.vue'));
@@ -126,6 +136,8 @@ export default {
     ShareReBuildFile,
     ShareReBuildBlog,
     ShareReBuildNote,
+    AdminPage,
+    AdLogin,
     // ShareListtabs,
   // StudentProblems,
   //Studentshow,

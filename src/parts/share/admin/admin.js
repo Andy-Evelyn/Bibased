@@ -11,7 +11,19 @@ import Vuex from 'vuex';
 Vue.use(Router);
 Vue.use(Vuex);
 const routes = [
-  {path: '/', component: routers.ShareAdmin},
+  {
+    path: '/', component: routers.ShareAdmin,
+    children: [
+      {
+        path: '',
+        component: routers.AdminPage
+      },
+      {
+        path: 'adlogin',
+        component: routers.AdLogin
+      }
+    ]
+  },
 ];
 const router= new Router({
   routes

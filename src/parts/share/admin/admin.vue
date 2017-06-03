@@ -1,65 +1,6 @@
 <template>
-  <div class="adminMain">
-    <header>
-      <div>
-        <span class="adL">
-          <a href="../../../parts/share/index/index.html" class="adL_title">sharing</a>
-          后台管理
-        </span>
-        <span class="adR">
-          <!--<span class="adUserName">2013081420</span>-->
-          <a href="../../../parts/share/login/login.html">
-            <mu-icon value="power_settings_new"/>&nbsp;&nbsp;退出
-          </a>
-      </span>
-      </div>
-    </header>
-  <!--头部结束-->
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--2-col">
-        <div class="con_left">
-
-          <mu-list>
-
-            <mu-list-item title="讨论版" toggleNested>
-              <mu-icon slot="left" value="inbox"/>
-              <mu-list-item slot="nested" title="分类一" href="../../../parts/share/index/index.html">
-                <mu-icon slot="left" value="local_offer"/>
-              </mu-list-item>
-              <mu-list-item slot="nested" title="分类二">
-                <mu-icon slot="left" value="local_offer"/>
-              </mu-list-item>
-            </mu-list-item>
-
-            <mu-list-item title="文档资料">
-              <mu-icon slot="left" value="drafts"/>
-            </mu-list-item>
-
-            <mu-list-item title="技术博客" toggleNested>
-              <mu-icon slot="left" value="drafts"/>
-              <mu-list-item slot="nested" title="tags" href="../../../parts/share/index/index.html">
-                <mu-icon slot="left" value="local_offer"/>
-              </mu-list-item>
-              <mu-list-item slot="nested" title="tags">
-                <mu-icon slot="left" value="local_offer"/>
-              </mu-list-item>
-            </mu-list-item>
-
-            <mu-list-item title="个人笔记">
-              <mu-icon slot="left" value="drafts"/>
-            </mu-list-item>
-
-          </mu-list>
-
-        </div>
-        <!--con_left 结束-->
-      </div>
-      <div class="mdl-cell mdl-cell--10-col">
-        <AdminMain></AdminMain>
-    </div>
-    </div>
-
-
+  <div>
+    <keep-alive><router-view></router-view></keep-alive>
   </div>
 
 </template>
@@ -153,8 +94,6 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import 'muse-ui/dist/theme-teal.css' // 使用 teal 主题
 Vue.use(MuseUI)
-
-import AdminMain from './adminmain'
   export default{
     data () {
       return {
@@ -164,7 +103,6 @@ import AdminMain from './adminmain'
     methods: {
     },
     components: {
-      AdminMain,
     }
   }
 </script>
