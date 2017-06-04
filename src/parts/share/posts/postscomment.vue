@@ -14,15 +14,14 @@
                 <p class="p1">求解？
                 </p>
                 <div class="comment_add">
-                  <span>2016-05-23</span>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="comment" @click="isShow_com1 = !isShow_com1"><mu-icon value="textsms" :size="16"/>&nbsp;添加评论</a>
+                  <span>2016-05-23</span>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="comment" @click="toggle1"><mu-icon value="textsms" :size="16"/>&nbsp;添加评论</a>
                 </div>
                 <!--添加评论-->
                 <transition name="fade">
-                  <form action="" method="" v-if="isShow_com1" id="s_h">
-                    <!--<textarea placeholder="请写下你的评论：" maxlength="280" autofocus ></textarea>-->
-                      <Editor style="min-height: 150px"></Editor>
+                  <div v-show="isShow_com1" id="s_h">
+                    <div type="text/plain" id='replayEd1'></div>
                     <mu-raised-button label="评论" to="/" class="com_btn" />
-                  </form>
+                  </div>
                 </transition>
                 <p class="p2"><span>1</span>个回复</p>
               </div>
@@ -37,12 +36,12 @@
                   115队列的链式存储结构与操作，提交不通过
                 </div>
                 <div>
-                  <a href="javascript:void(0);" class="con_number" id="reply_a" @click="isShow_com2 = !isShow_com2"><mu-icon value="textsms" :size="16"/>&nbsp;0</a>
+                  <a href="javascript:void(0);" class="con_number" id="reply_a" @click="toggle2"><mu-icon value="textsms" :size="16"/>&nbsp;0</a>
                   <span class="con_time">2016-5-23</span>
                 </div>
                 <!--评论的内容先隐藏-->
                 <transition name="fade">
-                  <ul class="reply_show" id="reply_num" v-if="isShow_com2">
+                  <ul class="reply_show" id="reply_num" v-show="isShow_com2">
                     <li class="clearfix">
                       <img :src="userUrl" alt="">
                       <div class="li_re">
@@ -52,11 +51,10 @@
                       </div>
                     </li>
                     <!--添加评论-->
-                    <form action="" method="" >
-                      <!--<textarea class="txt"placeholder="请写下你的评论：" maxlength="280" autofocus ></textarea>-->
-                        <Editor style="min-height: 150px"></Editor>
+                    <!--<div>-->
+                      <div type="text/plain"  id='replayEd2'></div>
                       <mu-raised-button label="评论" class="com_btn" to="/" />
-                    </form>
+                    <!--</div>-->
                     <!--<listCom></listCom>-->
                   </ul>
                 </transition>
@@ -86,7 +84,6 @@
   </div>
 </template>
 <style lang="less">
-
   /*动画效果*/
   .fade-enter-active, .fade-leave-active {
     /*transition: opacity .5s*/
@@ -107,6 +104,11 @@
   }
   .clearfix {
     *zoom: 1;
+  }
+  #seReplay,#fiReplay{
+    width: 100%;
+    min-height: 150px;
+    height: auto;
   }
   .postsCom-main {
     p{
@@ -313,29 +315,96 @@
   import '../../../assets/css/style.css' // 加载样式
   import imgurl from '../../../assets/images/user.png'
 //  import listCom from '../../../components/base/listtabs'
-  import Editor from 'components/base/pageeditor';
+  import $ from 'jquery';
+  import WangEditor from 'wangeditor';
+
   export default{
-      name:"postscomment",
+    name:"postscomment",
     data(){
       return {
         userUrl: imgurl,
         isShow_com1:false,
         isShow_com2:false,
-        editor:'',
+        dataInterface: {
+          editorUpImgUrl: 'http://xxxx'  // 编辑器插入的图片上传地址
+        },
+        editor: '',  // 存放实例化的wangEditor对象，在多个方法中使用
+        editor1: '',  // 存放实例化的wangEditor对象，在多个方法中使用
       }
     },
-    components: {
-      Editor,
-//      listCom
+    mounted(){
+      this.createEditor();
     },
-    methods:{
+    beforeDestroy(){
+      this.destroyEditor();
+    },
+    methods: {
+      selectClass(){   //选标签
+        $(".postSend_class a").click(function () {
+          console.log($(this).text());  //标签类别
+          if($(this).hasClass("selected")){
+            $(this).removeClass("selected");
+          }
+          else{
+//              $(this).siblings('a').removeClass("selected");  //只选一个
+            $(this).addClass("selected");
+          }
+        });
+      },
+      toggle1(){
+        this.isShow_com1 = !this.isShow_com1;
+      },
+      toggle2(){
+          this.isShow_com2 = !this.isShow_com2;
+      },
+      createEditor(){  // 创建编辑器
+        this.editor = new WangEditor('replayEd1');
+        this.initEditorConfig();  // 初始化编辑器配置，在create之前
+        this.editor.create();  // 生成编辑器
+        this.editor.$txt.html('<p>请在这里编辑您的内容</p>');  // 初始化内容
+        //        $('#ranDomid').css('height', '200px');  // 使编辑器内容区自动撑开，在css中定义min-height;
+        $("#replayEd1").css('height','150px');
 
-//      toggle_com1(){
-//        this.isShow_com1 = !this.isShow_com1;
-//      },
-//      toggle_com2(){
-//        this.isShow_com2 = !this.isShow_com2;
-//      }
+        this.editor1 = new WangEditor('replayEd2');
+        this.initEditorConfig();  // 初始化编辑器配置，在create之前
+        this.editor1.create();  // 生成编辑器
+        this.editor1.$txt.html('<p>请在这里编辑您的内容</p>');  // 初始化内容
+        $("#replayEd2").css('height','150px');
+      },
+      destroyEditor(){  // 销毁编辑器，官方没有给出完美方案。此方案是作者给出的临时方案
+        this.editor.destroy();  // 这个没有完全销毁实例，只是作了隐藏
+        //         $('#ranDomid').remove();  // 不报错的话，这一步可以省略
+        this.editor = null;
+        WangEditor.numberOfLocation--;  // 手动清除地图的重复引用，作者的临时解决方案。否则单页面来回切换时，地图报错重复引用
+      },
+      initEditorConfig(){  // 初始化编辑器配置
+        this.editor.config.fontsizes = {  // 字号配置，增加14px
+          // 格式：'value': 'title'
+          1: '12px',
+          2: '13px',
+          3: '14px',
+          4: '16px',
+          5: '18px',
+          6: '24px',
+          7: '32px',
+          8: '48px'
+        };
+        this.editor.config.uploadImgUrl = this.dataInterface.editorUpImgUrl;  // 图片上传地址
+
+        this.editor.config.uploadImgFileName = '_img';  // 统一指定上传的文件name，需要指定。否则默认不同的上传方式是不同的name
+
+        const usersecret = window.localStorage.getItem('usersecret');  // 获取 usersecret
+
+        this.editor.config.uploadParams = {  // 自定义上传参数配置
+          usersecret: usersecret
+        };
+      },
+      getEditorContent(){  // 获取编辑器 内容区内容
+        this.editorContent = this.editor.$txt.html();  // 获取 html 格式
+        // this.editor.$txt.text();  // 获取纯文本
+        // this.editor.$txt.formatText();  // 获取格式化后的纯文本
+        console.log(this.editorContent);
+      },
     }
   }
 </script>

@@ -74,6 +74,7 @@
         this.editorContent = this.editor.$txt.html();  // 获取 html 格式
         // this.editor.$txt.text();  // 获取纯文本
         // this.editor.$txt.formatText();  // 获取格式化后的纯文本
+        console.log(this.editorContent);
       },
     }
   }

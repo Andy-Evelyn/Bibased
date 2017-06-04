@@ -224,7 +224,7 @@
 
 <script>
 
-  /*全部加载，用于测试*/
+  /*全部加载*/
   import Vue from 'vue'
   import MuseUI from 'muse-ui'
   import 'muse-ui/dist/muse-ui.css'

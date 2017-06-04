@@ -1,19 +1,4 @@
 <template>
-    <!--<div class="mdl-layout mdl-js-layout mdl-layout&#45;&#45;fixed-header">-->
-        <!--<header class="mdl-layout__header">-->
-          <!--<div class="mdl-layout__header-row">-->
-            <!--<span class="mdl-layout-title"><a href="../../../parts/share/index/index.html">Sharing</a></span>-->
-            <!--<nav class="mdl-navigation mdl-layout&#45;&#45;large-screen-only">-->
-              <!--<mu-flat-button label="讨论版" color="#fff" backgroundColor="transparent" href="../../../parts/share/posts/posts.html" />-->
-              <!--<mu-flat-button label="交流分享" href="../../../parts/share/resources/resources.html" color="#fff" backgroundColor="transparent"/>-->
-            <!--</nav>-->
-            <!--<div class="mdl-layout-spacer"></div>-->
-            <!--<slot name="login"></slot>-->
-            <!--<slot name="user"></slot>-->
-          <!--</div>-->
-        <!--</header>-->
-    <!--</div>-->
-
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
@@ -99,11 +84,6 @@
     .mdl-layout__header-row{
       .mdl-navigation{
         padding-left: 50px;
-        /*.line-top {*/
-          /*border-top: 1px solid #3bbe7a;*/
-          /*width: 18px;*/
-          /*margin: auto;*/
-        /*}*/
         li{
           width: 100px;
           height: 20px;
@@ -191,18 +171,12 @@
 
   }
 
-
+  /*f分页在右边显示*/
+  .mu-pagination{
+    float: right;
+  }
 </style>
 <script>
-  /*import 'muse-components/styles/base.less'*/ // 加载基础的样式
-/*  import appBar from 'muse-components/appBar'
-  import textField  from 'muse-components/textField'
-  import flatButton from 'muse-components/flatButton'
-  import icon from 'muse-components/icon'
-  import avatar from 'muse-components/avatar'
-  import floatButton from 'muse-components/floatButton'
-  import dropDownMenu from 'muse-components/dropDownMenu'
-  import mItem from 'muse-components/menu/menuItem'*/
   import imgurl from '../../assets/images/user.png'
 
   /*全部加载muse-ui*/
@@ -223,14 +197,6 @@
     methods:{
     },
     components: {
-/*      appBar,
-      textField,
-      flatButton,
-      icon,
-      avatar,
-      floatButton,
-      dropDownMenu,
-      mItem*/
     }
   }
 </script>

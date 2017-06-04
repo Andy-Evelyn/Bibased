@@ -16,25 +16,26 @@
               </div>
             </a>
             <mu-text-field label="搜索" icon="search" hintText="输入关键词" labelFloat/>
-
-            <!--<mu-raised-button label="我要分享" to="" class="send_postBtn" primary href="#"/>-->
-            <!--<mu-raised-button label="我要分享"class="send_postBtn" primary ref="button" @click="toggle" color="#fff"/>-->
-            <!--<mu-popover :trigger="trigger" :open="open" @close="handleClose" :autoPosition="false" :anchorOrigin="anchorOrigin" :targetOrigin="targetOrigin"  >-->
-              <!--<mu-menu>-->
-                <!--<mu-menu-item title="文档资料" to="newbuild" href="#"/>-->
-                <!--<a href="newbuild"><mu-menu-item title="技术博客" /></a>-->
-                <!--<a href="../../../parts/share/resources/resources.html"><mu-menu-item title="个人笔记" /></a>-->
-              <!--</mu-menu>-->
-            <!--</mu-popover>-->
           </div>
-          <ListTabs>
-            <template scope="props" slot="addTabs">
+          <div class="tabsMain">
+            <mu-tabs :value="activeTab1" @change="handleTabChangeposts">
               <mu-tab value="tab1" id="wendang" title="文档资料" @click="handle"/>
               <mu-tab value="tab2" title="技术博客"/>
               <mu-tab value="tab3" title="个人笔记"/>
-            </template>
-          </ListTabs>
-          <PaginAtion></PaginAtion>
+            </mu-tabs>
+            <!--显示内容-->
+            <div class="postsL_all" v-if="activeTab1 === 'tab1'" v-for="item1 in itemData" :key="item1">    <!--v-if="activeTab1 === 'tab1'"-->
+              <div class="context_one">
+                <img :src="userImg" class="item_img"/>
+                <div class="item_cont">
+                  <h6><router-link to="detail" class="text" >{{item1.title}}</router-link></h6>
+                  <p> • <span class="itemUser_name">{{item1.username}} </span>的发布 • <span>{{item1.huifu}}</span>个回复 • <span>{{item1.liulang}}</span>次浏览 • <span>{{item1.time}}</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--分页-->
+          <mu-pagination :total="total" :current="current" @pageChange="handleClick"></mu-pagination>
         </mu-paper>
       </div>
     </div>
@@ -133,6 +134,70 @@
       }
      }
   }
+
+  .tabsMain{
+    position: relative;
+  .mu-tabs{
+    background: #fff !important;
+    z-index:1 !important;
+    width: 50%;
+    min-width: 95px;
+  }
+  .mu-tab-link{
+    color:#009688 !important;
+  }
+  .mu-tab-active{
+    color: #0b9613 !important;
+  }
+  .moreTitle{
+    position:relative;
+    padding-bottom:20px;
+  >span{
+     padding: 0 10px;
+     position: absolute;
+     font-size: 24px;
+     color:#009688 !important;
+   }
+  >a{
+     position: absolute;
+     right:10px;
+   }
+  }
+
+  .context_one {
+    position: relative;
+    /*height: 60px;*/
+    min-height: 45px;
+    padding: 20px 0;
+    border-top: 1px solid #e6e6e6;
+  >img{
+     position: absolute;
+     top: 22px;
+     width: 40px;
+     height: 40px;
+     border-radius:5px;
+   }
+  .item_cont {
+    padding-left: 60px;
+  h6,>p{
+        height:24px;
+        overflow: hidden;
+      }
+  h6{
+    font-size: 14px !important;
+    margin:0 !important;
+  }
+  >p{
+     font-size: 12px !important;
+     color:#999;
+     margin:0 !important;
+   }
+  .itemUser_name{
+    color:#666;
+  }
+  }
+  }
+  }
 </style>
 <script>
   import Vue from 'vue'
@@ -142,40 +207,40 @@
   Vue.use(MuseUI)
   import ListTabs from 'components/base/listtabs';
   import PaginAtion from 'components/base/pagination';
+  import userImg from '../../../assets/images/user.png'
   export default{
-    props: ['activeTab1'],
     data(){
       return {
-        /*open: false,
-        trigger: null,
-        autoPosition:false,
-        anchorOrigin: {
-          vertical: 'bottom',
-          horizontal: 'middle'
-        },
-        targetOrigin: {
-          vertical: 'top',
-          horizontal: 'middle'
-        },
-        anchorOriginDrawer: {
-          vertical: 'bottom',
-          horizontal: 'middle'
-        },
-        targetOriginDrawer: {
-          vertical: 'top',
-          horizontal: 'middle'
-        }*/
+        total: 500,
+        current: 1,
+        userImg:userImg,
+        activeTab1: 'tab1',
+        itemData:[
+          {
+            title:'Vue电子书籍',
+            username:'2013081420',
+            huifu:'7',
+            liulang:'150',
+            time:'2017-5-13',
+          },
+          {
+            title:'vue的监听端口在哪里修改',
+            username:'2013081510',
+            huifu:'0',
+            liulang:'10',
+            time:'2017-5-20',
+          },
+          {
+            title:'php学习资料',
+            username:'2014081609',
+            huifu:'7',
+            liulang:'08',
+            time:'2017-5-21',
+          }
+        ],
       }
     },
     mounted() {
-//      this.trigger = this.$refs.button.$el,
-//      document.getElementById(type.toString()).style.display="none";
-//      console.log(this.ur);
-//      let that = this;
-//      this.type=that.ur.split('?')[1].split("=")[1];
-////      document.getElementById(this.type.toString()).style.display="none";
-//      console.log(this.type.toString());
-////      document.getElementById(this.type.toString()).onclick="handleTabChangeposts"
       this.handle()
     },
     components: {
@@ -184,24 +249,13 @@
     },
     methods:{
         handle(){
-//          this.activeTab1 = this.activeTab1;
-//          console.log(this.activeTab1);
-//          var ur =location.href;
-//          var type=ur.split('?')[1].split("=")[1];
-//          console.log(ur);
-//          console.log(type);
-//          console.log(this.activeTab1);
           this.$emit('change','tab3');
         },
-       /* toggle(){
-          this.open = !this.open
+        handleTabChangeposts (val) {
+          this.activeTab1 = val
         },
-        handleClose () {
-          this.open = false
-        },
-        stringify (obj) {
-          return JSON.stringify(obj)
-        }*/
+        handleClick (newIndex) {
+        }
     },
   }
 </script>

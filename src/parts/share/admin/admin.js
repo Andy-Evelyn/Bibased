@@ -21,6 +21,14 @@ const routes = [
       {
         path: 'adlogin',
         component: routers.AdLogin
+      },
+      {
+        path: 'adpost',
+        component: routers.AdminPost
+      },
+      {
+        path: 'adnote',
+        component: routers.AdminNote
       }
     ]
   },

@@ -17,33 +17,33 @@
       <div class="mdl-cell mdl-cell--2-col">
         <div class="con_left">
 
-          <mu-list>
+          <mu-list activeClass="router-link-active">
 
             <mu-list-item title="讨论版" toggleNested>
               <mu-icon slot="left" value="inbox"/>
-              <mu-list-item slot="nested" title="分类一" href="../../../parts/share/index/index.html">
+              <mu-list-item slot="nested" title="分类一"  to="adpost">
                 <mu-icon slot="left" value="local_offer"/>
               </mu-list-item>
-              <mu-list-item slot="nested" title="分类二">
+              <mu-list-item slot="nested" title="分类二"  to="adpost1">
                 <mu-icon slot="left" value="local_offer"/>
               </mu-list-item>
             </mu-list-item>
 
-            <mu-list-item title="文档资料">
+            <mu-list-item title="文档资料" to="adfile">
               <mu-icon slot="left" value="drafts"/>
             </mu-list-item>
 
             <mu-list-item title="技术博客" toggleNested>
               <mu-icon slot="left" value="drafts"/>
-              <mu-list-item slot="nested" title="tags" href="../../../parts/share/index/index.html">
+              <mu-list-item slot="nested" title="tags"  to="adblog">
                 <mu-icon slot="left" value="local_offer"/>
               </mu-list-item>
-              <mu-list-item slot="nested" title="tags">
+              <mu-list-item slot="nested" title="tags" to="adblog1">
                 <mu-icon slot="left" value="local_offer"/>
               </mu-list-item>
             </mu-list-item>
 
-            <mu-list-item title="个人笔记">
+            <mu-list-item title="个人笔记" to="adnote">
               <mu-icon slot="left" value="drafts"/>
             </mu-list-item>
 
@@ -53,7 +53,9 @@
         <!--con_left 结束-->
       </div>
       <div class="mdl-cell mdl-cell--10-col">
-        <AdminTable></AdminTable>
+        <!--<AdminTable></AdminTable>-->
+        <slot name="adpost"></slot>
+        <slot name="adnote"></slot>
       </div>
     </div>
 
@@ -138,6 +140,13 @@
     min-width: 200px;
     /*border:1px solid blue;*/
   }
+  }
+  .router-link-active {
+    color: #3e54b8 !important;
+    .mu-item-title{
+      /*color: #59a176 !important;*/
+      color: #ff4081 !important;
+    }
   }
 
 </style>

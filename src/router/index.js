@@ -94,31 +94,17 @@ const AdLogin= resolve => {
     resolve(require('parts/share/admin/adlogin.vue'));
   }, 'adminlogin');
 };
-/*const FullPage= resolve => {
-  require.ensure(['parts/student/home/fullpage.vue'], require => {
-    resolve(require('parts/student/home/fullpage.vue'));
-  }, 'studentfullpage');
+const AdminPost= resolve => {
+  require.ensure(['parts/share/admin/adpost.vue'], require => {
+    resolve(require('parts/share/admin/adpost.vue'));
+  }, 'adminpost');
 };
-const Login= resolve => {
-  require.ensure(['parts/student/login/login.vue'], require => {
-    resolve(require('parts/student/login/login.vue'));
-  }, 'studentlogin');
+const AdminNote= resolve => {
+  require.ensure(['parts/share/admin/adnote.vue'], require => {
+    resolve(require('parts/share/admin/adnote.vue'));
+  }, 'adminpost');
 };
-const StudentProblems= resolve => {
-  require.ensure(['parts/student/problems/problems.vue'], require => {
-    resolve(require('parts/student/problems/problems.vue'));
-  }, 'Studentproblems');
-};
-const Studentshow= resolve => {
-  require.ensure(['parts/student/show/show.vue'], require => {
-    resolve(require('parts/student/show/show.vue'));
-  }, 'Studentshow');
-};
-const StudenttodoList= resolve => {
-  require.ensure(['parts/student/todolist/todolist.vue'], require => {
-    resolve(require('parts/student/todolist/todolist.vue'));
-  }, 'Studenttodolist');
-};*/
+
 export default {
     ShareIndex,
     SharePersonal,
@@ -138,6 +124,8 @@ export default {
     ShareReBuildNote,
     AdminPage,
     AdLogin,
+    AdminPost,
+    AdminNote,
     // ShareListtabs,
   // StudentProblems,
   //Studentshow,
