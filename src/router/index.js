@@ -34,6 +34,7 @@ const SharePostsMain= resolve => {
     resolve(require('parts/share/posts/postsmain.vue'));
   }, 'sharepostsmain');
 };
+
 const ShareResources= resolve => {
   require.ensure(['parts/share/resources/resources.vue'], require => {
     resolve(require('parts/share/resources/resources.vue'));
@@ -104,6 +105,21 @@ const AdminNote= resolve => {
     resolve(require('parts/share/admin/adnote.vue'));
   }, 'adminpost');
 };
+const SharePostsReach= resolve => {
+  require.ensure(['parts/share/posts/postsearch.vue'], require => {
+    resolve(require('parts/share/posts/postsearch.vue'));
+  }, 'sharepostsearch');
+};
+const ShareResearch= resolve => {
+  require.ensure(['parts/share/resources/resourcessearch.vue'], require => {
+    resolve(require('parts/share/resources/resourcessearch.vue'));
+  }, 'shareresourcessearch');
+};
+const AdSearch= resolve => {
+  require.ensure(['parts/share/admin/adsearch.vue'], require => {
+    resolve(require('parts/share/admin/adsearch.vue'));
+  }, 'adminsearch');
+};
 
 export default {
     ShareIndex,
@@ -126,8 +142,9 @@ export default {
     AdLogin,
     AdminPost,
     AdminNote,
+    SharePostsReach,
+    ShareResearch,
+    AdSearch,
     // ShareListtabs,
-  // StudentProblems,
-  //Studentshow,
-  //StudenttodoList
+
 };

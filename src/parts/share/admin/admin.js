@@ -12,11 +12,12 @@ Vue.use(Router);
 Vue.use(Vuex);
 const routes = [
   {
-    path: '/', component: routers.ShareAdmin,
+    path: '/',
+    component: routers.ShareAdmin,
     children: [
       {
         path: '',
-        component: routers.AdminPage
+        component: routers.AdminPost
       },
       {
         path: 'adlogin',
@@ -29,7 +30,11 @@ const routes = [
       {
         path: 'adnote',
         component: routers.AdminNote
-      }
+      },
+      {
+        path: 'search',
+        component: routers.AdSearch,
+      },
     ]
   },
 ];

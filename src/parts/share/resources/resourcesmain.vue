@@ -15,7 +15,7 @@
                 </div>
               </div>
             </a>
-            <mu-text-field label="搜索" icon="search" hintText="输入关键词" labelFloat/>
+            <mu-text-field label="搜索" type="text"  @keyup.enter.native="search()" icon="search" hintText="输入关键词" labelFloat/>
           </div>
           <div class="tabsMain">
             <mu-tabs :value="activeTab1" @change="handleTabChangeposts">
@@ -248,14 +248,17 @@
       PaginAtion,
     },
     methods:{
-        handle(){
-          this.$emit('change','tab3');
-        },
-        handleTabChangeposts (val) {
-          this.activeTab1 = val
-        },
-        handleClick (newIndex) {
-        }
+      handle(){
+        this.$emit('change','tab3');
+      },
+      handleTabChangeposts (val) {
+        this.activeTab1 = val
+      },
+      handleClick (newIndex) {
+      },
+      search(){
+        this.$router.push({path:'/search'});
+      }
     },
   }
 </script>

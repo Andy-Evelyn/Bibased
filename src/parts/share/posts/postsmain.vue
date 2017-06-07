@@ -4,41 +4,51 @@
       <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col">
           <div class="postTitle">
-            <mu-icon value="message" :size="48" color="#f1b200"/><span>讨论版</span>
+            <mu-icon value="message" :size="48" color="#f1b200"/>
+            <span>讨论版</span>
             <mu-raised-button label="发布帖子" to="postsend" class="send_postBtn" primary href="#"/>
-            <mu-text-field label="搜索" icon="search" hintText="输入关键词" labelFloat/>
+            <mu-text-field type="text" @keyup.enter.native="search()" label="搜索" icon="search" hintText="输入关键词"
+                           labelFloat/>
           </div>
           <div class="tabsMain">
             <!--切换按钮-->
             <mu-tabs :value="activeTab1" @change="handleTabChangeposts">
-              <mu-tab value="tab1" :title="tabsData[0]"/>
-              <mu-tab value="tab2" :title="tabsData[1]"/>
-              <mu-tab value="tab3" :title="tabsData[2]"/>
-              <mu-tab value="tab4" :title="tabsData[3]"/>
-              <mu-tab value="tab5" :title="tabsData[4]"/>
+              <mu-tab value="tab0" title="全部"/>
+              <mu-tab v-for="(tabitem,index) in tabData" :key="index" :value="'tab' +(index+1)"
+                      :title="tabitem.cate_name" />
             </mu-tabs>
+
             <!--显示内容-->
-            <div class="postsL_all" v-if="activeTab1 === 'tab1'" v-for="item1 in itemData" :key="item1">    <!--v-if="activeTab1 === 'tab1'"-->
-              <div class="context_one">
+            <div class="postsL_all" v-if="activeTab1 === 'tab0'">
+              <div class="context_one" v-for="(item1,index) in itemData" :key="index">
                 <img :src="userImg" class="item_img"/>
                 <div class="item_cont">
-                  <h6><router-link to="detail" class="text" >{{item1.title}}</router-link></h6>
-                  <p> • <span class="itemUser_name">{{item1.username}} </span>的发布 • <span>{{item1.huifu}}</span>个回复 • <span>{{item1.liulang}}</span>次浏览 • <span>{{item1.time}}</span></p>
+                  <h6>
+                    <router-link to="comment" class="text">{{item1.title}}</router-link>
+                  </h6>
+                  <p> • <span class="itemUser_name">{{item1.user_account}} </span>的发布 •
+                    <span>{{item1.comment_num}}</span>个回复 • <span>{{item1.view_num
+}}</span>次浏览 • <span>{{item1.mtime}}</span></p>
                 </div>
               </div>
             </div>
-            <div v-if="activeTab1 === 'tab3'">
-              <div class="context_one">
+
+            <div class="postsL_all" v-for="(liitem,index) in tabData" :key="index" v-if="activeTab1 === 'tab' +(index+1)">
+              <div class="context_one" v-for="(item,index) in categoryData" :key="index">
                 <img :src="userImg" class="item_img"/>
                 <div class="item_cont">
-                  <h6><router-link to="postscomment" class="text" >3333 test最热。。。修改。。。</router-link></h6>
-                  <p> • <span class="itemUser_name">2013081420 </span>的发布 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
+                  <h6>
+                    <router-link to="comment" class="text">{{item.title}}</router-link>
+                  </h6>
+                  <p> • <span class="itemUser_name">{{item.user_account}} </span>的发布 • <span>{{item.comment_num}}</span>个回复
+                    • <span>{{item.view_num}}</span>次浏览 • <span>{{item.mtime}}</span></p>
                 </div>
               </div>
             </div>
+
           </div>
           <!--分页-->
-          <mu-pagination :total="total" :current="current" @pageChange="handleClick"></mu-pagination>
+          <!--<mu-pagination :total="total" :current="current" @pageChange="handleClick"></mu-pagination>-->
         </div>
       </div>
     </div>
@@ -161,47 +171,80 @@
 </style>
 <script>
   import userImg from '../../../assets/images/user.png'
+  import $http from 'src/api/http.js';
   export default{
     name:"postsmain",
     data(){
       return {
         total: 500,
         current: 1,
-        activeTab1: 'tab1',
+        activeTab1: '',
+        activeID:"",
         userImg: userImg,
-        tabsData:['最新', '最热', '分类一', '分类二', '分类三'],
-        itemData:[
-          {
-            title:'Vue电子书籍',
-            username:'2013081420',
-            huifu:'7',
-            liulang:'150',
-            time:'2017-5-13',
-          },
-          {
-            title:'vue的监听端口在哪里修改',
-            username:'2013081510',
-            huifu:'0',
-            liulang:'10',
-            time:'2017-5-20',
-          },
-          {
-            title:'php学习资料',
-            username:'2014081609',
-            huifu:'7',
-            liulang:'08',
-            time:'2017-5-21',
-          }
-        ],
+        tabData:[],
+        itemData:[],
+        tabList:[],
+        categoryData:[],
+        form:{
+            limit:10,
+            start:0,
+        },
+        category:{
+          limit:10,
+          start:0,
+          cateid:'',
+        },
       }
     },
     components: {
     },
+    created(){
+      $http.corspost({
+        url: 'http://118.89.217.84/exchange-platform/index.php/BbsCategory/Show',
+        data: '',
+      }).done((res)=>{
+        this.activeTab1='tab0';
+        this.tabData=res.data;
+//        this.category.cateid = res.data.cate_name;
+      })
+      $http.corspost({
+        url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Show',
+        data: this.form,
+      }).done((res)=>{
+        this.itemData=res.data.list;
+      })
+/*      $http.corspost({
+        url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Show',
+        data: this.form,
+      }).done((res)=>{
+          this.itemData=res.data.list;
+      })*/
+    },
     methods:{
       handleTabChangeposts (val) {
-        this.activeTab1 = val
+        this.activeTab1 = val;
+        var index=val.slice(3);
+        console.log(val,index);
+        if(index==0){
+            this.category.cateid=""
+        }else{
+          var id=this.tabData[index-1].id;
+          this.category.cateid = id;
+        }
+        $http.corspost({
+          url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Show',
+          data: this.category
+        }).done((res)=>{
+//            this.categoryData=res.data;
+            this.categoryData=res.data.list;
+        })/*.always(()=>{
+
+        })*/
       },
       handleClick (newIndex) {
+      },
+      search(){
+        this.$router.push({path:'/search'});
       }
     },
   }

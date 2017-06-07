@@ -76,12 +76,8 @@
     .con_left{
       width:18%;
       height:100%;
-      /*min-height: 500px;*/
-      /*padding-top:50px;*/
-      /*background: #85bfbe;*/
       color:#fff !important;
       min-width: 200px;
-      /*border:1px solid blue;*/
     }
   }
 

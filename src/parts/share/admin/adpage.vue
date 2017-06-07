@@ -3,7 +3,7 @@
     <header>
       <div>
         <span class="adL">
-          <a href="../../../parts/share/index/index.html" class="adL_title">sharing</a>
+          <a href="#" class="adL_title">sharing</a>
           后台管理
         </span>
         <span class="adR">
@@ -56,6 +56,7 @@
         <!--<AdminTable></AdminTable>-->
         <slot name="adpost"></slot>
         <slot name="adnote"></slot>
+        <!--<router-view></router-view>-->
       </div>
     </div>
 
@@ -148,7 +149,10 @@
       color: #ff4081 !important;
     }
   }
-
+  /*f分页在右边显示*/
+  .mu-pagination{
+    float: right;
+  }
 </style>
 <script>
 

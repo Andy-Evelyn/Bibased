@@ -31,14 +31,14 @@ const routes = [
        component: routers.ShareReBuildNote,
      },
       {
-        path: 'detail',
+        path: 'comment',
         // component: routers.SharePostsComment,
         component: routers.SharePostsComment,
       },
-      // {
-      //   path: 'postslisttabs',
-      //   component: routers.ShareListtabs,
-      // },
+      {
+        path: 'search',
+        component: routers.ShareResearch,
+      },
     ]
   }
 ];

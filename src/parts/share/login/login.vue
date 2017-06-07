@@ -1,14 +1,15 @@
 <template>
-  <!--<div class="sl-page">-->
-    <!--<PageHeader></PageHeader>-->
-    <div class="main">
-        <h1>Sharing</h1>
-        <h5>分享你的知识、见解</h5>
-      <transition name="fade">
-        <keep-alive><router-view></router-view></keep-alive>
-      </transition>
-    </div>
-  <!--</div>-->
+<div>
+  <div class="main">
+    <h1>Sharing</h1>
+    <h5>分享你的知识、见解</h5>
+    <transition name="fade">
+      <keep-alive><router-view></router-view></keep-alive>
+    </transition>
+  </div>
+  <InFo></InFo>
+</div>
+
 
 </template>
 <style lang="less">
@@ -47,21 +48,16 @@
     overflow: hidden;
   }
   .main{
-    /*height: 100%;*/
-    /*border:1px solid blue;*/
     position: absolute;
     z-index:3;
     top:50%;
     left: 50%;
     width: 80%;
-    /*padding: 20px 20px 36px 20px;*/
-    /*padding: 5px 15px 30px 15px;*/
     max-width:  340px;
     transform: translate(-50%,-50%);
     h1,h5{
       text-align: center;
       color:#009688;
-      /*color:#ff4081;*/
     }
   }
   .fade-leave-active, .fade-enter-active{
@@ -71,23 +67,10 @@
     transform-origin:50% 50% !important;
   }
 
-  /*.loginTitle{*/
-    /*color:#009688;*/
-    /*text-align: center;*/
-    /*position: relative;*/
-    /*z-index: 4;*/
-  /*}*/
 </style>
 
 <script>
-//  import 'muse-components/styles/base.less' // 加载基础的样式
-//  import Vue from 'vue'
-//  import MuseUI from 'muse-ui'
-//  import 'muse-ui/dist/muse-ui.css'
-//  import 'muse-ui/dist/theme-teal.css' // 使用 carbon 主题
-//  Vue.use(MuseUI)
-
-//  import PageHeader from 'components/base/pageheader';
+  import InFo from 'components/base/info';
   export default{
     data(){
       return {
@@ -108,7 +91,7 @@
       }
     },
     components: {
-//      PageHeader
+      InFo
     }
   }
 </script>

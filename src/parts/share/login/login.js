@@ -8,10 +8,15 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import routers from 'router/index';
 import Vuex from 'vuex';
+import store from '../../../store/AppStore.js'
 Vue.use(Router);
 Vue.use(Vuex);
+Vue.config.productionTip = false
+Vue.config.devtools = true
 const routes = [
-  {path: '/', component: routers.Login,
+  {
+    path: '/',
+    component: routers.Login,
     children: [
       {
         path: '',
@@ -31,5 +36,6 @@ const router= new Router({
 new Vue({
     el: '#app',
     router,
+    store,
     template: '<router-view></router-view>',
 })

@@ -8,11 +8,11 @@
     <div class="login-form-head mu-flat-button-primary">
       管理员登录
     </div>
-    <form action="">
+    <div>
       <mu-text-field id="userName" @blur="check_name" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" pattern="-?[0-9]*(\.[0-9]+)?" fullWidth labelFloat/>
       <mu-text-field id="passWord" @blur="check_word" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/>
       <mu-raised-button label="登录" class="loginbtn" id="subMit" @click="login" primary/>
-    </form>
+    </div>
   </mu-paper>
 
 </template>

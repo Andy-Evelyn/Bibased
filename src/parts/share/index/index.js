@@ -9,7 +9,11 @@ import Router from 'vue-router';
 import routers from 'router/index';
 Vue.use(Router)
 const routes = [
-  {path: '/', component: routers.ShareIndex},
+  {
+    path: '/',
+    name:'index',
+    component: routers.ShareIndex
+  },
 ];
 const router= new Router({
   routes

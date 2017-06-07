@@ -1,31 +1,20 @@
 <template>
 
-  <paper class="loginPaper" :zDepth="2" >
-    <!--    <div class="icon-circle">
-          <icon value="lock" color="orange" :size="82" class="icon-clock"/>
-        </div>-->
-
+  <mu-paper class="loginPaper" :zDepth="2" >
     <div class="icon-circle">
-      <!--<h1 style="line-height: 140px;">Sharing</h1>-->
-      <icon value="account_box" color="orange" :size="82" class="icon-clock"/>
-      <!--<icon value="lock" color="orange" :size="82" class="icon-clock"/>-->
+      <mu-icon value="account_box" color="orange" :size="82" class="icon-clock"/>
     </div>
     <div class="login-form-head mu-flat-button-primary">
-      <!--<mu-list-item disabled>-->
-      <!--<mu-avatar slot="left" color="orange" backgroundColor="#eee" :size="140">Sharing</mu-avatar>-->
-      <!--</mu-list-item>-->
-      <!--      <h1>Sharing</h1>
-            &lt;!&ndash;<h5>分享你的知识、见解</h5>&ndash;&gt;
-            <p>用户登录</p>-->
       用户登录
     </div>
-    <form action="">
-      <textField id="userName" @blur="check_name" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" pattern="-?[0-9]*(\.[0-9]+)?" fullWidth labelFloat/>
-      <textField id="passWord" @blur="check_word" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/>
+    <form v-model="loginForm">
+      <mu-text-field v-model.trim="loginForm.account" @keyup.enter.native="login" id="userName"  :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" fullWidth labelFloat/>
+      <mu-text-field id="passWord" v-model.trim="loginForm.password" @keyup.enter.native="login" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/>
       <router-link to="forgetpw"><span class="forgetpw">忘记密码？</span></router-link>
-      <raisedButton label="登录" class="loginbtn" id="subMit" @click="login" primary/>
+      <mu-raised-button label="登录" class="loginbtn" id="subMit" @click="login" primary/>
     </form>
-  </paper>
+
+  </mu-paper>
 
 </template>
 <style lang="less" scoped>
@@ -100,41 +89,40 @@
     }
 </style>
 <script>
-  import textField from 'muse-components/textField';
-  import paper from 'muse-components/paper';
-  import icon from 'muse-components/icon';
-  import raisedButton from 'muse-components/raisedButton';
-//  import 'muse-components/styles/base.less' // 加载基础的样式
   import Vue from 'vue'
   import MuseUI from 'muse-ui'
   import 'muse-ui/dist/muse-ui.css'
   import 'muse-ui/dist/theme-teal.css' // 使用 carbon 主题
+  import $http from 'src/api/http.js';
   Vue.use(MuseUI)
-
   import $ from 'jquery';
     export default{
-        name:"loginform",
-        data(){
-            return {
-              inputErrorText:'',
-              inputErrorPassword:'',
-              msg: 'hello vue'
-            }
-        },
-        components: {
-          textField,
-          paper,
-          icon,
-          raisedButton,
-        },
+      data(){
+        return {
+          inputErrorText:'',
+          inputErrorPassword:'',
+          loginForm: {
+            account: '',
+            password: '',
+            type: 1
+          },
+          dialogVisible: false,
+          fullscreenLoading: false
+        }
+      },
+      components: {
+      },
       methods: {
         handleInputOverflow (isOverflow) {
-          this.inputErrorText = isOverflow ? '用戶名只能是10位数哟' : ''
+          this.inputErrorText = isOverflow ? '用户名只能是10位数哟' : ''
         },
         check_name(){
-            if($("#userName input").val() == ''){
+            if($("#userName input").val() === ''){
               this.inputErrorText = '用户名不能为空哟'
 //              return false
+            }
+            else if(!Number.isInteger(Number($("#userName input").val())) || Number($("#userName input").val()) < 1000000000){
+              this.inputErrorText = '请输入长度大于9位的数值'
             }else{
               this.inputErrorText = ''
             }
@@ -147,15 +135,47 @@
             this.inputErrorPassword = ''
           }
         },
-        login(){
+/*        login(){
           this.check_name()
           this.check_word()
           if($("#userName input").val() && $("#passWord input").val()){
             this.inputErrorText = ''
             this.inputErrorPassword = ''
+            if (!Number.isInteger(Number($("#userName input").val())) || Number($("#userName input").val()) < 1000000000 || $("#passWord input").val().length < 5) {
+              alert('帐号或密码格式错误')
+            }else{
+              window.location.href="../../../parts/share/index/index.html";   //登录成功，页面跳转
+
+            }
           }
-            console.log($("#userName input").val());
-            console.log($("#passWord input").val());
+        }*/
+        login() {
+            console.log(this.loginForm);
+          if (!Number.isInteger(Number(this.loginForm.account)) || Number(this.loginForm.account) < 1000000000 || this.loginForm.password.length < 5) {
+            this.$store.dispatch('showInfoDialog', '帐号或密码格式错误')
+            console.log("格式错误",this.$store);
+          } else {
+            this.fullscreenLoading = true;
+            $http.corspost({
+              url: 'http://118.89.217.84/exchange-platform/index.php/Login/checkLogin',
+              data: this.loginForm,
+            }).done((data) => {
+
+              this.fullscreenLoading = false;
+              if (data.code == 200) {
+                this.$store.dispatch('SetUserName', data.data.nickName);
+                window.location.href="../../../parts/share/index/index.html";   //登录成功，页面跳转
+                console.log("登录成功");
+              } else {
+                this.$store.dispatch('showInfoDialog', data.msg);
+                console.log(data.msg);
+              }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+              console.log(jqXHR, textStatus, errorThrown)
+            }).always(function () {
+              console.log("end")
+            })
+          }
         }
       }
     }

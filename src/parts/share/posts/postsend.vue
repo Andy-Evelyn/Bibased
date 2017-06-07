@@ -8,10 +8,7 @@
           <div class="post-Sendform">
             <p class="postSend_class">
               分类：
-              <a href="javascript:void(0)" id="a1">标签一</a>
-              <a href="javascript:void(0)">标签二</a>
-              <a href="javascript:void(0)">标签三</a>
-              <a href="javascript:void(0)">标签四</a>
+              <a href="javascript:void(0)" class="postTag" v-for="(item,index) in titleData" :key="index">{{item.cate_name}}</a>
             </p>
             <p>
               标题：<input type="text" class="">
@@ -104,7 +101,11 @@
             margin:0 3px;
             cursor: pointer;
           }
-          a:nth-of-type(1):link{
+          a:link{
+            background: #8391A5;
+            color:#fff;
+          }
+         /* a:nth-of-type(1):link{
             background: #8391A5;
             color:#fff;
             margin:0 !important;
@@ -123,7 +124,8 @@
             background: #fff8e9;
             color:#f7ba2a;
             border:1px solid #f7ba2a;
-          }
+          }*/
+
           .selected{
             background: #009688 !important;
             /*background: #a2abae !important;*/
@@ -140,17 +142,6 @@
             outline: none;
           }
         }
-        /*内容*/
-        /*p:nth-of-type(3){*/
-          /*textarea{*/
-            /*width: 100%;*/
-            /*height: 230px;*/
-            /*resize: none;*/
-            /*outline: none;*/
-            /*border-radius: 5px;*/
-            /*border: 1px solid #e6e6e6;*/
-          /*}*/
-        /*}*/
         /*发送*/
         p:nth-of-type(3){
           text-align: right;
@@ -167,9 +158,10 @@
   import 'muse-ui/dist/muse-ui.css'
   import 'muse-ui/dist/theme-teal.css' // 使用 teal 主题
   Vue.use(MuseUI)
-
+  import $http from 'src/api/http.js';
   import $ from 'jquery';
   import WangEditor from 'wangeditor';
+
   export default{
     name:"postsend",
     data(){
@@ -178,11 +170,12 @@
           editorUpImgUrl: 'http://xxxx'  // 编辑器插入的图片上传地址
         },
         editor: '',  // 存放实例化的wangEditor对象，在多个方法中使用
+        titleData:[],
       }
     },
     mounted() {
-      this.selectClass();
-      $("#a1").trigger("click"); //默认选中标签一
+//      this.selectClass();
+//      $(".postTag").trigger("click"); //默认选中标签一
       this.createEditor();
     },
     beforeDestroy(){
@@ -198,7 +191,7 @@
               $(this).removeClass("selected");
             }
             else{
-//              $(this).siblings('a').removeClass("selected");  //只选一个
+              $(this).siblings('a').removeClass("selected");  //只选一个
               $(this).addClass("selected");
             }
             });
@@ -208,7 +201,7 @@
           console.log(this.ranDomid);
           this.initEditorConfig();  // 初始化编辑器配置，在create之前
           this.editor.create();  // 生成编辑器
-          this.editor.$txt.html('<p>请在这里编辑您的内容</p>');  // 初始化内容
+          this.editor.$txt.html('');  // 初始化内容
   //        $('#ranDomid').css('height', '200px');  // 使编辑器内容区自动撑开，在css中定义min-height;
           $("#postEd").css('height','200px');
         },
@@ -247,6 +240,16 @@
           // this.editor.$txt.formatText();  // 获取格式化后的纯文本
           console.log(this.editorContent);
         },
-    }
+    },
+    created(){
+      $(".postTag").trigger("click"); //默认选中标签一
+      this.selectClass();
+      $http.corspost({
+        url: 'http://118.89.217.84/exchange-platform/index.php/BbsCategory/Show',
+        data: '',
+      }).done((res) => {
+        this.titleData = res.data;
+      })
+    },
   }
 </script>

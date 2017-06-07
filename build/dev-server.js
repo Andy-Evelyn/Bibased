@@ -64,7 +64,7 @@ app.use(staticPath, express.static('./static'))
 app.use('/mock', express.static('./src/mock'));
 app.use('/static',express.static('./static'))
 // var uri = 'http://localhost:' + port + '/parts/share/home/home.html'
-var uri = 'http://localhost:' + port + '/parts/share/index/index.html'
+var uri = 'http://localhost:' + port + '/parts/share/login/login.html'
 
 devMiddleware.waitUntilValid(function () {
   console.log('> Listening at ' + uri + '\n')
