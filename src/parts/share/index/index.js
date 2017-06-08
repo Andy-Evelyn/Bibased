@@ -7,7 +7,9 @@ require('../../../assets/js/material.min.js');
 import Vue from 'vue';
 import Router from 'vue-router';
 import routers from 'router/index';
+import store from '../../../store/AppStore.js'
 Vue.use(Router)
+Vue.use(store)
 const routes = [
   {
     path: '/',

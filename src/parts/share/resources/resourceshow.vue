@@ -11,6 +11,8 @@
             </div>
             <div class="com_topic_two">
               <p class="p1" v-html="comData.doc_desc"></p>
+              <p>文件名 :  <span v-html="comData.old_name"></span></p>
+              <p><span @click="download" class="download">点击下载</span></p>
               <div class="comment_add">
                 <span>{{comData.mtime}}</span>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="comment"
                                                                    @click="toggle1">
@@ -88,6 +90,16 @@
   </div>
 </template>
 <style lang="less">
+  .download{
+    display: inline-block;
+    cursor: pointer;
+    background:#00bfa5;
+    color:#fff;
+    border-radius: 3px;
+    font-size: 12px;
+    padding:2px 5px 2px 5px;
+    margin-top:5px;
+  }
   /*动画效果*/
   .fade-enter-active, .fade-leave-active {
     /*transition: opacity .5s*/
@@ -208,6 +220,7 @@
   >
   p.p1 {
     margin-top: 20px;
+    padding-bottom: 20px;
     color: #666a74;
   }
 
@@ -512,7 +525,20 @@
           console.log(res)
           window.location.reload();
         });
-      }
+      },
+      download(){
+          window.location.href = ' http://118.89.217.84/exchange-platform/index.php/Document/Down?id='+this.detail.id;
+          /*$http.corsget({
+            url: ' http://118.89.217.84/exchange-platform/index.php/Document/Down',
+            data: this.detail,
+          }).done((res) => {
+            this.comData = res.data;
+            console.log(this.comData)
+            if(res.code != 200){
+                alert(res.msg);
+            }
+          });*/
+      },
     },
     created(){
       $http.corsget({

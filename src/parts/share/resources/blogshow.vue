@@ -93,12 +93,10 @@
     /*transition: opacity .5s*/
     transition: all .5s ease;
   }
-
   .fade-enter, .fade-leave-active {
     transform: translateY(-50px);
     opacity: 0;
   }
-
   /*清除浮动*/
   .clearfix:after {
     content: ".";
@@ -107,17 +105,14 @@
     visibility: hidden;
     clear: both;
   }
-
   .clearfix {
     *zoom: 1;
   }
-
   #seReplay, #fiReplay {
     width: 100%;
     min-height: 150px;
     height: auto;
   }
-
   .postsCom-main {
     padding-top:74px;
   p {
@@ -129,19 +124,16 @@
     height: 40px;
     border-radius: 4px;
   }
-
   .mu-icon {
     position: relative;
     top: 4px;
   }
-
   .textarea {
     width: 100%;
     height: 150px;
     margin: 0 auto;
     margin-top: 15px;
   }
-
   .com_btn {
     position: relative;
     left: 83%;
@@ -150,32 +142,26 @@
     border-radius: 5px;
     margin-top: 10px;
   }
-
   .mdl-grid {
     margin: 0 20%;
     min-width: 500px;
-
   .mdl-cell {
     padding: 10px;
     position: relative;
   }
-
   }
   .comment_left {
     float: left;
     width: 75%;
     height: auto;
     border-right: 1px solid #e6e6e6;
-
   .com_topic {
     width: 100%;
     border-bottom: 1px solid #e6e6e6;
-
   .com_topic_top {
     margin: 0 auto;
     width: 90%;
     border-bottom: 1px solid #e6e6e6;
-
   .tags {
     display: inline-block;
     margin-bottom: 10px;
@@ -191,7 +177,6 @@
     /*background: #59b0ff;*/
     /*}*/
   }
-
   >
   p {
     font-size: 20px;
@@ -199,64 +184,51 @@
     line-height: 50px;
     margin: 0 !important;
   }
-
   }
   .com_topic_two {
     width: 90%;
     margin: 0 auto;
-
   >
   p.p1 {
     margin-top: 20px;
     color: #666a74;
   }
-
   .comment_add {
     margin-bottom: 15px;
   }
-
   .comment_add, .comment_add > a {
     margin-top: 20px;
     width: 100%;
     color: #999999;
     font-size: 12px;
   }
-
   .comment_add > a {
-
   &:hover {
      color: #59b0ff;
    }
-
   }
   >
   p.p2 {
     margin-top: 50px;
     font-size: 20px;
   }
-
   }
   }
-
   .reply {
     width: 90%;
     margin: 0 auto;
     padding: 14px 0;
-
   >
   img {
     float: left;
   }
-
   .reply_context {
     width: 90%;
     float: left;
     padding-left: 10px;
-
   .cont {
     padding: 15px 0;
   }
-
   a.con_number {
     display: inline-block;
     width: 50px;
@@ -266,19 +238,16 @@
     color: #999999;
     border-radius: 4px;
     background: #f5f5f5;
-
   & :hover {
       background: #59b0ff;
       color: #fff;
     }
-
   }
   .con_time {
     float: right;
     font-size: 12px;
     color: #99999c;
   }
-
   /*二级回复*/
   .reply_show {
     margin-top: 15px;
@@ -289,23 +258,19 @@
     border-top: 1px solid #e6e6e6;
     list-style: none;
     padding-bottom: 5px;
-
   li {
     width: 95%;
     margin: 0 auto;
     padding: 10px 0px;
-
   img {
     float: left;
   }
-
   .li_re {
     float: left;
     width: 80%;
     padding: 10px;
     font-size: 14px;
   }
-
   }
   .txt {
     display: block;
@@ -313,11 +278,9 @@
     height: 120px;
     margin-bottom: 5px;
   }
-
   .com_btn {
     left: 76% !important;
   }
-
   }
   }
   }
@@ -326,37 +289,29 @@
     float: right;
     width: 24.5%;
     height: auto;
-
   .writer {
     margin: 0 auto;
     margin-top: 30px;
     width: 80%;
     border-bottom: 1px solid #e6e6e6;
     padding-bottom: 10px;
-
   >
   p {
     padding-bottom: 15px;
   }
-
   a {
     position: relative;
     left: 8px;
     font-size: 12px;
     color: #155faa;
   }
-
   li {
     color: #666666;
     font-size: 13px;
   }
-
   }
   }
-
   }
-
-
 </style>
 <script>
   import '../../../assets/css/style.css' // 加载样式
@@ -394,7 +349,6 @@
           content:"",
           pid:0
         },
-
       }
     },
     mounted(){
@@ -405,7 +359,6 @@
       this.editor.$txt.html('');  // 初始化内容
       //        $('#ranDomid').css('height', '200px');  // 使编辑器内容区自动撑开，在css中定义min-height;
       $("#replayEd1").css('height', '150px');
-
     },
     beforeDestroy(){
       this.destroyEditor();
@@ -438,7 +391,6 @@
             this.commentList[index].ShowReply=res.data;
           });
         }
-
 //        this.isShow_com2 = !this.isShow_com2;
       },
       createEditor(){  // 创建编辑器
@@ -448,7 +400,6 @@
         this.editor.$txt.html('');  // 初始化内容
         //        $('#ranDomid').css('height', '200px');  // 使编辑器内容区自动撑开，在css中定义min-height;
         $("#replayEd1").css('height', '150px');
-
         this.editor1 = new WangEditor('replayEd2');
         this.initEditorConfig();  // 初始化编辑器配置，在create之前
         this.editor1.create();  // 生成编辑器
@@ -474,11 +425,8 @@
           8: '48px'
         };
         this.editor.config.uploadImgUrl = this.dataInterface.editorUpImgUrl;  // 图片上传地址
-
         this.editor.config.uploadImgFileName = '_img';  // 统一指定上传的文件name，需要指定。否则默认不同的上传方式是不同的name
-
         const usersecret = window.localStorage.getItem('usersecret');  // 获取 usersecret
-
         this.editor.config.uploadParams = {  // 自定义上传参数配置
           usersecret: usersecret
         };
@@ -490,7 +438,6 @@
         console.log(this.editorContent);
       },
       addComment(id=0,index){
-
         if(typeof index=="undefined"){
           if(this.editor.$txt.text() == ''){
             alert("评论内容不能为空");
@@ -515,15 +462,12 @@
       }
     },
     created(){
-
       $http.corsget({
         url: 'http://118.89.217.84/exchange-platform/index.php/Blog/Detail',
         data: this.detail,
       }).done((res) => {
-
         this.comData = res.data;
         console.log(this.comData)
-
       });
       $http.corspost({
         url: 'http://118.89.217.84/exchange-platform/index.php/Comment/Show',

@@ -29,6 +29,7 @@
   import PageHeader from 'components/base/pageheader';
   import ListTabs from 'components/base/listtabs';
   import PaginAtion from 'components/base/pagination';
+  import $http from 'src/api/http.js';
   export default{
     data(){
       return {
@@ -39,6 +40,6 @@
       PageHeader,
       ListTabs,
       PaginAtion,
-    }
+    },
   }
 </script>

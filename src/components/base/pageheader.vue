@@ -29,9 +29,9 @@
                       <mu-icon value="assignment_ind"/>&nbsp;&nbsp;个人中心
                     </a>
                   </li>
-                  <li>
+                  <li @click="logout">
                     <a href="javascript:void(0)">
-                      <mu-icon value="power_settings_new" @click="logout"/>&nbsp;&nbsp;退出
+                      <mu-icon value="power_settings_new"/>&nbsp;&nbsp;退出
                     </a>
                   </li>
               </mu-paper>
@@ -197,13 +197,14 @@
     },
     methods:{
       logout(){
-          console.log("111");
         $http.corspost({
           url: 'http://118.89.217.84/exchange-platform/index.php/Logout',
           data: ''
         }).done((res)=>{
             if(confirm("确认退出？")){
               window.location.href="../../../parts/share/login/login.html"
+            }else{
+                return false;
             }
         })
       }
@@ -216,7 +217,7 @@
       }).done((response) => {
         const data = response.data;
         console.log(data);
-        if (response.code === 200) {
+        if (response.code == 200) {
 //          this.$store.dispatch('setUserInfo', data);
           this.userName = data.nickName;
         } else {

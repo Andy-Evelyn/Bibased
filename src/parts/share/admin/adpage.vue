@@ -7,7 +7,6 @@
           后台管理
         </span>
         <span class="adR">
-          <!--<span class="adUserName">2013081420</span>-->
           <router-link to="adlogin"><mu-icon value="power_settings_new"/>&nbsp;&nbsp;退出</router-link>
       </span>
       </div>
@@ -19,34 +18,18 @@
 
           <mu-list activeClass="router-link-active">
 
-            <mu-list-item title="讨论版" toggleNested>
-              <mu-icon slot="left" value="inbox"/>
-              <mu-list-item slot="nested" title="分类一"  to="adpost">
-                <mu-icon slot="left" value="local_offer"/>
-              </mu-list-item>
-              <mu-list-item slot="nested" title="分类二"  to="adpost1">
-                <mu-icon slot="left" value="local_offer"/>
-              </mu-list-item>
-            </mu-list-item>
-
-            <mu-list-item title="文档资料" to="adfile">
+            <mu-list-item title="讨论版" to="adpost">
               <mu-icon slot="left" value="drafts"/>
-            </mu-list-item>
-
-            <mu-list-item title="技术博客" toggleNested>
+            </mu-list-item>-->
+            <mu-list-item title="文档资料" >
               <mu-icon slot="left" value="drafts"/>
-              <mu-list-item slot="nested" title="tags"  to="adblog">
-                <mu-icon slot="left" value="local_offer"/>
-              </mu-list-item>
-              <mu-list-item slot="nested" title="tags" to="adblog1">
-                <mu-icon slot="left" value="local_offer"/>
-              </mu-list-item>
-            </mu-list-item>
-
+            </mu-list-item>-->
+            <mu-list-item title="技术博客" >
+              <mu-icon slot="left" value="drafts"/>
+            </mu-list-item>-->
             <mu-list-item title="个人笔记" to="adnote">
               <mu-icon slot="left" value="drafts"/>
-            </mu-list-item>
-
+            </mu-list-item>-->
           </mu-list>
 
         </div>

@@ -2,7 +2,7 @@
   <div class="adminContent">
     <p class="aCtitle">
       帖子
-      <mu-text-field label="搜索"type="text"  @keyup.enter.native="search()" icon="search" hintText="输入关键词" labelFloat/>
+      <!--<mu-text-field label="搜索"type="text"  @keyup.enter.native="search()" icon="search" hintText="输入关键词" labelFloat/>-->
     </p>
 
     <mu-table :fixedHeader="fixedHeader" :height="height"  :enableSelectAll="enableSelectAll" :multiSelectable="multiSelectable" :selectable="selectable" :showCheckbox="showCheckbox">

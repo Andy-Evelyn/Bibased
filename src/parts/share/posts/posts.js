@@ -24,7 +24,7 @@ const routes = [
         component: routers.SharePostsShow,
       },
       {
-        path: 'search',
+        path: 'search/:q',
         component: routers.SharePostsReach,
       },
     ]

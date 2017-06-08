@@ -29,6 +29,6 @@
     },
     components: {
       PageHeader,
-    }
+    },
   }
 </script>

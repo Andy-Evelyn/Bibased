@@ -293,10 +293,10 @@
             data: this.addPostData,
           }).done((res) => {
             console.log(res)
-            window.location.href="../../../parts/share/index/index.html";   //登录成功，页面跳转
+            window.location.href="../../../parts/share/posts/posts.html#/";
+            location.reload();
           });
         }
     },
-
   }
 </script>

@@ -4,29 +4,21 @@
       <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col">
           <div class="tabsMain">
-            <p>搜索到以下结果：</p>
+            <p>"{{searchlabel}}" 搜索到以下结果</p>
             <!--显示内容-->
-            <div class="postsL_all" v-for="item1 in itemData" :key="item1">
-              <div class="context_one">
+            <div class="postsL_all">
+              <div class="context_one" v-for="(item,index) in Share_search" :key="index">
                 <img :src="userImg" class="item_img"/>
                 <div class="item_cont">
-                  <h6><router-link to="comment" class="text" >{{item1.title}}</router-link></h6>
-                  <p> • <span class="itemUser_name">{{item1.username}} </span>的发布 • <span>{{item1.huifu}}</span>个回复 • <span>{{item1.liulang}}</span>次浏览 • <span>{{item1.time}}</span></p>
+                  <h6><a :href="locat+item.id" class="text" >{{item.title}}</a></h6>
+                  <p> • <span class="itemUser_name">{{item.userinfo.nickName}} </span>的发布 • <span>{{item.comment_num}}</span>个回复 • <span>{{item.view_num}}</span>次浏览 • <span>{{item.mtime}}</span></p>
                 </div>
               </div>
             </div>
-            <div v-if="activeTab1 === 'tab3'">
-              <div class="context_one">
-                <img :src="userImg" class="item_img"/>
-                <div class="item_cont">
-                  <h6><router-link to="postscomment" class="text" >3333 test最热。。。修改。。。</router-link></h6>
-                  <p> • <span class="itemUser_name">2013081420 </span>的发布 • <span>7</span>个回复 • <span>1154</span>次浏览 • <span>2016-5-23</span></p>
-                </div>
-              </div>
-            </div>
+
           </div>
           <!--分页-->
-          <mu-pagination :total="total" :current="current" @pageChange="handleClick"></mu-pagination>
+          <mu-pagination :total="total" :current="current" :pageSize='pageSize' @pageChange="handleClick"></mu-pagination>
         </div>
       </div>
     </div>
@@ -84,48 +76,63 @@
 </style>
 <script>
   import userImg from '../../../assets/images/user.png'
+  import $http from 'src/api/http.js';
   export default{
+    props:['mes'],
     name:"postsmain",
     data(){
       return {
-        total: 500,
+        total: 0,
         current: 1,
-        activeTab1: 'tab1',
+        pageSize:10,
         userImg: userImg,
-        tabsData:['最新', '最热', '分类一', '分类二', '分类三'],
-        itemData:[
-          {
-            title:'Vue电子书籍',
-            username:'2013081420',
-            huifu:'7',
-            liulang:'150',
-            time:'2017-5-13',
-          },
-          {
-            title:'vue的监听端口在哪里修改',
-            username:'2013081510',
-            huifu:'0',
-            liulang:'10',
-            time:'2017-5-20',
-          },
-          {
-            title:'php学习资料',
-            username:'2014081609',
-            huifu:'7',
-            liulang:'08',
-            time:'2017-5-21',
-          }
-        ],
+        q:this.$route.params.q,
+        type:this.$route.params.type,
+        locat: '',
+        searchlabel: "",
+        Shareform:{
+          limit:10,
+          start:0,
+        },
+        Share_search:[],
       }
     },
     components: {
     },
     methods:{
-      handleTabChangeposts (val) {
-        this.activeTab1 = val
-      },
-      handleClick (newIndex) {
-      },
+      handleClick(newIndex){
+        this.Shareform.start = (newIndex - 1) * this.Shareform.limit;
+        var url = '';
+        if (this.type == 1) {
+          url = 'http://118.89.217.84/exchange-platform/index.php/Document/Search';
+          this.locat = '../../../parts/share/resources/resources.html#/fileshow/'
+        } else if (this.type == 2) {
+          url = 'http://118.89.217.84/exchange-platform/index.php/Blog/Search'
+          this.locat = '../../../parts/share/resources/resources.html#/blogshow/'
+        } else if (this.type == 3) {
+          url = 'http://118.89.217.84/exchange-platform/index.php/Note/Search';
+          this.locat = '../../../parts/share/resources/resources.html#/noteshow/'
+        }
+        $http.corspost({
+          url: url,
+          data: Object.assign({}, {q: this.q}, this.Shareform),
+        }).done((response) => {
+          const data = response.data;
+          console.log(this.q);
+          if (response.code === 200) {
+            console.log(data);
+            this.Share_search = data.list;
+            this.searchlabel = this.q;
+            this.total = response.data.meta.count;
+            this.current = this.Shareform.start / this.Shareform.limit + 1;
+          } else {
+            alert(response.msg);
+          }
+        })
+      }
     },
+    created(){
+      this.handleClick(1);
+    }
   }
 </script>

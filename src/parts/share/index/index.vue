@@ -24,6 +24,7 @@
   import PageHeader from 'components/base/pageheader';
   import PageMain from 'components/base/pagemain';
   import PageFooter from 'components/base/pagefooter';
+  import $http from 'src/api/http.js';
   export default{
     data(){
       return {

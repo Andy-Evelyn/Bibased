@@ -220,30 +220,6 @@
 
 
         });
-
-        var form = new FormData();
-        form.append("type", "1");
-        form.append("userfile", file);
-        form.append("desc", this.fileTitle);
-        form.append("title", this.editor.$txt.html());
-
-        var settings = {
-          "async": true,
-          "crossDomain": true,
-          "url": "http://118.89.217.84/exchange-platform/index.php/Document/Add",
-          "method": "POST",
-          "headers": {
-            "cache-control": "no-cache",
-          },
-          "processData": false,
-          "contentType": false,
-          "mimeType": "multipart/form-data",
-          "data": form
-        }
-
-        $.ajax(settings).done(function (response) {
-          console.log(response);
-        });
       },
     }
   }

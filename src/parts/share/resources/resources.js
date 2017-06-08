@@ -31,7 +31,7 @@ const routes = [
        component: routers.ShareReBuildNote,
      },
       {
-       path: 'show/:id',
+       path: 'fileshow/:id',
        component: routers.ShareReShow,
      },
      {
@@ -43,7 +43,7 @@ const routes = [
        component: routers.ShareNoteShow,
      },
       {
-        path: 'search',
+        path: 'search/type/:type/q/:q',
         component: routers.ShareResearch,
       },
     ]

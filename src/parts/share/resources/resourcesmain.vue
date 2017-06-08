@@ -15,28 +15,28 @@
                 </div>
               </div>
             </a>
-            <!--<mu-text-field label="搜索" type="text"  @keyup.enter.native="search()" icon="search" hintText="输入关键词" labelFloat/>-->
+            <mu-text-field label="搜索" type="text" v-model="q" @keyup.enter.native="search()" icon="search" hintText="输入关键词" labelFloat/>
           </div>
           <div class="tabsMain">
             <mu-tabs :value="activeTab1" @change="handleTabChangeposts">
-              <mu-tab value="tab1" id="wendang" title="文档资料" @click="handle"/>
-              <mu-tab value="tab2" title="技术博客"/>
-              <mu-tab value="tab3" title="个人笔记"/>
+              <mu-tab value="1" id="wendang" title="文档资料" @click="handle"/>
+              <mu-tab value="2" title="技术博客"/>
+              <mu-tab value="3" title="个人笔记"/>
             </mu-tabs>
             <!--显示内容-->
-            <div class="postsL_all" v-if="activeTab1 === 'tab1'" >
-              <div class="context_one" v-for="item in fileData" :key="item">
+            <div class="postsL_all" v-if="activeTab1 === '1'" >
+              <div class="context_one" v-for="item in shareData" :key="item">
                 <img :src="userImg" class="item_img"/>
                 <div class="item_cont">
-                  <h6><router-link :to="'show/'+item.id" class="text" >{{item.title}}</router-link></h6>
+                  <h6><router-link :to="'fileshow/'+item.id" class="text" >{{item.title}}</router-link></h6>
                   <p> • <span class="itemUser_name">{{item.userinfo.nickName}} </span>的发布 • <span>{{item.comment_num}}</span>个回复 • <span>{{item.down_num}}</span>次下载 • 最后一次更新时间 • <span>{{item.mtime}}</span></p>
                 </div>
               </div>
             </div>
 
 
-          <div class="postsL_all" v-if="activeTab1 === 'tab2'" >
-            <div class="context_one" v-for="item in blogData" :key="item">
+          <div class="postsL_all" v-if="activeTab1 === '2'" >
+            <div class="context_one" v-for="item in shareData" :key="item">
               <img :src="userImg" class="item_img"/>
               <div class="item_cont">
                 <h6><router-link :to="'blogshow/'+item.id" class="text" >{{item.title}}</router-link></h6>
@@ -45,8 +45,8 @@
             </div>
           </div>
 
-            <div class="postsL_all" v-if="activeTab1 === 'tab3'" >
-              <div class="context_one" v-for="item in noteData" :key="item">
+            <div class="postsL_all" v-if="activeTab1 === '3'" >
+              <div class="context_one" v-for="item in shareData" :key="item">
                 <img :src="userImg" class="item_img"/>
                 <div class="item_cont">
                   <h6><router-link :to="'noteshow/'+item.id" class="text" >{{item.title}}</router-link></h6>
@@ -57,7 +57,7 @@
 
         </div>
           <!--分页-->
-          <!--<mu-pagination :total="total" :current="current" @pageChange="handleClick"></mu-pagination>-->
+          <mu-pagination :total="total" :current="current" :pageSize="pageSize" @pageChange="handleClick"></mu-pagination>
         </mu-paper>
       </div>
     </div>
@@ -234,25 +234,17 @@
   export default{
     data(){
       return {
-        total: 500,
+        total: 0,
         current: 1,
+        pageSize:10,
         userImg:userImg,
-        activeTab1: 'tab1',
-        fileData:[],
-        blogData:[],
-        noteData:[],
+        activeTab1: '1',
+        q:'',
+        shareData:[],
         formData:{
             limit:10,
             start:0,
         },
-        formblogData:{
-          limit:10,
-          start:0,
-        },
-        formnoteData:{
-          limit:10,
-          start:0,
-        }
       }
     },
     mounted() {
@@ -264,33 +256,36 @@
     },
     methods:{
       handle(){
-        this.$emit('change','tab3');
+        this.$emit('change','3');
       },
       handleTabChangeposts (val) {
         this.activeTab1 = val;
-        $http.corspost({
-          url: 'http://118.89.217.84/exchange-platform/index.php/Blog/Show',
-          data: this.formblogData
-        }).done((res)=>{
-//            this.categoryData=res.data;
-          this.blogData=res.data.list;
-        }).always(()=>{
-
-        })
-        $http.corspost({
-          url: 'http://118.89.217.84/exchange-platform/index.php/Note/Show',
-          data: this.formnoteData
-        }).done((res)=>{
-//            this.categoryData=res.data;
-          this.noteData=res.data.list;
-        }).always(()=>{
-
-        })
+        this.handleClick(1);
       },
       handleClick (newIndex) {
+          var url = '';
+        if (this.activeTab1 == 1){
+          url='http://118.89.217.84/exchange-platform/index.php/Document/Show';
+        }else if (this.activeTab1 == 2){
+          url='http://118.89.217.84/exchange-platform/index.php/Blog/Show'
+        }else if (this.activeTab1 == 3){
+          url='http://118.89.217.84/exchange-platform/index.php/Note/Show'
+        }
+        this.formData.start = (newIndex-1)*this.formData.limit;
+        $http.corspost({
+          url: url,
+          data: this.formData
+        }).done((res)=>{
+//            this.categoryData=res.data;
+          this.shareData=res.data.list;
+          this.total = res.data.meta.count;
+          this.current = this.formData.start/this.formData.limit+1
+        }).always(()=>{
+
+        })
       },
       search(){
-        this.$router.push({path:'/search'});
+        this.$router.push({path:'/search/type/'+this.activeTab1+'/q/'+this.q});
       },
     },
     created(){
@@ -299,7 +294,9 @@
         data: this.formData
       }).done((res)=>{
 //            this.categoryData=res.data;
-        this.fileData=res.data.list;
+        this.shareData=res.data.list;
+        this.total = res.data.meta.count;
+        this.current = this.formData.start/this.formData.limit+1
       }).always(()=>{
 
       })

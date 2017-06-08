@@ -4,14 +4,14 @@
       <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col">
           <div class="tabsMain">
-            <p>搜索到以下结果：</p>
+            <p>"{{searchlabel}}" 搜索到以下结果</p>
             <!--显示内容-->
-            <div class="postsL_all" v-for="item1 in itemData" :key="item1">
-              <div class="context_one">
+            <div class="postsL_all">
+              <div class="context_one" v-for="(item,index) in Bbs_search" :key="index">
                 <img :src="userImg" class="item_img"/>
                 <div class="item_cont">
-                  <h6><router-link to="comment" class="text" >{{item1.title}}</router-link></h6>
-                  <p> • <span class="itemUser_name">{{item1.username}} </span>的发布 • <span>{{item1.huifu}}</span>个回复 • <span>{{item1.liulang}}</span>次浏览 • <span>{{item1.time}}</span></p>
+                  <h6><a :href="'../../../parts/share/posts/posts.html#/show/'+item.id" class="text" >{{item.title}}</a></h6>
+                  <p> • <span class="itemUser_name">{{item.userinfo.nickName}} </span>的发布 • <span>{{item.comment_num}}</span>个回复 • <span>{{item.view_num}}</span>次浏览 • <span>{{item.mtime}}</span></p>
                 </div>
               </div>
             </div>
@@ -26,8 +26,7 @@
             </div>
           </div>
           <!--分页-->
-          <mu-pagination :total="total" :current="current" @pageChange="handleClick"></mu-pagination>
-        </div>
+          <mu-pagination :total="total" :current="current" :pageSize="pageSize" @pageChange="handleClick"/>        </div>
       </div>
     </div>
   </div>
@@ -84,38 +83,24 @@
 </style>
 <script>
   import userImg from '../../../assets/images/user.png'
+  import $http from 'src/api/http.js';
   export default{
+      props:['mes'],
     name:"postsmain",
     data(){
       return {
-        total: 500,
+        total: 0,
+        pageSize:10,
         current: 1,
         activeTab1: 'tab1',
         userImg: userImg,
-        tabsData:['最新', '最热', '分类一', '分类二', '分类三'],
-        itemData:[
-          {
-            title:'Vue电子书籍',
-            username:'2013081420',
-            huifu:'7',
-            liulang:'150',
-            time:'2017-5-13',
-          },
-          {
-            title:'vue的监听端口在哪里修改',
-            username:'2013081510',
-            huifu:'0',
-            liulang:'10',
-            time:'2017-5-20',
-          },
-          {
-            title:'php学习资料',
-            username:'2014081609',
-            huifu:'7',
-            liulang:'08',
-            time:'2017-5-21',
-          }
-        ],
+        q:this.$route.params.q,
+        searchlabel: "",
+        Bbsform:{
+          limit:10,
+          start:0,
+        },
+        Bbs_search:[],
       }
     },
     components: {
@@ -125,7 +110,27 @@
         this.activeTab1 = val
       },
       handleClick (newIndex) {
+          this.Bbsform.start = (newIndex-1)*this.Bbsform.limit;
+        $http.corspost({
+          url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Search',
+          data: Object.assign({}, {q: this.q}, this.Bbsform),
+        }).done((response) => {
+          const data = response.data;
+          console.log(this.q);
+          if (response.code === 200) {
+            console.log(data);
+            this.Bbs_search = data.list;
+            this.searchlabel = this.q;
+            this.total = response.data.meta.count;
+            this.current = this.Bbsform.start/this.Bbsform.limit + 1;
+          } else {
+            alert(response.msg);
+          }
+        })
       },
     },
+    created(){
+      this.handleClick(1);
+    }
   }
 </script>

@@ -7,8 +7,8 @@
             <mu-icon value="message" :size="48" color="#f1b200"/>
             <span>讨论版</span>
             <mu-raised-button label="发布帖子" to="postsend" class="send_postBtn" primary href="#"/>
-            <!--<mu-text-field type="text" @keyup.enter.native="search()" label="搜索" icon="search" hintText="输入关键词"-->
-                           <!--labelFloat/>-->
+            <mu-text-field type="text" @keyup.enter.native="search" v-model="keywords" label="搜索" icon="search" hintText="输入关键词"
+            labelFloat />
           </div>
           <div class="tabsMain">
             <!--切换按钮-->
@@ -34,7 +34,7 @@
             </div>
 
             <div class="postsL_all" v-for="(liitem,index) in tabData" :key="index" v-if="activeTab1 === 'tab' +(index+1)">
-              <div class="context_one" v-for="(item,index) in categoryData" :key="index">
+              <div class="context_one" v-for="(item,index) in itemData" :key="index">
                 <img :src="userImg" class="item_img"/>
                 <div class="item_cont">
                   <h6>
@@ -48,7 +48,7 @@
 
           </div>
           <!--分页-->
-          <!--<mu-pagination :total="total" :current="current" @pageChange="handleClick"></mu-pagination>-->
+          <mu-pagination :total="total" :current="current"  :pageSize="pageSize" @pageChange="handleClick"></mu-pagination>
         </div>
       </div>
     </div>
@@ -58,10 +58,10 @@
   .listtabsmain{
     position: relative;
     padding-top:94px;
-/*  !*f分页在右边显示*!
-  .mu-pagination{
-    float: right;
-  }*/
+  /*  !*f分页在右边显示*!
+    .mu-pagination{
+      float: right;
+    }*/
   /*增加背景强度*/
   .mdl-grid {
     background:#fff;
@@ -71,7 +71,7 @@
     min-width: 500px;
   .postTitle {
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
   .mu-text-field.has-label {
     position: absolute;
     right: 0;
@@ -97,8 +97,6 @@
   }
   }
   }
-
-
   .tabsMain{
     position: relative;
   /*增加背景强度*/
@@ -133,7 +131,6 @@
      right:10px;
    }
   }
-
   .context_one {
     position: relative;
     /*height: 60px;*/
@@ -176,8 +173,9 @@
     name:"postsmain",
     data(){
       return {
-        total: 500,
+        total: 0,
         current: 1,
+        pageSize:10,
         activeTab1: '',
         activeID:"",
         userImg: userImg,
@@ -186,14 +184,11 @@
         tabList:[],
         categoryData:[],
         form:{
-            limit:10,
-            start:0,
-        },
-        category:{
           limit:10,
           start:0,
-          cateid:'',
+          cateid:0,
         },
+
       }
     },
     components: {
@@ -205,20 +200,20 @@
         const data = response.data;
         console.log(data);
         if (response.code === 200) {
-//          this.$store.dispatch('setUserInfo', data);
           $http.corspost({
             url: 'http://118.89.217.84/exchange-platform/index.php/BbsCategory/Show',
             data: '',
           }).done((res)=>{
             this.activeTab1='tab0';
             this.tabData=res.data;
-//        this.category.cateid = res.data.cate_name;
           })
           $http.corspost({
             url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Show',
             data: this.form,
           }).done((res)=>{
             this.itemData=res.data.list;
+            this.total = res.data.meta.count;
+            this.current = this.form.start/this.form.limit +1;
           })
         } else {
           alert("请先登录");
@@ -229,32 +224,40 @@
       }).always(function () {
       });
     },
-
     methods:{
       handleTabChangeposts (val) {
         this.activeTab1 = val;
         var index=val.slice(3);
         console.log(val,index);
-        if(index==0){
-            this.category.cateid=""
-        }else{
-          var id=this.tabData[index-1].id;
-          this.category.cateid = id;
-        }
-        $http.corspost({
-          url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Show',
-          data: this.category
-        }).done((res)=>{
-//            this.categoryData=res.data;
-            this.categoryData=res.data.list;
-        })/*.always(()=>{
-
-        })*/
+        this.form.cateid = index;
+        this.handleClick(1);
       },
       handleClick (newIndex) {
+          this.form.start = (newIndex - 1)*this.form.limit;
+        $http.corspost({
+          url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Show',
+          data: this.form,
+        }).done((res)=>{
+          this.itemData=res.data.list;
+          this.total = res.data.meta.count;
+          this.current = this.form.start/this.form.limit +1;
+        })
       },
       search(){
-        this.$router.push({path:'/search'});
+        this.$router.push({path:"/search/"+this.keywords});
+       /* $http.corspost({
+          url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Search',
+          data: Object.assign({}, {keyword: this.keywords}, this.Bbsform),
+        }).done((response) => {
+          const data = response.data;
+          if (response.code === 200) {
+            console.log(data);
+            this.Bbs_search = data.list;
+            this.searchlabel = this.keywords;
+          } else {
+            alert(response.msg);
+          }
+        })*/
       }
     },
   }

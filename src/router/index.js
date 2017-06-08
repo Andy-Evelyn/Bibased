@@ -161,8 +161,8 @@ export default {
     SharePostsReach,
     ShareResearch,
     AdSearch,
-  ShareBlogShow,
-  ShareNoteShow
+    ShareBlogShow,
+    ShareNoteShow
     // ShareListtabs,
 
 };
