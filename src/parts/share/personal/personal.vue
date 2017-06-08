@@ -11,13 +11,6 @@
             </div>
             <div class="upImg">
               <img :src="userUrl" alt="">
-              <!--<div class="maskUp">-->
-                <!--<div>-->
-                  <!--<mu-icon value="photo_camera" :size="36" color="#fff"/>-->
-                  <!--<p>修改我的头像</p>-->
-                <!--</div>-->
-                <!--<input type="file" accept="image/png,image/jpeg">-->
-              <!--</div>-->
             </div>
           </mu-paper>
           <mu-paper class="issueAll" :zDepth="1">
@@ -60,19 +53,19 @@
             <div v-if="activeFabu === 'wendang'" class="fabuDetails">
               <h4>我发布的文档资料</h4>
               <p>
-                这是文档资料
+                暂无数据
               </p>
             </div>
             <div v-if="activeFabu === 'boke'" class="fabuDetails">
               <h4>我发布的技术博客</h4>
               <p>
-                这是技术博客
+                暂无数据
               </p>
             </div>
             <div v-if="activeFabu === 'biji'" class="fabuDetails">
               <h4>我发布的个人笔记</h4>
               <p>
-                这是个人笔记
+                暂无数据
               </p>
             </div>
           </mu-paper>
@@ -235,16 +228,17 @@
 
   import imgurl from '../../../assets/images/user.png'
   import PageHeader from 'components/base/pageheader';
+  import $http from 'src/api/http.js';
   export default{
     data(){
       return {
         userUrl: imgurl,
-        stuNum:'2013081420',
-        stuClass:'计科134',
+        stuNum:'',
+        stuClass:'',
         n1:'1',
-        n2:'3',
-        n3:'10',
-        n4:'5',
+        n2:'0',
+        n3:'0',
+        n4:'0',
         activeFabu: 'tiezi',
         dialog: false
       }
@@ -265,7 +259,27 @@
     },
     components: {
       PageHeader,
-    }
+    },
+    created(){
+      $http.corspost({
+        url: 'http://118.89.217.84/exchange-platform/index.php/Auth/checkIsLogin',
+      }).done((response) => {
+        const data = response.data;
+        console.log(data);
+        if (response.code === 200) {
+//          this.$store.dispatch('setUserInfo', data);
+          this.stuNum = data.account;
+          this.stuClass = data.naturalClass.className;
+        } else {
+          alert("请先登录");
+          window.location.href="../../../parts/share/login/login.html"
+        }
+      }).fail((jqXHR, textStatus, errorThrown)=>{
+//        this.$store.dispatch('showInfoDialog', "请求发生错误，请稍后再试");
+        alert("请求发生错误，请稍后再试");
+      }).always(function () {
+      });
+    },
   }
 </script>
 

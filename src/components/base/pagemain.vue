@@ -8,18 +8,18 @@
       </div>
     </div>
 
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--6-col">
+<!--    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell&#45;&#45;6-col">
         <div class="moreTitle">
           <mu-icon value="message" :size="48" color="#f1b200"/><span>讨论版</span>
           <a href="../../../parts/share/posts/posts.html">更多>></a>
         </div>
-        <!--切换按钮-->
+        &lt;!&ndash;切换按钮&ndash;&gt;
         <mu-tabs :value="activeTab1" @change="handleTabChangeposts">
           <mu-tab value="tab1" title="最新"/>
           <mu-tab value="tab2" title="最热"/>
         </mu-tabs>
-        <!--显示内容-->
+        &lt;!&ndash;显示内容&ndash;&gt;
         <div v-if="activeTab1 === 'tab1'">
           <div class="context_one">
             <img :src="banner_img1" class="item_img"/>
@@ -40,17 +40,17 @@
         </div>
       </div>
 
-      <div class="mdl-cell mdl-cell--6-col">
+      <div class="mdl-cell mdl-cell&#45;&#45;6-col">
         <div class="moreTitle">
           <mu-icon value="forum" :size="48" color="#f1b200"/><span>分享</span>
           <a href="../../../parts/share/resources/resources.html">更多>></a>
         </div>
-        <!--切换按钮-->
+        &lt;!&ndash;切换按钮&ndash;&gt;
         <mu-tabs :value="activeTab2" @change="handleTabChangeRe">
           <mu-tab value="tab1" title="最新"/>
           <mu-tab value="tab2" title="最热"/>
         </mu-tabs>
-        <!--显示内容-->
+        &lt;!&ndash;显示内容&ndash;&gt;
         <div v-if="activeTab2 === 'tab1'">
           <div class="context_one">
             <img :src="banner_img1" class="item_img"/>
@@ -67,7 +67,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </div>-->
 
   </div>
 

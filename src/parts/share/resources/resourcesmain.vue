@@ -15,7 +15,7 @@
                 </div>
               </div>
             </a>
-            <mu-text-field label="搜索" type="text"  @keyup.enter.native="search()" icon="search" hintText="输入关键词" labelFloat/>
+            <!--<mu-text-field label="搜索" type="text"  @keyup.enter.native="search()" icon="search" hintText="输入关键词" labelFloat/>-->
           </div>
           <div class="tabsMain">
             <mu-tabs :value="activeTab1" @change="handleTabChangeposts">
@@ -24,18 +24,40 @@
               <mu-tab value="tab3" title="个人笔记"/>
             </mu-tabs>
             <!--显示内容-->
-            <div class="postsL_all" v-if="activeTab1 === 'tab1'" v-for="item1 in itemData" :key="item1">    <!--v-if="activeTab1 === 'tab1'"-->
-              <div class="context_one">
+            <div class="postsL_all" v-if="activeTab1 === 'tab1'" >
+              <div class="context_one" v-for="item in fileData" :key="item">
                 <img :src="userImg" class="item_img"/>
                 <div class="item_cont">
-                  <h6><router-link to="detail" class="text" >{{item1.title}}</router-link></h6>
-                  <p> • <span class="itemUser_name">{{item1.username}} </span>的发布 • <span>{{item1.huifu}}</span>个回复 • <span>{{item1.liulang}}</span>次浏览 • <span>{{item1.time}}</span></p>
+                  <h6><router-link :to="'show/'+item.id" class="text" >{{item.title}}</router-link></h6>
+                  <p> • <span class="itemUser_name">{{item.userinfo.nickName}} </span>的发布 • <span>{{item.comment_num}}</span>个回复 • <span>{{item.down_num}}</span>次下载 • 最后一次更新时间 • <span>{{item.mtime}}</span></p>
                 </div>
               </div>
             </div>
+
+
+          <div class="postsL_all" v-if="activeTab1 === 'tab2'" >
+            <div class="context_one" v-for="item in blogData" :key="item">
+              <img :src="userImg" class="item_img"/>
+              <div class="item_cont">
+                <h6><router-link :to="'blogshow/'+item.id" class="text" >{{item.title}}</router-link></h6>
+                <p> • <span class="itemUser_name">{{item.userinfo.nickName}} </span>的发布 • <span>{{item.comment_num}}</span>个回复 • <span>{{item.view_num}}</span>次浏览 • 最后一次更新时间 • <span>{{item.mtime}}</span></p>
+              </div>
+            </div>
           </div>
+
+            <div class="postsL_all" v-if="activeTab1 === 'tab3'" >
+              <div class="context_one" v-for="item in noteData" :key="item">
+                <img :src="userImg" class="item_img"/>
+                <div class="item_cont">
+                  <h6><router-link :to="'noteshow/'+item.id" class="text" >{{item.title}}</router-link></h6>
+                  <p> • <span class="itemUser_name">{{item.userinfo.nickName}} </span>的发布 • 最后一次更新时间 • <span>{{item.mtime}}</span></p>
+                </div>
+              </div>
+            </div>
+
+        </div>
           <!--分页-->
-          <mu-pagination :total="total" :current="current" @pageChange="handleClick"></mu-pagination>
+          <!--<mu-pagination :total="total" :current="current" @pageChange="handleClick"></mu-pagination>-->
         </mu-paper>
       </div>
     </div>
@@ -170,7 +192,7 @@
     min-height: 45px;
     padding: 20px 0;
     border-top: 1px solid #e6e6e6;
-  >img{
+  img{
      position: absolute;
      top: 22px;
      width: 40px;
@@ -208,6 +230,7 @@
   import ListTabs from 'components/base/listtabs';
   import PaginAtion from 'components/base/pagination';
   import userImg from '../../../assets/images/user.png'
+  import $http from 'src/api/http.js';
   export default{
     data(){
       return {
@@ -215,29 +238,21 @@
         current: 1,
         userImg:userImg,
         activeTab1: 'tab1',
-        itemData:[
-          {
-            title:'Vue电子书籍',
-            username:'2013081420',
-            huifu:'7',
-            liulang:'150',
-            time:'2017-5-13',
-          },
-          {
-            title:'vue的监听端口在哪里修改',
-            username:'2013081510',
-            huifu:'0',
-            liulang:'10',
-            time:'2017-5-20',
-          },
-          {
-            title:'php学习资料',
-            username:'2014081609',
-            huifu:'7',
-            liulang:'08',
-            time:'2017-5-21',
-          }
-        ],
+        fileData:[],
+        blogData:[],
+        noteData:[],
+        formData:{
+            limit:10,
+            start:0,
+        },
+        formblogData:{
+          limit:10,
+          start:0,
+        },
+        formnoteData:{
+          limit:10,
+          start:0,
+        }
       }
     },
     mounted() {
@@ -252,13 +267,42 @@
         this.$emit('change','tab3');
       },
       handleTabChangeposts (val) {
-        this.activeTab1 = val
+        this.activeTab1 = val;
+        $http.corspost({
+          url: 'http://118.89.217.84/exchange-platform/index.php/Blog/Show',
+          data: this.formblogData
+        }).done((res)=>{
+//            this.categoryData=res.data;
+          this.blogData=res.data.list;
+        }).always(()=>{
+
+        })
+        $http.corspost({
+          url: 'http://118.89.217.84/exchange-platform/index.php/Note/Show',
+          data: this.formnoteData
+        }).done((res)=>{
+//            this.categoryData=res.data;
+          this.noteData=res.data.list;
+        }).always(()=>{
+
+        })
       },
       handleClick (newIndex) {
       },
       search(){
         this.$router.push({path:'/search'});
-      }
+      },
     },
+    created(){
+      $http.corspost({
+        url: 'http://118.89.217.84/exchange-platform/index.php/Document/Show',
+        data: this.formData
+      }).done((res)=>{
+//            this.categoryData=res.data;
+        this.fileData=res.data.list;
+      }).always(()=>{
+
+      })
+    }
   }
 </script>

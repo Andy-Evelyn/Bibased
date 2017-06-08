@@ -19,7 +19,7 @@
             <mu-list class="personalR">
               <mu-list-item class="personal">
                 <mu-avatar  slot="left" :src="userUrl" :size="40"/>
-                <span class="userName">2013081420</span>
+                <span class="userName">{{this.userName}}</span>
               </mu-list-item>
             </mu-list>
             <div class="m1">
@@ -30,8 +30,8 @@
                     </a>
                   </li>
                   <li>
-                    <a href="../../../parts/share/login/login.html">
-                      <mu-icon value="power_settings_new"/>&nbsp;&nbsp;退出
+                    <a href="javascript:void(0)">
+                      <mu-icon value="power_settings_new" @click="logout"/>&nbsp;&nbsp;退出
                     </a>
                   </li>
               </mu-paper>
@@ -178,7 +178,7 @@
 </style>
 <script>
   import imgurl from '../../assets/images/user.png'
-
+  import $http from 'src/api/http.js';
   /*全部加载muse-ui*/
   import Vue from 'vue'
   import MuseUI from 'muse-ui'
@@ -190,13 +190,44 @@
     data(){
       return {
         userUrl: imgurl,
+        userName:'',
       }
     },
     mounted () {
     },
     methods:{
+      logout(){
+          console.log("111");
+        $http.corspost({
+          url: 'http://118.89.217.84/exchange-platform/index.php/Logout',
+          data: ''
+        }).done((res)=>{
+            if(confirm("确认退出？")){
+              window.location.href="../../../parts/share/login/login.html"
+            }
+        })
+      }
     },
     components: {
-    }
+    },
+    created(){
+      $http.corspost({
+        url: 'http://118.89.217.84/exchange-platform/index.php/Auth/checkIsLogin',
+      }).done((response) => {
+        const data = response.data;
+        console.log(data);
+        if (response.code === 200) {
+//          this.$store.dispatch('setUserInfo', data);
+          this.userName = data.nickName;
+        } else {
+          alert("请先登录");
+          window.location.href="../../../parts/share/login/login.html"
+        }
+      }).fail((jqXHR, textStatus, errorThrown)=>{
+//        this.$store.dispatch('showInfoDialog', "请求发生错误，请稍后再试");
+        alert("请求发生错误，请稍后再试");
+      }).always(function () {
+      });
+    },
   }
 </script>

@@ -14,8 +14,12 @@
             <!--<a href="javascript:void(0)">标签四</a>-->
             <slot name="send_tags"></slot>
           <!--</p>-->
-          <p class="send_title">
-            标题：<input type="text" class="" name="send_title">
+          <!--<p class="send_title">-->
+            <!--标题：<input type="text" class="" name="send_title">-->
+          <!--</p>-->
+          <p>
+            <slot name="send_file"></slot>
+            <!--上传文件：<input type="file" class="" name="send_file">-->
           </p>
           <p>
             <slot name="send_file"></slot>

@@ -8,15 +8,15 @@
           <div class="post-Sendform">
             <p class="postSend_class">
               分类：
-              <a href="javascript:void(0)" class="postTag" v-for="(item,index) in titleData" :key="index">{{item.cate_name}}</a>
+              <span class="postTag" :id="index+1" v-for="(item,index) in titleData" :key="index">{{item.cate_name}}</span>
             </p>
             <p>
-              标题：<input type="text" class="">
+              标题：<input type="text" class="" v-model="postTitle">
             </p>
             <div type="text/plain" id='postEd'></div>
 
             <p>
-              <mu-flat-button @click="getEditorContent()" label="发布" to="/" backgroundColor="orange" labelPosition="before" icon="near_me" color="#fff"/>
+              <mu-flat-button @click="addPost" label="发布" backgroundColor="orange" labelPosition="before" icon="near_me" color="#fff"/>
             </p>
           </div>
         </mu-paper>
@@ -92,16 +92,24 @@
           font-weight: bolder !important;
         }
         /*tag分类*/
+        /*.postTag{*/
+          /*display: inline-block;*/
+          /*padding:0 3px;*/
+          /*border-radius: 3px;*/
+          /*font-size: 12px;*/
+          /*margin:0 3px;*/
+          /*cursor: pointer;*/
+          /*background: #8391A5;*/
+          /*color:#fff;*/
+        /*}*/
         p:nth-of-type(1){
-          a{
+          .postTag{
             display: inline-block;
             padding:0 3px;
             border-radius: 3px;
             font-size: 12px;
             margin:0 3px;
             cursor: pointer;
-          }
-          a:link{
             background: #8391A5;
             color:#fff;
           }
@@ -171,34 +179,53 @@
         },
         editor: '',  // 存放实例化的wangEditor对象，在多个方法中使用
         titleData:[],
+        postTitle:'',
+        addPostData:{
+          cateid:"",
+          content:"",
+          title:"",
+        },
+        id:''
       }
     },
     mounted() {
-//      this.selectClass();
+      this.selectClass();
 //      $(".postTag").trigger("click"); //默认选中标签一
       this.createEditor();
     },
     beforeDestroy(){
       this.destroyEditor();
     },
+    created(){
+      $http.corspost({
+        url: 'http://118.89.217.84/exchange-platform/index.php/BbsCategory/Show',
+        data: '',
+      }).done((res) => {
+        this.titleData = res.data;
+        this.$nextTick(function () {
+          this.selectClass();
+        })
+      })
+    },
     components: {
     },
     methods: {
         selectClass(){   //选标签
-          $(".postSend_class a").click(function () {
+          $(".postSend_class span").click(function(){
               console.log($(this).text());  //标签类别
             if($(this).hasClass("selected")){
               $(this).removeClass("selected");
             }
             else{
-              $(this).siblings('a').removeClass("selected");  //只选一个
+              $(this).siblings('span').removeClass("selected");  //只选一个
               $(this).addClass("selected");
+//              this.id = $(this).attr("id");
+//              console.log(this.id);
             }
             });
         },
         createEditor(){  // 创建编辑器
           this.editor = new WangEditor('postEd');
-          console.log(this.ranDomid);
           this.initEditorConfig();  // 初始化编辑器配置，在create之前
           this.editor.create();  // 生成编辑器
           this.editor.$txt.html('');  // 初始化内容
@@ -240,16 +267,36 @@
           // this.editor.$txt.formatText();  // 获取格式化后的纯文本
           console.log(this.editorContent);
         },
+        addPost(){
+//            var index = this.id;
+//          var id=this.titleData[index].id;
+          this.id = $(".selected").attr("id");
+          if(this.id == null){
+              alert("请选择帖子分类");
+            return false;
+          }
+          if(this.postTitle.length==0){
+            alert("请输入帖子标题");
+            return false;
+          }
+          if(this.editor.$txt.html().length==0){
+            alert("请输入帖子内容");
+            return false;
+          }
+          this.addPostData.cateid = this.id;
+          console.log(this.addPostData.cateid);
+          this.addPostData.title = this.postTitle;
+          this.addPostData.content = this.editor.$txt.html();
+
+          $http.corspost({
+            url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Add',
+            data: this.addPostData,
+          }).done((res) => {
+            console.log(res)
+            window.location.href="../../../parts/share/index/index.html";   //登录成功，页面跳转
+          });
+        }
     },
-    created(){
-      $(".postTag").trigger("click"); //默认选中标签一
-      this.selectClass();
-      $http.corspost({
-        url: 'http://118.89.217.84/exchange-platform/index.php/BbsCategory/Show',
-        data: '',
-      }).done((res) => {
-        this.titleData = res.data;
-      })
-    },
+
   }
 </script>

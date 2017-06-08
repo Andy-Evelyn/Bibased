@@ -20,8 +20,8 @@ const routes = [
         component: routers.SharePostsSend,
       },
       {
-        path: 'comment',
-        component: routers.SharePostsComment,
+        path: 'show/:id',
+        component: routers.SharePostsShow,
       },
       {
         path: 'search',

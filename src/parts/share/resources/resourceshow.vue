@@ -7,10 +7,10 @@
           <div class="com_topic">
             <div class="com_topic_top">
               <p>{{comData.title}}</p>
-              <span><span class="tags">{{comData.catename}}</span></span>
+              <!--<span><span class="tags">{{comData.catename}}</span></span>-->
             </div>
             <div class="com_topic_two">
-              <p class="p1" v-html="comData.content"></p>
+              <p class="p1" v-html="comData.doc_desc"></p>
               <div class="comment_add">
                 <span>{{comData.mtime}}</span>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="comment"
                                                                    @click="toggle1">
@@ -44,16 +44,16 @@
               <!--评论的内容先隐藏-->
               <transition name="fade">
                 <div v-show="item.show">
-                <ul class="reply_show" id="reply_num" >
-                  <li class="clearfix" v-for="itemchild in item.ShowReply">
-                    <img :src="userUrl" alt="">
-                    <div class="li_re">
-                      <a href="#">{{item.childuser_account}}</a>
-                      &nbsp;&nbsp;&nbsp;&nbsp;<span>{{itemchild.ctime}}</span>
-                      <p v-html="itemchild.content"></p>
-                    </div>
-                  </li>
-                </ul>
+                  <ul class="reply_show" id="reply_num" >
+                    <li class="clearfix" v-for="itemchild in item.ShowReply">
+                      <img :src="userUrl" alt="">
+                      <div class="li_re">
+                        <a href="#">{{item.childuser_account}}</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span>{{itemchild.ctime}}</span>
+                        <p v-html="itemchild.content"></p>
+                      </div>
+                    </li>
+                  </ul>
                   <!--添加评论-->
                   <!--<div>-->
                   <div type="text/plain" :id="'creplayEd'+index" class="comreplayEd"></div>
@@ -225,8 +225,8 @@
   .comment_add > a {
 
   &:hover {
-    color: #59b0ff;
-  }
+     color: #59b0ff;
+   }
 
   }
   >
@@ -268,9 +268,9 @@
     background: #f5f5f5;
 
   & :hover {
-    background: #59b0ff;
-    color: #fff;
-  }
+      background: #59b0ff;
+      color: #fff;
+    }
 
   }
   .con_time {
@@ -378,10 +378,10 @@
         editors: [],  // 子评论
         comData: [],
         detail:{
-            id:this.$route.params.id,
+          id:this.$route.params.id,
         },
         commentPost: {
-          type: 1,
+          type: 2,
           id:this.$route.params.id,
           limit: 10,
           start: 0
@@ -389,10 +389,10 @@
         commentList: [],
         total: 0,
         addCommentData:{
-            type:1,
-            id:this.$route.params.id,
-            content:"",
-            pid:0
+          type:2,
+          id:this.$route.params.id,
+          content:"",
+          pid:0
         },
 
       }
@@ -515,9 +515,8 @@
       }
     },
     created(){
-
       $http.corsget({
-        url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Detail',
+        url: 'http://118.89.217.84/exchange-platform/index.php/Document/Detail',
         data: this.detail,
       }).done((res) => {
 
@@ -538,14 +537,14 @@
         console.log(this.commentList);
         this.editors=[];
         this.$nextTick(()=>{
-            for(var i=0;i<this.commentList.length;i++){
-                var editor1 = new WangEditor('creplayEd'+i);
-              this.initEditorConfig();  // 初始化编辑器配置，在create之前
-              editor1.create();  // 生成编辑器
-              editor1.$txt.html('');  // 初始化内容
-              this.editors.push(editor1)
-              $('#creplayEd'+i).css('height', '150px');
-            }
+          for(var i=0;i<this.commentList.length;i++){
+            var editor1 = new WangEditor('creplayEd'+i);
+            this.initEditorConfig();  // 初始化编辑器配置，在create之前
+            editor1.create();  // 生成编辑器
+            editor1.$txt.html('');  // 初始化内容
+            this.editors.push(editor1)
+            $('#creplayEd'+i).css('height', '150px');
+          }
         })
       })
     },

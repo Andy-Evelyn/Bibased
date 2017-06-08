@@ -19,10 +19,25 @@ const SharePostsSend= resolve => {
     resolve(require('parts/share/posts/postsend.vue'));
   }, 'sharepostsend');
 };
-const SharePostsComment= resolve => {
-  require.ensure(['parts/share/posts/postscomment.vue'], require => {
-    resolve(require('parts/share/posts/postscomment.vue'));
-  }, 'sharepostscomment');
+const SharePostsShow= resolve => {
+  require.ensure(['parts/share/posts/postsshow.vue'], require => {
+    resolve(require('parts/share/posts/postsshow.vue'));
+  }, 'sharepostsshow');
+};
+const ShareReShow= resolve => {
+  require.ensure(['parts/share/resources/resourceshow.vue'], require => {
+    resolve(require('parts/share/resources/resourceshow.vue'));
+  }, 'shareresourceshow');
+};
+const ShareBlogShow= resolve => {
+  require.ensure(['parts/share/resources/blogshow.vue'], require => {
+    resolve(require('parts/share/resources/blogshow.vue'));
+  }, 'shareblogshow');
+};
+const ShareNoteShow= resolve => {
+  require.ensure(['parts/share/resources/noteshow.vue'], require => {
+    resolve(require('parts/share/resources/noteshow.vue'));
+  }, 'sharenoteshow');
 };
 // const ShareListtabs= resolve => {
 //   require.ensure(['components/base/listtabs.vue'], require => {
@@ -132,7 +147,8 @@ export default {
     Login,
     ShareLoginForm,
     ShareLoginForgetpw,
-    SharePostsComment,
+    SharePostsShow,
+    ShareReShow,
     ShareResourcesMain,
     ShareReNewBuild,
     ShareReBuildFile,
@@ -145,6 +161,8 @@ export default {
     SharePostsReach,
     ShareResearch,
     AdSearch,
+  ShareBlogShow,
+  ShareNoteShow
     // ShareListtabs,
 
 };

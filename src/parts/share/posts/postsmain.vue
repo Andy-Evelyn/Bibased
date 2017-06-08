@@ -7,8 +7,8 @@
             <mu-icon value="message" :size="48" color="#f1b200"/>
             <span>讨论版</span>
             <mu-raised-button label="发布帖子" to="postsend" class="send_postBtn" primary href="#"/>
-            <mu-text-field type="text" @keyup.enter.native="search()" label="搜索" icon="search" hintText="输入关键词"
-                           labelFloat/>
+            <!--<mu-text-field type="text" @keyup.enter.native="search()" label="搜索" icon="search" hintText="输入关键词"-->
+                           <!--labelFloat/>-->
           </div>
           <div class="tabsMain">
             <!--切换按钮-->
@@ -24,9 +24,9 @@
                 <img :src="userImg" class="item_img"/>
                 <div class="item_cont">
                   <h6>
-                    <router-link to="comment" class="text">{{item1.title}}</router-link>
+                    <router-link :to="'show/'+item1.id" class="text">{{item1.title}}</router-link>
                   </h6>
-                  <p> • <span class="itemUser_name">{{item1.user_account}} </span>的发布 •
+                  <p> • <span class="itemUser_name">{{item1.userinfo.nickName}} </span>的发布 •
                     <span>{{item1.comment_num}}</span>个回复 • <span>{{item1.view_num
 }}</span>次浏览 • <span>{{item1.mtime}}</span></p>
                 </div>
@@ -38,9 +38,9 @@
                 <img :src="userImg" class="item_img"/>
                 <div class="item_cont">
                   <h6>
-                    <router-link to="comment" class="text">{{item.title}}</router-link>
+                    <router-link :to="'show/'+item.id" class="text">{{item.title}}</router-link>
                   </h6>
-                  <p> • <span class="itemUser_name">{{item.user_account}} </span>的发布 • <span>{{item.comment_num}}</span>个回复
+                  <p> • <span class="itemUser_name">{{item.userinfo.nickName}} </span>的发布 • <span>{{item.comment_num}}</span>个回复
                     • <span>{{item.view_num}}</span>次浏览 • <span>{{item.mtime}}</span></p>
                 </div>
               </div>
@@ -110,7 +110,7 @@
   .mu-tabs{
     background: #fff !important;
     z-index:1 !important;
-    width: 50%;
+    /*width: 50%;*/
     min-width: 95px;
   }
   .mu-tab-link{
@@ -200,26 +200,36 @@
     },
     created(){
       $http.corspost({
-        url: 'http://118.89.217.84/exchange-platform/index.php/BbsCategory/Show',
-        data: '',
-      }).done((res)=>{
-        this.activeTab1='tab0';
-        this.tabData=res.data;
+        url: 'http://118.89.217.84/exchange-platform/index.php/Auth/checkIsLogin',
+      }).done((response) => {
+        const data = response.data;
+        console.log(data);
+        if (response.code === 200) {
+//          this.$store.dispatch('setUserInfo', data);
+          $http.corspost({
+            url: 'http://118.89.217.84/exchange-platform/index.php/BbsCategory/Show',
+            data: '',
+          }).done((res)=>{
+            this.activeTab1='tab0';
+            this.tabData=res.data;
 //        this.category.cateid = res.data.cate_name;
-      })
-      $http.corspost({
-        url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Show',
-        data: this.form,
-      }).done((res)=>{
-        this.itemData=res.data.list;
-      })
-/*      $http.corspost({
-        url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Show',
-        data: this.form,
-      }).done((res)=>{
-          this.itemData=res.data.list;
-      })*/
+          })
+          $http.corspost({
+            url: 'http://118.89.217.84/exchange-platform/index.php/Bbs/Show',
+            data: this.form,
+          }).done((res)=>{
+            this.itemData=res.data.list;
+          })
+        } else {
+          alert("请先登录");
+          window.location.href="../../../parts/share/login/login.html"
+        }
+      }).fail((jqXHR, textStatus, errorThrown)=>{
+        this.$store.dispatch('showInfoDialog', "请求发生错误，请稍后再试");
+      }).always(function () {
+      });
     },
+
     methods:{
       handleTabChangeposts (val) {
         this.activeTab1 = val;
