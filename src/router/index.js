@@ -135,6 +135,26 @@ const AdSearch= resolve => {
     resolve(require('parts/share/admin/adsearch.vue'));
   }, 'adminsearch');
 };
+const AdminIndex= resolve => {
+  require.ensure(['parts/share/admin/adindex.vue'], require => {
+    resolve(require('parts/share/admin/adindex.vue'));
+  }, 'adminindex');
+};
+const AdminFile= resolve => {
+  require.ensure(['parts/share/admin/adfile.vue'], require => {
+    resolve(require('parts/share/admin/adfile.vue'));
+  }, 'adminfile');
+};
+const AdminBlog= resolve => {
+  require.ensure(['parts/share/admin/adblog.vue'], require => {
+    resolve(require('parts/share/admin/adblog.vue'));
+  }, 'adminblog');
+};
+const AdminPostView= resolve => {
+  require.ensure(['parts/share/admin/adpostview.vue'], require => {
+    resolve(require('parts/share/admin/adpostview.vue'));
+  }, 'adminpostview');
+};
 
 export default {
     ShareIndex,
@@ -162,7 +182,11 @@ export default {
     ShareResearch,
     AdSearch,
     ShareBlogShow,
-    ShareNoteShow
+    ShareNoteShow,
+    AdminIndex,
+    AdminFile,
+    AdminBlog,
+    AdminPostView,
     // ShareListtabs,
 
 };

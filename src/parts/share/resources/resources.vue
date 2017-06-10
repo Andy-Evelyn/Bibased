@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:100%">
     <PageHeader>
       <template slot="line-topR">
         <p class="line-top"></p>
@@ -10,7 +10,7 @@
 </template>
 <style lang="less">
   body{
-    height:100%;
+    height:100% !important;
     background: #f2f2f2 !important;
     overflow: hidden;
   }

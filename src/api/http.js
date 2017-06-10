@@ -26,9 +26,20 @@ const checkLogin = ()=>{
     url: 'http://118.89.217.84/exchange-platform/index.php/Login/checkLogin',
   });
 }
+
+/*判断管理员登录*/
+const checkAdminLogin = ()=>{
+  return corspost({
+    url: 'http://118.89.217.84/exchange-platform/index.php/Login/checkLogin',
+  });
+  return corsget({
+    url: 'http://118.89.217.84/exchange-platform/index.php/Login/checkLogin',
+  });
+}
 export default {
   corspost,
   corsget,
-  checkLogin
+  checkLogin,
+  checkAdminLogin
 }
 

@@ -10,6 +10,8 @@
           <mu-tr>
             <mu-th width="25%">标题</mu-th>
             <mu-th width="15%">发布人</mu-th>
+            <mu-th width="15%">回复量</mu-th>
+            <mu-th width="15%">浏览量</mu-th>
             <mu-th width="20%">最近更新时间</mu-th>
             <!--<mu-th width="10%">操作</mu-th>-->
           </mu-tr>
@@ -19,11 +21,13 @@
           <mu-tr v-for="(item,index) in Data" :key="index">
             <mu-th width="25%">{{item.title}}</mu-th>
             <mu-td width="15%">{{item.userinfo.nickName}}</mu-td>
+            <mu-td width="15%">{{item.comment_num}}</mu-td>
+            <mu-td width="15%">{{item.view_num}}</mu-td>
             <mu-td width="20%">{{item.mtime}}</mu-td>
-            <!--<mu-td width="10%">-->
-              <!--&lt;!&ndash;<mu-icon-button title="查看" icon="search" iconClass="re_style" to="adpostview/"/>&ndash;&gt;-->
-              <!--<mu-icon-button title="删除" label="dialog" icon="delete_forever" iconClass="de_style" @click="open"/>-->
-            <!--</mu-td>-->
+<!--            <mu-td width="10%">
+              &lt;!&ndash;<mu-icon-button title="查看" icon="search" iconClass="re_style" to="adpostview/"/>&ndash;&gt;
+              <mu-icon-button title="删除" label="dialog" icon="delete_forever" iconClass="de_style" @click="open"/>
+            </mu-td>-->
           </mu-tr>
         </mu-tbody>
 
@@ -64,11 +68,11 @@
         height: '520px',
         total: 0,
         current: 1,
-        pageSize:10,
+        pageSize:8,
         keywords:'',
         Data:[],
         form:{
-          limit:10,
+          limit:8,
           start:'',
         },
       }
@@ -86,7 +90,7 @@
       handleClick (newIndex) {
         this.form.start = (newIndex - 1)*this.form.limit;
         $http.corspost({
-          url: 'http://118.89.217.84/exchange-platform/index.php/Note/Show',
+          url: 'http://118.89.217.84/exchange-platform/index.php/Blog/Show',
           data: this.form,
         }).done((res)=>{
           this.Data=res.data.list;
@@ -103,7 +107,7 @@
         console.log(data);
         if (response.code === 200) {
           $http.corspost({
-            url: 'http://118.89.217.84/exchange-platform/index.php/Note/Show ',
+            url: 'http://118.89.217.84/exchange-platform/index.php/Blog/Show ',
             data: this.form,
           }).done((res)=>{
             this.Data=res.data.list;

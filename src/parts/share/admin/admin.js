@@ -7,55 +7,65 @@ require('../../../assets/js/material.min.js');
 import Vue from 'vue';
 import Router from 'vue-router';
 import routers from 'router/index';
+import store from '../../../store/AppStore.js'
 import Vuex from 'vuex';
 Vue.use(Router);
 Vue.use(Vuex);
+Vue.use(store);
 const routes = [
   {
     path: '/',
     component: routers.ShareAdmin,
     children: [
       {
-        path: '',
-        component: routers.AdminPost
+        path:'',
+        component: routers.AdLogin,
       },
       {
-        path: 'adlogin',
-        component: routers.AdLogin
+        path: 'adpage',
+        component: routers.AdminPage,
+        children: [
+          {
+            path: '',
+            component: routers.AdminIndex,
+          },
+          {
+            path: '/adpost',
+            component: routers.AdminPost
+          },
+          {
+            path: '/adnote',
+            component: routers.AdminNote
+          },
+          {
+            path: '/adblog',
+            component: routers.AdminBlog
+          },
+          {
+            path: '/adfile',
+            component: routers.AdminFile
+          },
+          {
+            path: '/adpostview',
+            component: routers.AdminPostView,
+          },
+        ]
       },
-      {
-        path: 'adpost',
-        component: routers.AdminPost
-      },
-      {
-        path: 'adnote',
-        component: routers.AdminNote
-      },
-      {
-        path: 'search',
-        component: routers.AdSearch,
-      },
+      // {
+      //   path: 'search',
+      //   component: routers.AdSearch,
+      // },
     ]
   },
 ];
 const router= new Router({
   routes
 });
-/*const store = new Vuex.Store({
-  state: {
-    isshowlogin:true
-  },
-  getters: {
-  },
-  mutations: {
-
-  }
-});*/
 
 new Vue({
   el: '#app',
   router,
-  //store,
+  store,
   template: '<router-view></router-view>',
   components: {
   }

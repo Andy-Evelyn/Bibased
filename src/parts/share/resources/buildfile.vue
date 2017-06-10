@@ -1,18 +1,17 @@
-
 <template>
-  <div class="postSend-main">
+  <div class="postSend-main" style="height:100%">
     <div class="mdl-grid">
       <mu-paper :zDepth="2" class="mdl-cell mdl-cell--12-col">
         <p class="SendTitle">
           <mu-icon value="card_travel" :size="48" color="#f1b200"/><span>新建文档资料</span>
         </p>
-        <form class="post-Sendform" action="" enctype="multipart/form-data">
+        <form class="post-Sendform" action="" enctype="multipart/form-data" method="post" id="upload">
           <p class="send_title">
-          标题：<input type="text" class="" name="send_title" v-model="fileTitle">
+          标题：<input type="text" class="" name="title" v-model="fileTitle">
           </p>
           <p>文件描述：</p>
-          <div type="text/plain" id='fileDesc'></div>
-          <p class="p_upfile">上传文件：<input type="file" id="file" name="send_file"></p>
+          <textarea type="text/plain" id='fileDesc' name="desc"></textarea>
+          <p class="p_upfile">上传文件：<input type="file" id="file" name="userfile"></p>
           <p class="send_button">
             <mu-flat-button label="分享" @click="uploadButton" backgroundColor="orange" labelPosition="before" icon="near_me" color="#fff"/>
           </p>
@@ -202,12 +201,27 @@
 //          return false;
 //        }
 
-        this.fileData.title = this.fileTitle;
+        /*文件上传路径*/
+/*        if($.browser.msie  && ($.browser.version =='10.0' )){
+          var file =$("#file");
+          file.select();
+          var path=document.selection.createRange().text;
+          document.selection.empty();
+        }
+        console.log(path);
+        if(!path){
+          alert("请选择要上传的文件");
+        }*/
+
+        /*this.fileData.title = this.fileTitle;
         this.fileData.desc = this.editor.$txt.html();
-        this.fileData.userfile = $("#file").val();
+        this.fileData.userfile = file;*/
         $http.corspost({
           url: 'http://118.89.217.84/exchange-platform/index.php/Document/Add',
-          data: this.fileData,
+          data: new FormData($("#upload")[0]),
+          contentType:false,
+          processData:false,
+          //contentType:'multipart/form-data',
         }).done((response) => {
           const data = response.data;
           if (response.code === 200) {
@@ -217,11 +231,9 @@
               alert(response.msg);
               return false;
           }
-
-
         });
       },
     }
   }
-</script>-->
+</script>
 

@@ -6,8 +6,8 @@
           <a href="#" class="adL_title">sharing</a>
           后台管理
         </span>
-        <span class="adR">
-          <router-link to="adlogin"><mu-icon value="power_settings_new"/>&nbsp;&nbsp;退出</router-link>
+        <span class="adR" @click="logout">
+          <mu-icon value="power_settings_new"/>&nbsp;&nbsp;退出
       </span>
       </div>
     </header>
@@ -20,16 +20,32 @@
 
             <mu-list-item title="讨论版" to="adpost">
               <mu-icon slot="left" value="drafts"/>
-            </mu-list-item>-->
-            <mu-list-item title="文档资料" >
+            </mu-list-item>
+            <mu-list-item title="文档资料" to="adfile">
               <mu-icon slot="left" value="drafts"/>
-            </mu-list-item>-->
-            <mu-list-item title="技术博客" >
+            </mu-list-item>
+            <mu-list-item title="技术博客" to="adblog">
               <mu-icon slot="left" value="drafts"/>
-            </mu-list-item>-->
+            </mu-list-item>
             <mu-list-item title="个人笔记" to="adnote">
               <mu-icon slot="left" value="drafts"/>
-            </mu-list-item>-->
+            </mu-list-item>
+<!--            <mu-list-item title="博客分类" toggleNested>
+              <mu-icon slot="left" value="inbox"/>
+
+              <mu-list-item slot="nested" title="添加" toggleNested>
+                <mu-icon slot="left" value="inbox"/>
+                <mu-list-item slot="nested" title="tag">
+                  <mu-icon slot="left" value="inbox"/>
+                </mu-list-item>
+              </mu-list-item>
+
+              <mu-list-item slot="nested" title="删除">
+                <mu-icon slot="left" value="inbox"/>
+              </mu-list-item>-->
+
+            </mu-list-item>
+
           </mu-list>
 
         </div>
@@ -37,9 +53,9 @@
       </div>
       <div class="mdl-cell mdl-cell--10-col">
         <!--<AdminTable></AdminTable>-->
-        <slot name="adpost"></slot>
-        <slot name="adnote"></slot>
-        <!--<router-view></router-view>-->
+        <!--<slot name="adpost"></slot>-->
+        <!--<slot name="adnote"></slot>-->
+        <router-view></router-view>
       </div>
     </div>
 
@@ -102,6 +118,7 @@
   .adR{
     width:30%;
     text-align: right;
+    cursor:pointer;
   /*管理员名*/
   .adUserName{
     padding-right: 30px;
@@ -115,7 +132,7 @@
   }
   /*header end*/
   .con_left{
-    width:18%;
+    width:100%;
     height:100%;
     /*min-height: 500px;*/
     /*padding-top:50px;*/
@@ -147,6 +164,7 @@
   Vue.use(MuseUI)
 
   import AdminTable from './adtable'
+  import $http from 'src/api/http.js';
   export default{
     data () {
       return {
@@ -154,9 +172,41 @@
       }
     },
     methods: {
+      logout(){
+        $http.corspost({
+          url: 'http://118.89.217.84/exchange-platform/index.php/Logout',
+          data: ''
+        }).done((res)=>{
+          if(confirm("确认退出？")){
+            window.location.href="../../../parts/share/admin/admin.html"
+//            this.router.push('/');
+          }else{
+            return false;
+          }
+        })
+      }
     },
     components: {
       AdminTable,
-    }
+    },
+    created(){
+      $http.corspost({
+        url: 'http://118.89.217.84/exchange-platform/index.php/Auth/checkIsLogin',
+      }).done((response) => {
+        const data = response.data;
+        console.log(data);
+        if (response.code == 200) {
+//          this.$store.dispatch('setUserInfo', data);
+          this.userName = data.nickName;
+        } else {
+          alert("请先登录");
+          window.location.href="../../../parts/share/admin/admin.html"
+        }
+      }).fail((jqXHR, textStatus, errorThrown)=>{
+//        this.$store.dispatch('showInfoDialog', "请求发生错误，请稍后再试");
+        alert("请求发生错误，请稍后再试");
+      }).always(function () {
+      });
+    },
   }
 </script>

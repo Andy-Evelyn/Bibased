@@ -83,7 +83,7 @@
                   </p>
                   <p>
                     <a href="javascript: void(0);" label="dialog" @click="deletenote(item.id)" title="删除"><mu-icon value="delete" :size="16"/></a>&nbsp;&nbsp;
-                    <!--<a href="#" title="编辑"><mu-icon value="border_color" :size="14"/></a>-->
+                    <a href="#" title="编辑"><mu-icon value="border_color" :size="14"/></a>
                   </p>
                 </li>
               </ul>

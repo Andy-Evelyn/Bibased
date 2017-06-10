@@ -8,11 +8,12 @@
     <div class="login-form-head mu-flat-button-primary">
       管理员登录
     </div>
-    <div>
-      <mu-text-field id="userName" @blur="check_name" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" pattern="-?[0-9]*(\.[0-9]+)?" fullWidth labelFloat/>
-      <mu-text-field id="passWord" @blur="check_word" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/>
+    <form v-model="loginForm">
+      <mu-text-field id="userName" @blur="check_name" :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="管理员名" type="text" hin
+      <mu-text-field v-model.trim="loginForm.account" @keyup.enter.native="login" id="userName"  :errorText="inputErrorText" @textOverflow="handleInputOverflow" :maxLength="10" label="用户名" type="text" hintText="请输入用户名" labelClass="textlabel" fullWidth labelFloat/>
+      <mu-text-field id="passWord" v-model.trim="loginForm.password" @keyup.enter.native="login" :errorText="inputErrorPassword" label="密码" hintText="请输入密码" labelClass="textlabel" type="password" fullWidth labelFloat/>
       <mu-raised-button label="登录" class="loginbtn" id="subMit" @click="login" primary/>
-    </div>
+    </form>
   </mu-paper>
 
 </template>
@@ -100,7 +101,7 @@
   import 'muse-ui/dist/muse-ui.css'
   import 'muse-ui/dist/theme-teal.css' // 使用teal主题
   Vue.use(MuseUI)
-
+  import $http from 'src/api/http.js';
   import $ from 'jquery';
   export default{
     name:"adlogin",
@@ -108,7 +109,10 @@
       return {
         inputErrorText:'',
         inputErrorPassword:'',
-        msg: 'hello vue'
+        loginForm:{
+            account:'',
+            password:''
+        }
       }
     },
     components: {
@@ -120,7 +124,7 @@
       check_name(){
         if($("#userName input").val() == ''){
           this.inputErrorText = '用户名不能为空哟'
-//              return false
+              return false
         }else{
           this.inputErrorText = ''
         }
@@ -128,20 +132,39 @@
       check_word(){
         if($("#passWord input").val() == ''){
           this.inputErrorPassword = '密码不能为空哟'
-//              return false
+              return false
         }else{
           this.inputErrorPassword = ''
         }
       },
-      login(){
-        this.check_name()
-        this.check_word()
-        if($("#userName input").val() && $("#passWord input").val()){
-          this.inputErrorText = ''
-          this.inputErrorPassword = ''
+      login() {
+        console.log(this.loginForm);
+        if (!Number.isInteger(Number(this.loginForm.account)) || Number(this.loginForm.account) < 1000000000 || this.loginForm.password.length < 5) {
+//          this.$store.dispatch('showInfoDialog', '帐号或密码格式错误')
+          alert('账号或密码格式错误');
+          console.log("格式错误",this.$store);
+        } else {
+          this.fullscreenLoading = true;
+          $http.corspost({
+            url: 'http://118.89.217.84/exchange-platform/index.php/Login/checkLogin',
+            data: this.loginForm,
+          }).done((data) => {
+
+            this.fullscreenLoading = false;
+            if (data.code == 200) {
+//              this.$store.dispatch('SetUserName', data.data.nickName);
+              this.$router.push('/adpage');
+              console.log("登录成功");
+            } else {
+//              this.$store.dispatch('showInfoDialog', data.msg);
+              console.log(data.msg);
+            }
+          }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR, textStatus, errorThrown)
+          }).always(function () {
+            console.log("end")
+          })
         }
-        console.log($("#userName input").val());
-        console.log($("#passWord input").val());
       }
     }
   }
